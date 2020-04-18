@@ -62205,9 +62205,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   key: "anyKey",
   wsHost: window.location.hostname,
   wsPort: 6001,
-  wssPort: 6001,
-  disableStats: true,
-  enabledTransports: ['ws', 'wss']
+  disableStats: true
 });
 window.Echo.channel('DemoChannel').listen('WebsocketDemoEvent', function (e) {
   console.log(e);
