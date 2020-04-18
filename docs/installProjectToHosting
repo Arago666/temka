@@ -1,0 +1,43 @@
+Устанавливаем композер
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+
+создаем папку и переносим в нее composer.phar
+mkdir composer
+mv composer.phar composer
+
+клонируем проект
+git clone https://github.com/Arago666/temka.git
+
+Прописываем доступы к php
+-touch .bash_profile
+-nano .bash_profile (открывается файл)
+alias composer='/opt/php72/bin/php -/composer/composer.phar'
+alias php='/opt/php72/bin/php' (Alt+x +y + enter - чтобы выйти и сохранить)
+
+Перезапускаем putty
+
+заходим в папку с проектом и устанавливаем composer
+cd temka
+composer install
+
+Создаем бд на хостинге
+
+Меняем файл .env
+cp .env.example .env
+nano .env (прописываем доступ к бд) (пользователь и имя базы совпадают)
+
+Устанавливаем ключ
+php artisan key:generate
+
+В самом проекте temka поменять файл app/Providers/AppServiceProvider.php (добавить длину таблиц по умолчанию для создания)
+use Illuminate\Support\Facades\Schema;
+class AppServiceProvider extends ServiceProvider
+{
+    public function register()
+    {
+        Schema::defaultStringLength(191);
+    }
+}
