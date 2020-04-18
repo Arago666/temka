@@ -30,9 +30,9 @@ return [
             'path' => env('PUSHER_APP_PATH'),
             'capacity' => null,
 //           Для работы функции "Пользователь печатает"
-            'enable_client_messages' => true,
+            'enable_client_messages' => false,
 //            Хранение статистической информации во время работы
-            'enable_statistics' => true,
+            'enable_statistics' => false,
         ],
     ],
 
