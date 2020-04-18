@@ -41,3 +41,15 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
     }
 }
+
+Заливаем миграцию БД
+php artisan migrate:fresh --seed
+
+В понеле управления хостингом на вкладке Сайт поменять
+    в "(основной сайт) PHP 7.1 - Python 3.4 - HTTP" версию php на 7.2
+    Включить "c www.site.com на site.com"
+
+Создаем симлинк(сслыку) нашего преокта на папку)
+rm -rf public_html (из корня)
+ln -s ~/temka/public public_html
+
