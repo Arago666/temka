@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3708943-4d88-452f-ada2-8e26d86e5741" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/config/broadcasting.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/broadcasting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -238,6 +238,7 @@
       <workItem from="1586916757648" duration="27345000" />
       <workItem from="1587010226269" duration="42962000" />
       <workItem from="1587106986586" duration="15333000" />
+      <workItem from="1588775964123" duration="602000" />
     </task>
     <servers />
   </component>
@@ -249,7 +250,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
