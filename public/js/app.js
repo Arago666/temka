@@ -2377,6 +2377,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'item'],
   data: function data() {
@@ -2387,7 +2401,8 @@ __webpack_require__.r(__webpack_exports__);
       textRes: [],
       statusOK: [],
       colors: [],
-      buildings: []
+      buildings: [],
+      statusDel: '0'
     };
   },
   created: function created() {
@@ -2404,16 +2419,24 @@ __webpack_require__.r(__webpack_exports__);
       // if(document.getElementById('startCity' + event.building.number && event.building.status==2)){
       //     document.getElementById('startCity' + event.building.number).innerHTML ='';
       // }
-      if (document.getElementById('start' + event.building.number)) {
-        document.getElementById('start' + event.building.number).innerHTML = '';
-      }
-
-      if (document.getElementById('startCity' + event.building.number)) {
-        document.getElementById('startCity' + event.building.number).innerHTML = '';
-      }
-
+      // if(document.getElementById('start' + event.building.number)){
+      //
+      //     document.getElementById('start' + event.building.number).innerHTML ='';
+      // }
+      // if(document.getElementById('startCity' + event.building.number)){
+      //     document.getElementById('startCity' + event.building.number).innerHTML ='';
+      //
+      // }
       if (event.building.game_number == _this.item.game_number) {
         _this.buildings.push(event.building);
+      }
+
+      if (event.building.element_type_id == 3) {
+        if (event.building.status == 2) {
+          document.getElementById('start' + event.building.number).innerHTML = '';
+        } else {
+          document.getElementById('startCity' + event.building.number).innerHTML = '';
+        }
       }
 
       console.log('Заработало!');
@@ -2428,6 +2451,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/games/coordinateelements').then(function (response) {
         _this2.coordinates = response.data;
         console.log(_this2.item.game_number);
+        console.log('мои данные');
+        console.log(_this2.colors);
+        console.log('мои данные');
       });
     },
     //получаем расположение гексов
@@ -2524,6 +2550,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     //игрок выбирает цвет
     ChoseColor: function ChoseColor(color, color_id) {
+      var _this6 = this;
+
       //   alert(color);
       // axios.post('color',{color: color});
       axios.post('color', {
@@ -2531,6 +2559,12 @@ __webpack_require__.r(__webpack_exports__);
         color: color,
         color_id: color_id
       }); //     console.log({game_number: this.item, user: this.user, color: color});
+      // fetchPlayerColors();
+
+      axios.get('/games/playercolor/' + this.item.game_number).then(function (response) {
+        _this6.colors = response.data;
+        console.log(_this6.colors[0].color);
+      });
     },
     //добавляем данные по строительству дороги или города или поселения в базу
     addBuildingToDb: function addBuildingToDb(type_id, id, typeCityOrVillege, coordinate_top, coordinate_left) {
@@ -2573,6 +2607,46 @@ __webpack_require__.r(__webpack_exports__);
         coordinate_top: coordinate_top,
         coordinate_left: coordinate_left
       });
+    },
+    //удаление строения данные по строительству дороги или города или поселения в базу
+    delBuildingFromDb: function delBuildingFromDb(type_id, id, typeCityOrVillege, coordinate_top, coordinate_left) {
+      axios.post('delbuildingfromdb', {
+        game_number: this.item.game_number,
+        color_id: this.colors[0].id,
+        number: id,
+        element_type_id: type_id,
+        typeCityOrVillege: typeCityOrVillege,
+        color1_element: this.colors[0].color1_element,
+        color2_element: this.colors[0].color2_element,
+        color3_element: this.colors[0].color3_element,
+        coordinate_top: coordinate_top,
+        coordinate_left: coordinate_left
+      });
+    },
+    changeStatusDel: function changeStatusDel() {
+      if (this.statusDel == 1) {
+        this.statusDel = 0;
+      } else {
+        this.statusDel = 1;
+      }
+    },
+    delroad: function delroad(a, b) {
+      //   5,coordinate.number
+      if (a == 4) {
+        document.getElementById('RoadVertical' + b).style.display = 'none';
+      }
+
+      if (a == 5) {
+        document.getElementById('RoadLeftUp' + b).style.display = 'none';
+      }
+
+      if (a == 6) {
+        document.getElementById('RoadLeftDown' + b).style.display = 'none';
+      }
+
+      document.getElementById('MenuRoadVertical' + b).style.display = 'none';
+      document.getElementById('MenuRoadLeftUp' + b).style.display = 'none';
+      document.getElementById('MenuRoadLeftDown' + b).style.display = 'none';
     }
   }
 });
@@ -47970,87 +48044,115 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c(
       "div",
-      { staticStyle: { position: "absolute", top: "100px", left: "100px" } },
+      { staticStyle: { position: "absolute", top: "100px", left: "610px" } },
       [
         _c(
           "div",
-          {
-            staticStyle: { position: "absolute", left: "1000px", top: "100px" }
-          },
+          { staticStyle: { position: "absolute", left: "750px", top: "0px" } },
           [
-            _vm._v("\n                Выбрать цвет\n                "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-danger",
-                staticStyle: { width: "100px" },
-                on: {
-                  click: function($event) {
-                    return _vm.ChoseColor("red", 1)
-                  }
-                }
-              },
-              [_vm._v("Красный")]
-            ),
+            _vm.colors[0]
+              ? _c("div", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      style:
+                        "width: 100px;background:" +
+                        _vm.colors[0].color +
+                        ";color:white;"
+                    },
+                    [_vm._v("Твой цвет")]
+                  ),
+                  _vm._v(" "),
+                  _vm.statusDel == 0
+                    ? _c("button", {
+                        staticClass: "btn",
+                        staticStyle: { background: "#2fa360" },
+                        on: {
+                          click: function($event) {
+                            return _vm.changeStatusDel()
+                          }
+                        }
+                      })
+                    : _c("button", {
+                        staticClass: "btn",
+                        staticStyle: { background: "red" },
+                        on: {
+                          click: function($event) {
+                            return _vm.changeStatusDel()
+                          }
+                        }
+                      })
+                ])
+              : _vm._e(),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success",
-                staticStyle: { width: "100px" },
-                on: {
-                  click: function($event) {
-                    return _vm.ChoseColor("green", 2)
-                  }
-                }
-              },
-              [_vm._v("Зеленый")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-warning",
-                staticStyle: {
-                  width: "100px",
-                  "background-color": "orange",
-                  "border-color": "orange"
-                },
-                on: {
-                  click: function($event) {
-                    return _vm.ChoseColor("orange", 3)
-                  }
-                }
-              },
-              [_vm._v("Оранжевый")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary",
-                staticStyle: { width: "100px" },
-                on: {
-                  click: function($event) {
-                    return _vm.ChoseColor("blue", 4)
-                  }
-                }
-              },
-              [_vm._v("Голубой")]
-            ),
-            _vm._v(" "),
-            _vm._l(_vm.colors, function(color) {
-              return _c("div", [
-                _vm._v(
-                  _vm._s(color.color2_element) +
-                    " " +
-                    _vm._s(color.color1_element) +
-                    " "
-                )
-              ])
-            })
-          ],
-          2
+            !_vm.colors[0]
+              ? _c("div", [
+                  _vm._v(
+                    "\n                    Выбрать цвет\n                    "
+                  ),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      staticStyle: { width: "100px" },
+                      on: {
+                        click: function($event) {
+                          return _vm.ChoseColor("red", 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Красный")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      staticStyle: { width: "100px" },
+                      on: {
+                        click: function($event) {
+                          return _vm.ChoseColor("green", 2)
+                        }
+                      }
+                    },
+                    [_vm._v("Зеленый")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-warning",
+                      staticStyle: {
+                        width: "100px",
+                        "background-color": "orange",
+                        "border-color": "orange"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.ChoseColor("orange", 3)
+                        }
+                      }
+                    },
+                    [_vm._v("Оранжевый")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      staticStyle: { width: "100px" },
+                      on: {
+                        click: function($event) {
+                          return _vm.ChoseColor("blue", 4)
+                        }
+                      }
+                    },
+                    [_vm._v("Голубой")]
+                  )
+                ])
+              : _vm._e()
+          ]
         ),
         _vm._v(" "),
         _vm._l(_vm.coordinates, function(coordinate) {
@@ -49063,7 +49165,34 @@ var render = function() {
                           }
                         },
                         [_vm._v("Закрыть")]
-                      )
+                      ),
+                      _vm._v(" "),
+                      _vm.statusDel == 1
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn",
+                              staticStyle: {
+                                width: "100px",
+                                background: "#1b1e21",
+                                color: "white"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.delroad(4, coordinate.number),
+                                    _vm.delBuildingFromDb(
+                                      4,
+                                      coordinate.number,
+                                      1,
+                                      coordinate.coordinate_top,
+                                      coordinate.coordinate_left
+                                    )
+                                }
+                              }
+                            },
+                            [_vm._v("Удалить")]
+                          )
+                        : _vm._e()
                     ]
                   ),
                   _vm._v(" "),
@@ -49172,7 +49301,34 @@ var render = function() {
                           }
                         },
                         [_vm._v("Закрыть")]
-                      )
+                      ),
+                      _vm._v(" "),
+                      _vm.statusDel == 1
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn",
+                              staticStyle: {
+                                width: "100px",
+                                background: "#1b1e21",
+                                color: "white"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.delroad(5, coordinate.number),
+                                    _vm.delBuildingFromDb(
+                                      5,
+                                      coordinate.number,
+                                      1,
+                                      coordinate.coordinate_top,
+                                      coordinate.coordinate_left
+                                    )
+                                }
+                              }
+                            },
+                            [_vm._v("Удалить")]
+                          )
+                        : _vm._e()
                     ]
                   ),
                   _vm._v(" "),
@@ -49283,7 +49439,34 @@ var render = function() {
                           }
                         },
                         [_vm._v("Закрыть")]
-                      )
+                      ),
+                      _vm._v(" "),
+                      _vm.statusDel == 1
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn",
+                              staticStyle: {
+                                width: "100px",
+                                background: "#1b1e21",
+                                color: "white"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.delroad(6, coordinate.number),
+                                    _vm.delBuildingFromDb(
+                                      6,
+                                      coordinate.number,
+                                      1,
+                                      coordinate.coordinate_top,
+                                      coordinate.coordinate_left
+                                    )
+                                }
+                              }
+                            },
+                            [_vm._v("Удалить")]
+                          )
+                        : _vm._e()
                     ]
                   ),
                   _vm._v(" "),
@@ -49755,7 +49938,35 @@ var render = function() {
                           }
                         },
                         [_vm._v("Закрыть")]
-                      )
+                      ),
+                      _vm._v(" "),
+                      _vm.statusDel == 1
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn",
+                              staticStyle: {
+                                width: "100px",
+                                background: "#1b1e21",
+                                color: "white"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.addVillage(coordinate.number),
+                                    _vm.addCity(coordinate.number),
+                                    _vm.delBuildingFromDb(
+                                      3,
+                                      coordinate.number,
+                                      1,
+                                      coordinate.coordinate_top,
+                                      coordinate.coordinate_left
+                                    )
+                                }
+                              }
+                            },
+                            [_vm._v("Удалить")]
+                          )
+                        : _vm._e()
                     ]
                   ),
                   _vm._v(" "),
@@ -62439,8 +62650,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\OpenServer\OSPanel\domains\temka\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\OpenServer\OSPanel\domains\temka\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\Open Server\OSPanel\domains\temka\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\Open Server\OSPanel\domains\temka\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

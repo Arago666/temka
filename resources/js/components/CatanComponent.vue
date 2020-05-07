@@ -1,14 +1,23 @@
 <template>
     <div class="container">
 
-        <div style="position:absolute; top:100px; left: 100px;">
-            <div style="position:absolute; left:1000px; top:100px;">
-                Выбрать цвет
-                <button class="btn btn-danger" v-on:click="ChoseColor('red',1)" style="width: 100px;">Красный</button>
-                <button class="btn btn-success" v-on:click="ChoseColor('green',2)" style="width: 100px;">Зеленый</button>
-                <button class="btn btn-warning" v-on:click="ChoseColor('orange',3)" style="width: 100px; background-color: orange; border-color:orange;">Оранжевый</button>
-                <button class="btn btn-primary" v-on:click="ChoseColor('blue',4)" style="width: 100px;">Голубой</button>
-                <div v-for="color in colors">{{color.color2_element}} {{color.color1_element}} </div>
+        <div style="position:absolute; top:100px; left: 610px;">
+            <div style="position:absolute; left:750px; top:0px;">
+                <div v-if="colors[0]">
+                    <button class="btn" :style="'width: 100px;background:'+colors[0].color+';color:white;'">Твой цвет</button>
+
+                    <button class="btn" v-if="statusDel==0" v-on:click="changeStatusDel()" style="background: #2fa360"></button>
+                    <button class="btn" v-else v-on:click="changeStatusDel()" style="background: red;"></button>
+
+                </div>
+                <div v-if="!colors[0]">
+                    Выбрать цвет
+                    <button class="btn btn-danger" v-on:click="ChoseColor('red',1)" style="width: 100px;">Красный</button>
+                    <button class="btn btn-success" v-on:click="ChoseColor('green',2)" style="width: 100px;">Зеленый</button>
+                    <button class="btn btn-warning" v-on:click="ChoseColor('orange',3)" style="width: 100px; background-color: orange; border-color:orange;">Оранжевый</button>
+                    <button class="btn btn-primary" v-on:click="ChoseColor('blue',4)" style="width: 100px;">Голубой</button>
+                </div>
+
             </div>
 
 <!--         стартовые гексы - море-->
@@ -269,6 +278,7 @@
                 <div :id="'MenuRoadVertical'+coordinate.number"  :style="'z-index: 100;display:none; position: absolute; top:'+ coordMenuTop +'px; left:'+ coordMenuLeft +'px;'">
                     <button class="btn btn-success" v-on:click="addRoadVertical(coordinate.number),addBuildingToDb(4,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px; ">Дорога</button>
                     <button class="btn btn-danger" v-on:click="closeMenuRoadVertical(coordinate.number)" style="width: 100px;">Закрыть</button>
+                    <button v-if="statusDel==1" class="btn" v-on:click="delroad(4,coordinate.number),delBuildingFromDb(4,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px;background: #1b1e21;color: white;">Удалить</button>
                 </div>
 
                 <!--              кнопка для вызова меню постройки -->
@@ -295,6 +305,7 @@
                 <div :id="'MenuRoadLeftUp'+coordinate.number"  :style="'z-index: 100;display:none; position: absolute; top:'+ coordMenuTop +'px; left:'+ coordMenuLeft +'px;'">
                     <button class="btn btn-success" v-on:click="addRoadLeftUp(coordinate.number),addBuildingToDb(5,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px; ">Дорога</button>
                     <button class="btn btn-danger" v-on:click="closeMenuRoadLeftUp(coordinate.number)" style="width: 100px;">Закрыть</button>
+                    <button v-if="statusDel==1" class="btn" v-on:click="delroad(5,coordinate.number),delBuildingFromDb(5,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px;background: #1b1e21;color: white;">Удалить</button>
                 </div>
 
                 <!--              кнопка для вызова меню постройки -->
@@ -320,6 +331,7 @@
                 <div :id="'MenuRoadLeftDown'+coordinate.number"  :style="'z-index: 100;display:none; position: absolute; top:'+ coordMenuTop +'px; left:'+ coordMenuLeft +'px;'">
                     <button class="btn btn-success" v-on:click="addRoadLeftDown(coordinate.number),addBuildingToDb(6,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px; ">Дорога</button>
                     <button class="btn btn-danger" v-on:click="closeMenuRoadLeftDown(coordinate.number)" style="width: 100px;">Закрыть</button>
+                    <button v-if="statusDel==1" class="btn" v-on:click="delroad(6,coordinate.number),delBuildingFromDb(6,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px;background: #1b1e21;color: white;">Удалить</button>
                 </div>
 
                 <!--              кнопка для вызова меню постройки -->
@@ -443,6 +455,8 @@
 <!--                    addBuildingToDb(3 - тип элемента,coordinate.number,1 - поселение (2 для города))-->
                     <button class="btn btn-primary" v-on:click="addVillage(coordinate.number),addBuildingToDb(3,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)">Поселение</button>
                     <button class="btn btn-danger" v-on:click="closeMenu(coordinate.number)" style="width: 100px;">Закрыть</button>
+                    <button v-if="statusDel==1" class="btn" v-on:click="addVillage(coordinate.number),addCity(coordinate.number),delBuildingFromDb(3,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px;background: #1b1e21;color: white;">Удалить</button>
+
                 </div>
 
                 <!--              кнопка для вызова меню постройки поселения или города-->
@@ -483,11 +497,13 @@
                 statusOK: [],
                 colors: [],
                 buildings: [],
+                statusDel: '0',
 
             }
         },
 
         created() {
+
             this.fetchCoordinate();
             this.fetchPosition();
             this.fetchPlayerColors();
@@ -501,17 +517,30 @@
                     //     document.getElementById('startCity' + event.building.number).innerHTML ='';
                     // }
 
-                    if(document.getElementById('start' + event.building.number)){
+                    // if(document.getElementById('start' + event.building.number)){
+                    //
+                    //     document.getElementById('start' + event.building.number).innerHTML ='';
+                    // }
+                    // if(document.getElementById('startCity' + event.building.number)){
+                    //     document.getElementById('startCity' + event.building.number).innerHTML ='';
+                    //
+                    // }
 
-                        document.getElementById('start' + event.building.number).innerHTML ='';
-                    }
-                    if(document.getElementById('startCity' + event.building.number)){
-                        document.getElementById('startCity' + event.building.number).innerHTML ='';
 
-                    }
                     if(event.building.game_number == this.item.game_number){
                         this.buildings.push(event.building);
                     }
+                    if(event.building.element_type_id==3){
+                        if(event.building.status == 2){
+                            document.getElementById('start' + event.building.number).innerHTML ='';
+                        }
+                        else{
+                            document.getElementById('startCity' + event.building.number).innerHTML ='';
+                        }
+
+                    }
+
+
 
 
                     console.log('Заработало!');
@@ -529,6 +558,9 @@
                 axios.get('/games/coordinateelements').then(response =>{
                     this.coordinates = response.data;
                     console.log(this.item.game_number);
+                    console.log('мои данные');
+                    console.log(this.colors);
+                    console.log('мои данные');
                 })
             },
             //получаем расположение гексов
@@ -653,6 +685,11 @@
               // axios.post('color',{color: color});
                  axios.post('color',{game_number: this.item.game_number, color: color, color_id:color_id});
            //     console.log({game_number: this.item, user: this.user, color: color});
+               // fetchPlayerColors();
+                axios.get('/games/playercolor/'+this.item.game_number).then(response =>{
+                    this.colors = response.data;
+                    console.log(this.colors[0].color);
+                })
             },
             //добавляем данные по строительству дороги или города или поселения в базу
             addBuildingToDb(type_id,id,typeCityOrVillege,coordinate_top,coordinate_left){
@@ -698,6 +735,49 @@
                     coordinate_left: coordinate_left,
                 });
             },
+
+            //удаление строения данные по строительству дороги или города или поселения в базу
+            delBuildingFromDb(type_id,id,typeCityOrVillege,coordinate_top,coordinate_left){
+                    axios.post('delbuildingfromdb',{
+                    game_number: this.item.game_number,
+                    color_id: this.colors[0].id,
+                    number: id,
+                    element_type_id:type_id,
+                    typeCityOrVillege: typeCityOrVillege,
+
+                    color1_element: this.colors[0].color1_element,
+                    color2_element: this.colors[0].color2_element,
+                    color3_element: this.colors[0].color3_element,
+                    coordinate_top: coordinate_top,
+                    coordinate_left: coordinate_left,
+                });
+            },
+            changeStatusDel(){
+                if(this.statusDel == 1){
+                    this.statusDel = 0;
+                }else{
+                    this.statusDel = 1;
+                }
+            },
+
+            delroad(a,b){
+             //   5,coordinate.number
+                if(a==4){
+                    document.getElementById('RoadVertical' + b).style.display = 'none';
+                }
+                if(a==5){
+                    document.getElementById('RoadLeftUp' + b).style.display = 'none';
+                }
+                if(a==6){
+                    document.getElementById('RoadLeftDown' + b).style.display = 'none';
+                }
+                document.getElementById('MenuRoadVertical'+b).style.display = 'none';
+
+                document.getElementById('MenuRoadLeftUp'+b).style.display = 'none';
+
+                document.getElementById('MenuRoadLeftDown'+b).style.display = 'none';
+             },
+
         }
     }
 </script>

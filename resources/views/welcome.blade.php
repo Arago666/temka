@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
-        <title>Laravel</title>
+        <title>Temka</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -70,12 +70,12 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">Главная</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}">Войти</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}">Регистрация</a>
                         @endif
                     @endauth
                 </div>
@@ -83,18 +83,16 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Temka.net
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{ route('catan.index') }}">Колонизаторы</a>
+                    <a href="#">Битва магов</a>
+                    <a href="#">Манчкин</a>
+                    <a href="#">Мачикоро</a>
+                    <a href="#">Ужас Аркхема</a>
+                    <a href="#">Контакты</a>
                 </div>
             </div>
         </div>

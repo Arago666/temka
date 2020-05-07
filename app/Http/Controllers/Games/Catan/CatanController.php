@@ -230,12 +230,15 @@ class CatanController extends Controller
           //  ->where('user_id','=',auth()->user()->id)
             ->Where('color_id','=',$request->color_id)
             ->get();
+
+        //проверка выбран ли уже цвет игроком, если да - то выходим
         $color1 = CatanGamePositionPlayer::query()
             ->Where('game_number',$request->game_number)
             ->where('user_id','=',auth()->user()->id)
             ->get();
         if(count($color)>0 || count($color1)>0 ){
-            return false;
+            return back();
+               // ->withErrors(['msg' => 'Ошибка удаления']);
         }
 
         $item = new CatanGamePositionPlayer();
@@ -266,6 +269,7 @@ class CatanController extends Controller
             $item->position = 4;
         }
         $item->save();
+
     }
 
     public function AddBuildingToDb(Request $request)
@@ -351,5 +355,28 @@ class CatanController extends Controller
 
         broadcast(new CatanBuildingToDb($catanGameLog))->toOthers();
     }
+
+    public function DelBuildingFromDb(Request $request)
+    {
+        $item = CatanGamePositionElement::query()
+            ->Where('game_number','=',$request->game_number)
+            ->Where('element_type_id','=',$request->element_type_id)
+            ->Where('number','=',$request->number)
+            ->delete();
+//        if($item){
+//            $item->delete();
+//        }
+
+
+
+
+
+
+
+       // broadcast(new CatanBuildingToDb($catanGameLog))->toOthers();
+    }
+
+
+
 
 }

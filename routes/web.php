@@ -41,6 +41,7 @@ Route::group(['namespace' => 'Games\Catan'], function (){
     ])->names('catan');
     Route::post('/games/catan/color','CatanController@ChoseColor');
     Route::post('/games/catan/addbuildingtodb','CatanController@AddBuildingToDb');
+    Route::post('/games/catan/delbuildingfromdb','CatanController@DelBuildingFromDb');
 
 
 
