@@ -12,6 +12,30 @@
                     <button class="btn" v-if="statusTorg==0" v-on:click="changeStatusTorg()" style="background: red"></button>
                     <button class="btn" v-else v-on:click="changeStatusTorg()" style="background: #eadd3f;"></button>
 
+                    <!--            Карты ресурсов игрока-->
+                    <div style="position: absolute;top:200px;left:0px;">
+                        <div style="position: absolute;top:0px;left:0px;">
+                            <img src="/img/kart-seno.png" width="80" height="120">
+                            <button class="btn btn-success" style="width:80px;" >Взять</button>
+                        </div>
+                        <div style="position: absolute;top:0px;left:90px;">
+                            <img src="/img/kart-glina.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">0</div>
+                        </div>
+                        <div  style="position: absolute;top:0px;left:180px;">
+                            <img class="content_center" src="/img/kart-les.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">2</div>
+                        </div>
+                        <div style="position: absolute;top:0px;left:270px;">
+                            <img src="/img/kart-ovtsa.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">0</div>
+                        </div>
+                        <div style="position: absolute;top:0px;left:360px;">
+                            <img src="/img/kart-kamen.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">0</div>
+                        </div>
+                    </div>
+
                 </div>
                 <div v-if="!colors[0]">
                     Выбрать цвет
@@ -171,6 +195,31 @@
                 </div>
                 <div style="position: absolute;top:130px;left:482px;">
                     <img src="/img/0-3-1.png"  width="30" height="30">
+                </div>
+            </div>
+
+
+            <!--            Карты ресурсов игрока-->
+            <div style="position: absolute;top:600px;left:90px;">
+                <div style="position: absolute;top:0px;left:0px;">
+                    <img src="/img/kart-seno.png"  width="80" height="120">
+                    <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">1</div>
+                </div>
+                <div style="position: absolute;top:0px;left:90px;">
+                    <img src="/img/kart-glina.png"  width="80" height="120">
+                    <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">0</div>
+                </div>
+                <div  style="position: absolute;top:0px;left:180px;">
+                    <img class="content_center" src="/img/kart-les.png"  width="80" height="120">
+                    <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">2</div>
+                </div>
+                <div style="position: absolute;top:0px;left:270px;">
+                    <img src="/img/kart-ovtsa.png"  width="80" height="120">
+                    <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">0</div>
+                </div>
+                <div style="position: absolute;top:0px;left:360px;">
+                    <img src="/img/kart-kamen.png"  width="80" height="120">
+                    <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">0</div>
                 </div>
             </div>
 
@@ -823,3 +872,5 @@
         }
     }
 </script>
+
+

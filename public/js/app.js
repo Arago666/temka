@@ -2425,6 +2425,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'item'],
   data: function data() {
@@ -48144,7 +48193,9 @@ var render = function() {
                             return _vm.changeStatusTorg()
                           }
                         }
-                      })
+                      }),
+                  _vm._v(" "),
+                  _vm._m(0)
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -48829,8 +48880,6 @@ var render = function() {
         _vm._v(" "),
         _vm.statusTorg == 1
           ? _c("div", [
-              _vm._m(0),
-              _vm._v(" "),
               _vm._m(1),
               _vm._v(" "),
               _vm._m(2),
@@ -48845,9 +48894,13 @@ var render = function() {
               _vm._v(" "),
               _vm._m(7),
               _vm._v(" "),
-              _vm._m(8)
+              _vm._m(8),
+              _vm._v(" "),
+              _vm._m(9)
             ])
           : _vm._e(),
+        _vm._v(" "),
+        _vm._m(10),
         _vm._v(" "),
         _vm._l(_vm.buildings, function(building) {
           return _c("div", [
@@ -50085,6 +50138,136 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
+      { staticStyle: { position: "absolute", top: "200px", left: "0px" } },
+      [
+        _c(
+          "div",
+          { staticStyle: { position: "absolute", top: "0px", left: "0px" } },
+          [
+            _c("img", {
+              attrs: { src: "/img/kart-seno.png", width: "80", height: "120" }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                staticStyle: { width: "80px" }
+              },
+              [_vm._v("Взять")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { position: "absolute", top: "0px", left: "90px" } },
+          [
+            _c("img", {
+              attrs: { src: "/img/kart-glina.png", width: "80", height: "120" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  position: "absolute",
+                  top: "111px",
+                  left: "25px",
+                  "font-size": "49px",
+                  "font-weight": "bold",
+                  "font-family": "'Monotype Corsiva'"
+                }
+              },
+              [_vm._v("0")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { position: "absolute", top: "0px", left: "180px" } },
+          [
+            _c("img", {
+              staticClass: "content_center",
+              attrs: { src: "/img/kart-les.png", width: "80", height: "120" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  position: "absolute",
+                  top: "111px",
+                  left: "25px",
+                  "font-size": "49px",
+                  "font-weight": "bold",
+                  "font-family": "'Monotype Corsiva'"
+                }
+              },
+              [_vm._v("2")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { position: "absolute", top: "0px", left: "270px" } },
+          [
+            _c("img", {
+              attrs: { src: "/img/kart-ovtsa.png", width: "80", height: "120" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  position: "absolute",
+                  top: "111px",
+                  left: "25px",
+                  "font-size": "49px",
+                  "font-weight": "bold",
+                  "font-family": "'Monotype Corsiva'"
+                }
+              },
+              [_vm._v("0")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { position: "absolute", top: "0px", left: "360px" } },
+          [
+            _c("img", {
+              attrs: { src: "/img/kart-kamen.png", width: "80", height: "120" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  position: "absolute",
+                  top: "111px",
+                  left: "25px",
+                  "font-size": "49px",
+                  "font-weight": "bold",
+                  "font-family": "'Monotype Corsiva'"
+                }
+              },
+              [_vm._v("0")]
+            )
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
       { staticStyle: { position: "absolute", top: "460px", left: "338px" } },
       [
         _c("img", {
@@ -50202,6 +50385,142 @@ var staticRenderFns = [
         _c("img", {
           attrs: { src: "/img/0-3-1.png", width: "30", height: "30" }
         })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { position: "absolute", top: "600px", left: "90px" } },
+      [
+        _c(
+          "div",
+          { staticStyle: { position: "absolute", top: "0px", left: "0px" } },
+          [
+            _c("img", {
+              attrs: { src: "/img/kart-seno.png", width: "80", height: "120" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  position: "absolute",
+                  top: "111px",
+                  left: "25px",
+                  "font-size": "49px",
+                  "font-weight": "bold",
+                  "font-family": "'Monotype Corsiva'"
+                }
+              },
+              [_vm._v("1")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { position: "absolute", top: "0px", left: "90px" } },
+          [
+            _c("img", {
+              attrs: { src: "/img/kart-glina.png", width: "80", height: "120" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  position: "absolute",
+                  top: "111px",
+                  left: "25px",
+                  "font-size": "49px",
+                  "font-weight": "bold",
+                  "font-family": "'Monotype Corsiva'"
+                }
+              },
+              [_vm._v("0")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { position: "absolute", top: "0px", left: "180px" } },
+          [
+            _c("img", {
+              staticClass: "content_center",
+              attrs: { src: "/img/kart-les.png", width: "80", height: "120" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  position: "absolute",
+                  top: "111px",
+                  left: "25px",
+                  "font-size": "49px",
+                  "font-weight": "bold",
+                  "font-family": "'Monotype Corsiva'"
+                }
+              },
+              [_vm._v("2")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { position: "absolute", top: "0px", left: "270px" } },
+          [
+            _c("img", {
+              attrs: { src: "/img/kart-ovtsa.png", width: "80", height: "120" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  position: "absolute",
+                  top: "111px",
+                  left: "25px",
+                  "font-size": "49px",
+                  "font-weight": "bold",
+                  "font-family": "'Monotype Corsiva'"
+                }
+              },
+              [_vm._v("0")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { position: "absolute", top: "0px", left: "360px" } },
+          [
+            _c("img", {
+              attrs: { src: "/img/kart-kamen.png", width: "80", height: "120" }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  position: "absolute",
+                  top: "111px",
+                  left: "25px",
+                  "font-size": "49px",
+                  "font-weight": "bold",
+                  "font-family": "'Monotype Corsiva'"
+                }
+              },
+              [_vm._v("0")]
+            )
+          ]
+        )
       ]
     )
   }
