@@ -50268,10 +50268,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticStyle: { position: "absolute", top: "460px", left: "338px" } },
+      { staticStyle: { position: "absolute", top: "455px", left: "341px" } },
       [
         _c("img", {
-          attrs: { src: "/img/0-derevo.png", width: "30", height: "30" }
+          attrs: { src: "/img/0-derevo.png", width: "20", height: "20" }
         })
       ]
     )
@@ -50282,10 +50282,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticStyle: { position: "absolute", top: "331px", left: "106px" } },
+      { staticStyle: { position: "absolute", top: "332px", left: "115px" } },
       [
         _c("img", {
-          attrs: { src: "/img/0-seno.png", width: "30", height: "30" }
+          attrs: { src: "/img/0-seno.png", width: "20", height: "20" }
         })
       ]
     )
@@ -50296,10 +50296,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticStyle: { position: "absolute", top: "52px", left: "337px" } },
+      { staticStyle: { position: "absolute", top: "63px", left: "339px" } },
       [
         _c("img", {
-          attrs: { src: "/img/0-ovtsa.png", width: "30", height: "30" }
+          attrs: { src: "/img/0-ovtsa.png", width: "20", height: "20" }
         })
       ]
     )
@@ -50310,10 +50310,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticStyle: { position: "absolute", top: "185px", left: "105px" } },
+      { staticStyle: { position: "absolute", top: "187px", left: "115px" } },
       [
         _c("img", {
-          attrs: { src: "/img/0-kamen.png", width: "30", height: "30" }
+          attrs: { src: "/img/0-kamen.png", width: "20", height: "20" }
         })
       ]
     )
@@ -50324,10 +50324,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticStyle: { position: "absolute", top: "380px", left: "482px" } },
+      { staticStyle: { position: "absolute", top: "380px", left: "477px" } },
       [
         _c("img", {
-          attrs: { src: "/img/0-glina.png", width: "30", height: "30" }
+          attrs: { src: "/img/0-glina.png", width: "20", height: "20" }
         })
       ]
     )
@@ -50338,10 +50338,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticStyle: { position: "absolute", top: "52px", left: "182px" } },
+      { staticStyle: { position: "absolute", top: "62px", left: "192px" } },
       [
         _c("img", {
-          attrs: { src: "/img/0-3-1.png", width: "30", height: "30" }
+          attrs: { src: "/img/0-3-1.png", width: "20", height: "20" }
         })
       ]
     )
@@ -50352,10 +50352,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticStyle: { position: "absolute", top: "460px", left: "182px" } },
+      { staticStyle: { position: "absolute", top: "454px", left: "187px" } },
       [
         _c("img", {
-          attrs: { src: "/img/0-3-1.png", width: "30", height: "30" }
+          attrs: { src: "/img/0-3-1.png", width: "20", height: "20" }
         })
       ]
     )
@@ -50369,7 +50369,7 @@ var staticRenderFns = [
       { staticStyle: { position: "absolute", top: "257px", left: "550px" } },
       [
         _c("img", {
-          attrs: { src: "/img/0-3-1.png", width: "30", height: "30" }
+          attrs: { src: "/img/0-3-1.png", width: "20", height: "20" }
         })
       ]
     )
@@ -50380,10 +50380,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticStyle: { position: "absolute", top: "130px", left: "482px" } },
+      { staticStyle: { position: "absolute", top: "136px", left: "476px" } },
       [
         _c("img", {
-          attrs: { src: "/img/0-3-1.png", width: "30", height: "30" }
+          attrs: { src: "/img/0-3-1.png", width: "20", height: "20" }
         })
       ]
     )
