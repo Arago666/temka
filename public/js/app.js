@@ -2391,6 +2391,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'item'],
   data: function data() {
@@ -2402,7 +2436,8 @@ __webpack_require__.r(__webpack_exports__);
       statusOK: [],
       colors: [],
       buildings: [],
-      statusDel: '0'
+      statusDel: '0',
+      statusTorg: '0'
     };
   },
   created: function created() {
@@ -2628,6 +2663,13 @@ __webpack_require__.r(__webpack_exports__);
         this.statusDel = 0;
       } else {
         this.statusDel = 1;
+      }
+    },
+    changeStatusTorg: function changeStatusTorg() {
+      if (this.statusTorg == 1) {
+        this.statusTorg = 0;
+      } else {
+        this.statusTorg = 1;
       }
     },
     delroad: function delroad(a, b) {
@@ -48082,6 +48124,26 @@ var render = function() {
                             return _vm.changeStatusDel()
                           }
                         }
+                      }),
+                  _vm._v(" "),
+                  _vm.statusTorg == 0
+                    ? _c("button", {
+                        staticClass: "btn",
+                        staticStyle: { background: "red" },
+                        on: {
+                          click: function($event) {
+                            return _vm.changeStatusTorg()
+                          }
+                        }
+                      })
+                    : _c("button", {
+                        staticClass: "btn",
+                        staticStyle: { background: "#eadd3f" },
+                        on: {
+                          click: function($event) {
+                            return _vm.changeStatusTorg()
+                          }
+                        }
                       })
                 ])
               : _vm._e(),
@@ -48764,6 +48826,28 @@ var render = function() {
             )
           ]
         ),
+        _vm._v(" "),
+        _vm.statusTorg == 1
+          ? _c("div", [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4),
+              _vm._v(" "),
+              _vm._m(5),
+              _vm._v(" "),
+              _vm._m(6),
+              _vm._v(" "),
+              _vm._m(7),
+              _vm._v(" "),
+              _vm._m(8)
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _vm._l(_vm.buildings, function(building) {
           return _c("div", [
@@ -49994,7 +50078,134 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { position: "absolute", top: "460px", left: "338px" } },
+      [
+        _c("img", {
+          attrs: { src: "/img/0-derevo.png", width: "30", height: "30" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { position: "absolute", top: "331px", left: "106px" } },
+      [
+        _c("img", {
+          attrs: { src: "/img/0-seno.png", width: "30", height: "30" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { position: "absolute", top: "52px", left: "337px" } },
+      [
+        _c("img", {
+          attrs: { src: "/img/0-ovtsa.png", width: "30", height: "30" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { position: "absolute", top: "185px", left: "105px" } },
+      [
+        _c("img", {
+          attrs: { src: "/img/0-kamen.png", width: "30", height: "30" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { position: "absolute", top: "380px", left: "482px" } },
+      [
+        _c("img", {
+          attrs: { src: "/img/0-glina.png", width: "30", height: "30" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { position: "absolute", top: "52px", left: "182px" } },
+      [
+        _c("img", {
+          attrs: { src: "/img/0-3-1.png", width: "30", height: "30" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { position: "absolute", top: "460px", left: "182px" } },
+      [
+        _c("img", {
+          attrs: { src: "/img/0-3-1.png", width: "30", height: "30" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { position: "absolute", top: "257px", left: "550px" } },
+      [
+        _c("img", {
+          attrs: { src: "/img/0-3-1.png", width: "30", height: "30" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { position: "absolute", top: "130px", left: "482px" } },
+      [
+        _c("img", {
+          attrs: { src: "/img/0-3-1.png", width: "30", height: "30" }
+        })
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 

@@ -9,6 +9,9 @@
                     <button class="btn" v-if="statusDel==0" v-on:click="changeStatusDel()" style="background: #2fa360"></button>
                     <button class="btn" v-else v-on:click="changeStatusDel()" style="background: red;"></button>
 
+                    <button class="btn" v-if="statusTorg==0" v-on:click="changeStatusTorg()" style="background: red"></button>
+                    <button class="btn" v-else v-on:click="changeStatusTorg()" style="background: #eadd3f;"></button>
+
                 </div>
                 <div v-if="!colors[0]">
                     Выбрать цвет
@@ -20,15 +23,15 @@
 
             </div>
 
-<!--         стартовые гексы - море-->
+            <!--         стартовые гексы - море-->
             <div v-for="coordinate in coordinates"
                  :class="'type'+coordinate.element_type_id+'-'+coordinate.number" v-if="coordinate.element_type_id==1">
 
-                    <div  :style="'position: absolute; top:'+ coordinate.coordinate_top +'px; left:'+ coordinate.coordinate_left +'px; height: 100px; width: 100px;'">
-                        <svg  viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                            <polygon  points="50 1 95 25 95 75 50 99 5 75 5 25" fill="url(#type_more)"/>
-                        </svg>
-                    </div>
+                <div  :style="'position: absolute; top:'+ coordinate.coordinate_top +'px; left:'+ coordinate.coordinate_left +'px; height: 100px; width: 100px;'">
+                    <svg  viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                        <polygon  points="50 1 95 25 95 75 50 99 5 75 5 25" fill="url(#type_more)"/>
+                    </svg>
+                </div>
 
             </div>
 
@@ -126,7 +129,6 @@
                     </svg>
                 </div>
 
-
                 <div style="position: absolute; top: 0px; left: 135px; height: 100px; width: 100px;">
                     <svg viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -137,8 +139,40 @@
                         <polygon points="50 1 95 25 95 75 50 99 5 75 5 25" fill="url(#type_more)"/>
                     </svg>
                 </div>
+
+
             </div>
 
+<!--            Обмен ресурсов-->
+            <div v-if="statusTorg==1">
+                <div style="position: absolute;top:460px;left:338px;">
+                    <img src="/img/0-derevo.png"  width="30" height="30">
+                </div>
+                <div style="position: absolute;top:331px;left:106px;">
+                    <img src="/img/0-seno.png"  width="30" height="30">
+                </div>
+                <div style="position: absolute;top:52px;left:337px;">
+                    <img src="/img/0-ovtsa.png"  width="30" height="30">
+                </div>
+                <div style="position: absolute;top:185px;left:105px;">
+                    <img src="/img/0-kamen.png"  width="30" height="30">
+                </div>
+                <div style="position: absolute;top:380px;left:482px;">
+                    <img src="/img/0-glina.png"  width="30" height="30">
+                </div>
+                <div style="position: absolute;top:52px;left:182px;">
+                    <img src="/img/0-3-1.png"  width="30" height="30">
+                </div>
+                <div style="position: absolute;top:460px;left:182px;">
+                    <img src="/img/0-3-1.png"  width="30" height="30">
+                </div>
+                <div style="position: absolute;top:257px;left:550px;">
+                    <img src="/img/0-3-1.png"  width="30" height="30">
+                </div>
+                <div style="position: absolute;top:130px;left:482px;">
+                    <img src="/img/0-3-1.png"  width="30" height="30">
+                </div>
+            </div>
 
             <!--         стартовая загрузка Дорог-->
             <div v-for="building in buildings">
@@ -498,6 +532,7 @@
                 colors: [],
                 buildings: [],
                 statusDel: '0',
+                statusTorg: '0',
 
             }
         },
@@ -757,6 +792,13 @@
                     this.statusDel = 0;
                 }else{
                     this.statusDel = 1;
+                }
+            },
+            changeStatusTorg(){
+                if(this.statusTorg == 1){
+                    this.statusTorg = 0;
+                }else{
+                    this.statusTorg = 1;
                 }
             },
 
