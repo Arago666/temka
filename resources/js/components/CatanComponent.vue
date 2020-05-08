@@ -870,10 +870,10 @@
                                 this.player1countcard = this.player1countcard+this.playercards[i].count_res;
                             }
                             if(this.playercards[i].type_res>5 && this.playercards[i].type_res<11){
-                                this.player1countcardrazv = this.player1countcard+this.playercards[i].count_res;
+                                this.player1countcardrazv = this.player1countcardrazv+this.playercards[i].count_res;
                             }
                             if(this.playercards[i].type_res>10){
-                                this.player1countcardknight = this.player1countcard+this.playercards[i].count_res;
+                                this.player1countcardknight = this.player1countcardknight+this.playercards[i].count_res;
                             }
                         }
                         if(this.playercards[i].position_id==2){
@@ -881,10 +881,10 @@
                                 this.player2countcard = this.player2countcard+this.playercards[i].count_res;
                             }
                             if(this.playercards[i].type_res>5 && this.playercards[i].type_res<11){
-                                this.player2countcardrazv = this.player2countcard+this.playercards[i].count_res;
+                                this.player2countcardrazv = this.player2countcardrazv+this.playercards[i].count_res;
                             }
                             if(this.playercards[i].type_res>10){
-                                this.player2countcardknight = this.player2countcard+this.playercards[i].count_res;
+                                this.player2countcardknight = this.player2countcardknight+this.playercards[i].count_res;
                             }
                         }
                         if(this.playercards[i].position_id==3){
@@ -892,10 +892,10 @@
                                 this.player3countcard = this.player3countcard+this.playercards[i].count_res;
                             }
                             if(this.playercards[i].type_res>5 && this.playercards[i].type_res<11){
-                                this.player3countcardrazv = this.player3countcard+this.playercards[i].count_res;
+                                this.player3countcardrazv = this.player3countcardrazv+this.playercards[i].count_res;
                             }
                             if(this.playercards[i].type_res>10){
-                                this.player3countcardknight = this.player3countcard+this.playercards[i].count_res;
+                                this.player3countcardknight = this.player3countcardknight+this.playercards[i].count_res;
                             }
                         }
                         if(this.playercards[i].position_id==4){
@@ -903,10 +903,10 @@
                                 this.player4countcard = this.player4countcard+this.playercards[i].count_res;
                             }
                             if(this.playercards[i].type_res>5 && this.playercards[i].type_res<11){
-                                this.player4countcardrazv = this.player4countcard+this.playercards[i].count_res;
+                                this.player4countcardrazv = this.player4countcardrazv+this.playercards[i].count_res;
                             }
                             if(this.playercards[i].type_res>10){
-                                this.player4countcardknight = this.player4countcard+this.playercards[i].count_res;
+                                this.player4countcardknight = this.player4countcardknight+this.playercards[i].count_res;
                             }
                         }
                     }

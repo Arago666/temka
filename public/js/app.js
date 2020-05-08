@@ -2764,11 +2764,11 @@ __webpack_require__.r(__webpack_exports__);
             }
 
             if (_this6.playercards[i].type_res > 5 && _this6.playercards[i].type_res < 11) {
-              _this6.player1countcardrazv = _this6.player1countcard + _this6.playercards[i].count_res;
+              _this6.player1countcardrazv = _this6.player1countcardrazv + _this6.playercards[i].count_res;
             }
 
             if (_this6.playercards[i].type_res > 10) {
-              _this6.player1countcardknight = _this6.player1countcard + _this6.playercards[i].count_res;
+              _this6.player1countcardknight = _this6.player1countcardknight + _this6.playercards[i].count_res;
             }
           }
 
@@ -2778,11 +2778,11 @@ __webpack_require__.r(__webpack_exports__);
             }
 
             if (_this6.playercards[i].type_res > 5 && _this6.playercards[i].type_res < 11) {
-              _this6.player2countcardrazv = _this6.player2countcard + _this6.playercards[i].count_res;
+              _this6.player2countcardrazv = _this6.player2countcardrazv + _this6.playercards[i].count_res;
             }
 
             if (_this6.playercards[i].type_res > 10) {
-              _this6.player2countcardknight = _this6.player2countcard + _this6.playercards[i].count_res;
+              _this6.player2countcardknight = _this6.player2countcardknight + _this6.playercards[i].count_res;
             }
           }
 
@@ -2792,11 +2792,11 @@ __webpack_require__.r(__webpack_exports__);
             }
 
             if (_this6.playercards[i].type_res > 5 && _this6.playercards[i].type_res < 11) {
-              _this6.player3countcardrazv = _this6.player3countcard + _this6.playercards[i].count_res;
+              _this6.player3countcardrazv = _this6.player3countcardrazv + _this6.playercards[i].count_res;
             }
 
             if (_this6.playercards[i].type_res > 10) {
-              _this6.player3countcardknight = _this6.player3countcard + _this6.playercards[i].count_res;
+              _this6.player3countcardknight = _this6.player3countcardknight + _this6.playercards[i].count_res;
             }
           }
 
@@ -2806,11 +2806,11 @@ __webpack_require__.r(__webpack_exports__);
             }
 
             if (_this6.playercards[i].type_res > 5 && _this6.playercards[i].type_res < 11) {
-              _this6.player4countcardrazv = _this6.player4countcard + _this6.playercards[i].count_res;
+              _this6.player4countcardrazv = _this6.player4countcardrazv + _this6.playercards[i].count_res;
             }
 
             if (_this6.playercards[i].type_res > 10) {
-              _this6.player4countcardknight = _this6.player4countcard + _this6.playercards[i].count_res;
+              _this6.player4countcardknight = _this6.player4countcardknight + _this6.playercards[i].count_res;
             }
           }
         }
