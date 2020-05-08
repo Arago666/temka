@@ -1,25 +1,71 @@
 <template>
     <div class="container">
 
-        <div style="position:absolute; top:100px; left: 100px;">
-            <div style="position:absolute; left:1000px; top:100px;">
-                Выбрать цвет
-                <button class="btn btn-danger" v-on:click="ChoseColor('red',1)" style="width: 100px;">Красный</button>
-                <button class="btn btn-success" v-on:click="ChoseColor('green',2)" style="width: 100px;">Зеленый</button>
-                <button class="btn btn-warning" v-on:click="ChoseColor('orange',3)" style="width: 100px; background-color: orange; border-color:orange;">Оранжевый</button>
-                <button class="btn btn-primary" v-on:click="ChoseColor('blue',4)" style="width: 100px;">Голубой</button>
-                <div v-for="color in colors">{{color.color2_element}} {{color.color1_element}} </div>
+        <div style="position:absolute; top:100px; left: 610px;">
+            <div style="position:absolute; left:750px; top:0px;">
+                <div v-if="colors[0]">
+                    <div style="position: absolute; left:160px;top:0px;">
+                        <button class="btn" :style="'width: 100px;background:'+colors[0].color+';color:white;'">Твой цвет</button>
+    <!--кнопка ключения удаления строения-->
+                        <button class="btn" v-if="statusDel==0" v-on:click="changeStatusDel()" style="background: #2fa360;"></button>
+                        <button class="btn" v-else v-on:click="changeStatusDel()" style="background: red;"></button>
+    <!--Кнопка включения значков обмена ресурсов на карте-->
+                        <button class="btn" v-if="statusTorg==0" v-on:click="changeStatusTorg()" style="background: red"></button>
+                        <button class="btn" v-else v-on:click="changeStatusTorg()" style="background: #eadd3f;"></button>
+    <!--пустая кнопка для интерфейся-->
+                        <button class="btn" style="background: #eadd3f;"></button>
+                    </div>
+
+                    <!--            Взять ресурс из банка (карты)-->
+                    <div style="position: absolute;top:90px;left:-55px;">
+                        <div style="position: absolute;top:0px;left:0px;">
+                            <img src="/img/kart-seno.png" width="80" height="120">
+                            <button v-on:click="addResToPlayer(1)" class="btn btn-success" style="width:80px;" >Взять</button>
+
+                        </div>
+                        <div style="position: absolute;top:0px;left:90px;">
+                            <img src="/img/kart-glina.png"  width="80" height="120">
+                            <button v-on:click="addResToPlayer(2)" class="btn btn-success" style="width:80px;" >Взять</button>
+                        </div>
+                        <div  style="position: absolute;top:0px;left:180px;">
+                            <img class="content_center" src="/img/kart-les.png"  width="80" height="120">
+                            <button v-on:click="addResToPlayer(3)" class="btn btn-success" style="width:80px;" >Взять</button>
+                        </div>
+                        <div style="position: absolute;top:0px;left:270px;">
+                            <img src="/img/kart-ovtsa.png"  width="80" height="120">
+                            <button v-on:click="addResToPlayer(4)" class="btn btn-success" style="width:80px;" >Взять</button>
+                        </div>
+                        <div style="position: absolute;top:0px;left:360px;">
+                            <img src="/img/kart-kamen.png"  width="80" height="120">
+                            <button v-on:click="addResToPlayer(5)" class="btn btn-success" style="width:80px;" >Взять</button>
+                        </div>
+                        <div style="position: absolute;top:0px;left:450px;">
+                            <img src="/img/kart-back.png"  width="80" height="120">
+                            <button v-on:click="addResToPlayer(7)" class="btn btn-success" style="width:80px;" >Взять</button>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div v-if="!colors[0]">
+                    Выбрать цвет
+                    <button class="btn btn-danger" v-on:click="ChoseColor('red',1)" style="width: 100px;">Красный</button>
+                    <button class="btn btn-success" v-on:click="ChoseColor('green',2)" style="width: 100px;">Зеленый</button>
+                    <button class="btn btn-warning" v-on:click="ChoseColor('orange',3)" style="width: 100px; background-color: orange; border-color:orange;">Оранжевый</button>
+                    <button class="btn btn-primary" v-on:click="ChoseColor('blue',4)" style="width: 100px;">Голубой</button>
+                </div>
+
             </div>
 
-<!--         стартовые гексы - море-->
+            <!--         стартовые гексы - море-->
             <div v-for="coordinate in coordinates"
                  :class="'type'+coordinate.element_type_id+'-'+coordinate.number" v-if="coordinate.element_type_id==1">
 
-                    <div  :style="'position: absolute; top:'+ coordinate.coordinate_top +'px; left:'+ coordinate.coordinate_left +'px; height: 100px; width: 100px;'">
-                        <svg  viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                            <polygon  points="50 1 95 25 95 75 50 99 5 75 5 25" fill="url(#type_more)"/>
-                        </svg>
-                    </div>
+                <div  :style="'position: absolute; top:'+ coordinate.coordinate_top +'px; left:'+ coordinate.coordinate_left +'px; height: 100px; width: 100px;'">
+                    <svg  viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                        <polygon  points="50 1 95 25 95 75 50 99 5 75 5 25" fill="url(#type_more)"/>
+                    </svg>
+                </div>
 
             </div>
 
@@ -42,10 +88,15 @@
                     {{ a = coordinate.coordinate_left + 36 }}
                     {{ b = coordinate.coordinate_top + 34 }}
                 </div>
+<!--                Цифры на гексах-->
                 <div v-for="position in positions" v-if="coordinate.number == position.position">
-                <input v-if="position.number!=8 && position.number!=6 && position.number!=777" type="button" :value="position.number" :style="'position: absolute; left: '+ a +'px;top:'+ b +'px;  margin: 0 auto;height:30px;cursor:default; width:30px;  display: inline-block;  color: black; font-size:14px; font-weight: bold;  outline: none;  border: 2px solid white;  border-radius: 70px; background: rgb(238, 239, 195);    box-shadow: 0 12px 6px -6px #b1b1b1, 0 0 3px 0 #151515;'">
-                <input v-else-if="position.number==8 || position.number==6 && position.number!=777" type="button" :value="position.number" :style="'position: absolute; left: '+ a +'px;top:'+ b +'px;  margin: 0 auto;height:30px;cursor:default; width:30px;  display: inline-block;  color: red; font-size:14px; font-weight: bold;  outline: none;  border: 2px solid white;  border-radius: 70px; background: rgb(238, 239, 195);    box-shadow: 0 12px 6px -6px #b1b1b1, 0 0 3px 0 #151515;'">
+                    <input v-on:dblclick="addKnight(coordinate.number)" :class="'btnNumber'+coordinate.number" v-if="position.number!=8 && position.number!=6 && position.number!=777" type="button" :value="position.number" :style="'z-index:99;position: absolute; left: '+ a +'px;top:'+ b +'px;  margin: 0 auto;height:30px;cursor:default; width:30px;  display: inline-block;  color: black; font-size:14px; font-weight: bold;  outline: none;  border: 2px solid white;  border-radius: 70px; background: rgb(238, 239, 195);    box-shadow: 0 12px 6px -6px #b1b1b1, 0 0 3px 0 #151515;'">
+                    <input v-on:dblclick="addKnight(coordinate.number)" :class="'btnNumber'+coordinate.number" v-else-if="position.number==8 || position.number==6 && position.number!=777" type="button" :value="position.number" :style="'z-index:99;position: absolute; left: '+ a +'px;top:'+ b +'px;  margin: 0 auto;height:30px;cursor:default; width:30px;  display: inline-block;  color: red; font-size:14px; font-weight: bold;  outline: none;  border: 2px solid white;  border-radius: 70px; background: rgb(238, 239, 195);    box-shadow: 0 12px 6px -6px #b1b1b1, 0 0 3px 0 #151515;'">
+<!--                    //местоположение рыцаря-->
+                    <input v-if="coordinate.number==knightPosition" :class="'btnNumber000'+coordinate.number" type="button"  :style="'z-index:99;position: absolute; left: '+ a +'px;top:'+ b +'px;  margin: 0 auto;height:30px;cursor:pointer; width:30px;  display: inline-block;  color: black; font-size:14px; font-weight: bold;  border: 2px solid white;  border-radius: 70px; background: url(/img/7.png);background-size: 30px 30px; '">
+
                 </div>
+
 
             </div>
 
@@ -117,7 +168,6 @@
                     </svg>
                 </div>
 
-
                 <div style="position: absolute; top: 0px; left: 135px; height: 100px; width: 100px;">
                     <svg viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -128,8 +178,142 @@
                         <polygon points="50 1 95 25 95 75 50 99 5 75 5 25" fill="url(#type_more)"/>
                     </svg>
                 </div>
+
+
             </div>
 
+<!--            Обмен ресурсов-->
+            <div v-if="statusTorg==1">
+                <div style="position: absolute;top:455px;left:341px;">
+                    <img src="/img/0-derevo.png"  width="20" height="20">
+                </div>
+                <div style="position: absolute;top:332px;left:115px;">
+                    <img src="/img/0-seno.png"  width="20" height="20">
+                </div>
+                <div style="position: absolute;top:63px;left:339px;">
+                    <img src="/img/0-ovtsa.png"  width="20" height="20">
+                </div>
+                <div style="position: absolute;top:187px;left:115px;">
+                    <img src="/img/0-kamen.png"  width="20" height="20">
+                </div>
+                <div style="position: absolute;top:380px;left:477px;">
+                    <img src="/img/0-glina.png"  width="20" height="20">
+                </div>
+                <div style="position: absolute;top:62px;left:192px;">
+                    <img src="/img/0-3-1.png"  width="20" height="20">
+                </div>
+                <div style="position: absolute;top:454px;left:187px;">
+                    <img src="/img/0-3-1.png"  width="20" height="20">
+                </div>
+                <div style="position: absolute;top:257px;left:550px;">
+                    <img src="/img/0-3-1.png"  width="20" height="20">
+                </div>
+                <div style="position: absolute;top:136px;left:476px;">
+                    <img src="/img/0-3-1.png"  width="20" height="20">
+                </div>
+            </div>
+
+
+            <!--            Карты ресурсов игрока-->
+            <div style="display: none">
+            {{i=360}}
+            {{b=90}}</div>
+            <div style="position: absolute;top:600px;left:90px;">
+
+                <div v-for="playercard in playercards">
+<!--                Сыгранные рыцари-->
+                    <div v-if="playercard.position_id==colors[0].id && playercard.type_res>10 && playercard.count_res>0">
+                        <div   style="position: absolute;top:0px;left:-110px;">
+                            <img src="/img/kart-knight.png"  width="80" height="120" style="filter: grayscale(80%); ">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">{{playercard.count_res}}</div>
+                        </div>
+                    </div>
+<!--                    Обычные ресурсы (дерево, глина...)-->
+                    <div v-if="playercard.position_id==colors[0].id && playercard.type_res<6">
+                        <div v-if="playercard.type_res==1" style="position: absolute;top:0px;left:0px;">
+
+                            <img v-on:click.alt="delResFromPlayer(1)" v-on:dblclick="delResFromPlayer(1)" src="/img/kart-seno.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">{{playercard.count_res}}</div>
+
+                        </div>
+                        <div v-if="playercard.type_res==2" style="position: absolute;top:0px;left:90px;">
+                            <img v-on:click.alt="delResFromPlayer(2)" v-on:dblclick="delResFromPlayer(2)" src="/img/kart-glina.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">{{playercard.count_res}}</div>
+                        </div>
+                        <div v-if="playercard.type_res==3" style="position: absolute;top:0px;left:180px;">
+                            <img v-on:click.alt="delResFromPlayer(3)" v-on:dblclick="delResFromPlayer(3)" class="content_center" src="/img/kart-les.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">{{playercard.count_res}}</div>
+                        </div>
+                        <div  v-if="playercard.type_res==4" style="position: absolute;top:0px;left:270px;">
+                            <img v-on:click.alt="delResFromPlayer(4)" v-on:dblclick="delResFromPlayer(4)" src="/img/kart-ovtsa.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">{{playercard.count_res}}</div>
+                        </div>
+                        <div  v-if="playercard.type_res==5" style="position: absolute;top:0px;left:360px;">
+                            <img v-on:click.alt="delResFromPlayer(5)" v-on:dblclick="delResFromPlayer(5)" src="/img/kart-kamen.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">{{playercard.count_res}}</div>
+                        </div>
+                    </div>
+<!--                    карты развития-->
+                    <div v-if="playercard.position_id==colors[0].id && playercard.type_res>5 && playercard.type_res<11 && playercard.count_res>0">
+<div style="display: none;">
+                        {{i=b+i}}</div>
+                        <div v-if="playercard.type_res==6" :style="'position: absolute;top:0px;left:'+ i +'px;'">
+                            <img v-on:click.alt="delResFromPlayer(6)" v-on:dblclick="delResFromPlayer(6)" src="/img/kart-1poin-1.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">{{playercard.count_res}}</div>
+
+                        </div>
+                        <div v-if="playercard.type_res==7" :style="'position: absolute;top:0px;left:'+ i +'px;'">
+                            <img v-on:click.alt="delResFromPlayer(7)" v-on:dblclick="delResFromPlayer(7)" src="/img/kart-monopolia.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">{{playercard.count_res}}</div>
+                        </div>
+                        <div v-if="playercard.type_res==8" :style="'position: absolute;top:0px;left:'+ i +'px;'">
+                            <img v-on:click.alt="delResFromPlayer(8)" v-on:dblclick="delResFromPlayer(8)" class="content_center" src="/img/kart-proriv.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">{{playercard.count_res}}</div>
+                        </div>
+                        <div  v-if="playercard.type_res==9"  :style="'position: absolute;top:0px;left:'+ i +'px;'">
+                            <img v-on:click.alt="delResFromPlayer(9)" v-on:dblclick="delResFromPlayer(9)" src="/img/kart-road.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">{{playercard.count_res}}</div>
+                        </div>
+                        <div  v-if="playercard.type_res==10"  :style="'position: absolute;top:0px;left:'+ i +'px;'">
+                            <img v-on:click.alt="delResFromPlayer(10)" v-on:dblclick="delResFromPlayer(10)" src="/img/kart-knight.png"  width="80" height="120">
+                            <div style=" position: absolute;top:111px;left:25px;font-size: 49px;font-weight: bold;font-family: 'Monotype Corsiva';">{{playercard.count_res}}</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--            Карты ресурсов других игроков -->
+            <div style="position: absolute;top:0px;left:-300px;">
+                <div>
+                    Первый игрок: **<br>
+                    Количество карт: {{ player1countcard }}<br>
+                    Количество карт развития: {{ player1countcardrazv }}<br>
+                    Количество сыгранных рыцарей: {{ player1countcardknight}}<br><br>
+                </div>
+                <div>
+                    Первый игрок: ***
+                    Количество карт: {{ player2countcard }}<br>
+                    Количество карт развития: {{ player2countcardrazv }}<br>
+                    Количество сыгранных рыцарей: {{ player2countcardknight}}<br><br>
+                </div>
+                <div>
+                    Первый игрок: ***<br>
+                    Количество карт: {{ player3countcard }}<br>
+                    Количество карт развития: {{ player3countcardrazv }}<br>
+                    Количество сыгранных рыцарей: {{ player3countcardknight}}<br><br>
+                </div>
+                <div>
+                    Первый игрок: ***<br>
+                    Количество карт: {{ player4countcard }}<br>
+                    Количество карт развития: {{ player4countcardrazv }}<br>
+                    Количество сыгранных рыцарей: {{ player4countcardknight}}<br><br>
+                </div>
+
+
+
+
+            </div>
 
             <!--         стартовая загрузка Дорог-->
             <div v-for="building in buildings">
@@ -269,6 +453,7 @@
                 <div :id="'MenuRoadVertical'+coordinate.number"  :style="'z-index: 100;display:none; position: absolute; top:'+ coordMenuTop +'px; left:'+ coordMenuLeft +'px;'">
                     <button class="btn btn-success" v-on:click="addRoadVertical(coordinate.number),addBuildingToDb(4,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px; ">Дорога</button>
                     <button class="btn btn-danger" v-on:click="closeMenuRoadVertical(coordinate.number)" style="width: 100px;">Закрыть</button>
+                    <button v-if="statusDel==1" class="btn" v-on:click="delroad(4,coordinate.number),delBuildingFromDb(4,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px;background: #1b1e21;color: white;">Удалить</button>
                 </div>
 
                 <!--              кнопка для вызова меню постройки -->
@@ -295,6 +480,7 @@
                 <div :id="'MenuRoadLeftUp'+coordinate.number"  :style="'z-index: 100;display:none; position: absolute; top:'+ coordMenuTop +'px; left:'+ coordMenuLeft +'px;'">
                     <button class="btn btn-success" v-on:click="addRoadLeftUp(coordinate.number),addBuildingToDb(5,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px; ">Дорога</button>
                     <button class="btn btn-danger" v-on:click="closeMenuRoadLeftUp(coordinate.number)" style="width: 100px;">Закрыть</button>
+                    <button v-if="statusDel==1" class="btn" v-on:click="delroad(5,coordinate.number),delBuildingFromDb(5,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px;background: #1b1e21;color: white;">Удалить</button>
                 </div>
 
                 <!--              кнопка для вызова меню постройки -->
@@ -320,6 +506,7 @@
                 <div :id="'MenuRoadLeftDown'+coordinate.number"  :style="'z-index: 100;display:none; position: absolute; top:'+ coordMenuTop +'px; left:'+ coordMenuLeft +'px;'">
                     <button class="btn btn-success" v-on:click="addRoadLeftDown(coordinate.number),addBuildingToDb(6,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px; ">Дорога</button>
                     <button class="btn btn-danger" v-on:click="closeMenuRoadLeftDown(coordinate.number)" style="width: 100px;">Закрыть</button>
+                    <button v-if="statusDel==1" class="btn" v-on:click="delroad(6,coordinate.number),delBuildingFromDb(6,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px;background: #1b1e21;color: white;">Удалить</button>
                 </div>
 
                 <!--              кнопка для вызова меню постройки -->
@@ -443,6 +630,8 @@
 <!--                    addBuildingToDb(3 - тип элемента,coordinate.number,1 - поселение (2 для города))-->
                     <button class="btn btn-primary" v-on:click="addVillage(coordinate.number),addBuildingToDb(3,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)">Поселение</button>
                     <button class="btn btn-danger" v-on:click="closeMenu(coordinate.number)" style="width: 100px;">Закрыть</button>
+                    <button v-if="statusDel==1" class="btn" v-on:click="addVillage(coordinate.number),addCity(coordinate.number),delBuildingFromDb(3,coordinate.number,1,coordinate.coordinate_top,coordinate.coordinate_left)" style="width: 100px;background: #1b1e21;color: white;">Удалить</button>
+
                 </div>
 
                 <!--              кнопка для вызова меню постройки поселения или города-->
@@ -483,15 +672,109 @@
                 statusOK: [],
                 colors: [],
                 buildings: [],
+                playercards: [],
+                statusDel: '0',
+                statusTorg: '0',
+                player1countcard: 0,
+                player1countcardrazv: 0,
+                player1countcardknight: 0,
+                player2countcard: 0,
+                player3countcard: 0,
+                player4countcard: 0,
+                player2countcardrazv: 0,
+                player3countcardrazv: 0,
+                player4countcardrazv: 0,
+                player2countcardknight: 0,
+                player3countcardknight: 0,
+                player4countcardknight: 0,
+
+                knightPosition: 0,
+
 
             }
         },
 
         created() {
+
             this.fetchCoordinate();
             this.fetchPosition();
             this.fetchPlayerColors();
             this.fetchBuildings();
+            this.fetchPlayerCards();
+            this.fetchKnightPosition();
+
+
+            Echo.join('catan-playercard')
+                .listen('CatanPlayerCardToDb', (event) => {
+                    console.log('Карточки');
+                    console.log(event.playerCard);
+                    var k=1;
+
+
+
+
+                    if(event.playerCard.game_number == this.item.game_number){
+
+                        //добавляем количиство карт локального пользователя
+                        console.log(event.playerCard);
+                        for(var i=0;i<this.playercards.length;i++) {
+                            if(this.playercards[i].position_id==event.playerCard.position_id && this.playercards[i].type_res==event.playerCard.type_res)
+                            {
+                                if(this.playercards[i].count_res>event.playerCard.count_res){
+                                    k=-1;
+                                }
+                                this.playercards[i].count_res = event.playerCard.count_res;
+                            }
+                        }
+
+
+                        if(event.playerCard.position_id==1 && event.playerCard.type_res<6){
+                            this.player1countcard = this.player1countcard +k;
+                        }
+                        if(event.playerCard.position_id==2 && event.playerCard.type_res<6){
+                            this.player2countcard = this.player2countcard +k;
+                        }
+                        if(event.playerCard.position_id==3 && event.playerCard.type_res<6){
+                            this.player3countcard = this.player3countcard +k;
+                        }
+                        if(event.playerCard.position_id==4 && event.playerCard.type_res<6){
+                            this.player4countcard = this.player4countcard +k;
+                        }
+                        if(event.playerCard.position_id==1 && event.playerCard.type_res>5 && event.playerCard.type_res<11){
+                            this.player1countcardrazv = this.player1countcardrazv +k;
+                        }
+                        if(event.playerCard.position_id==2 && event.playerCard.type_res>5 && event.playerCard.type_res<11){
+                            this.player2countcardrazv = this.player2countcardrazv +k;
+                        }
+                        if(event.playerCard.position_id==3 && event.playerCard.type_res>5 && event.playerCard.type_res<11){
+                            this.player3countcardrazv = this.player3countcardrazv +k;
+                        }
+                        if(event.playerCard.position_id==4 && event.playerCard.type_res>5 && event.playerCard.type_res<11){
+                            this.player4countcardrazv = this.player4countcardrazv +k;
+                        }
+                        if(event.playerCard.position_id==1 && event.playerCard.type_res>10){
+                            this.player1countcardknight = this.player1countcardknight +k;
+                        }
+                        if(event.playerCard.position_id==2 && event.playerCard.type_res>10){
+                            this.player2countcardknight = this.player2countcardknight +k;
+                        }
+                        if(event.playerCard.position_id==3 && event.playerCard.type_res>10){
+                            this.player3countcardknight = this.player3countcardknight +k;
+                        }
+                        if(event.playerCard.position_id==4 && event.playerCard.type_res>10){
+                            this.player4countcardknight = this.player4countcardknight +k;
+                        }
+
+
+
+
+
+
+                    }
+
+                });
+
+
             Echo.join('catan-building')
                 .listen('CatanBuildingToDb', (event) =>{
                     //  if(document.getElementById('start' + event.building.number && event.building.element_type_id==3 && event.building.status==1)){
@@ -501,17 +784,34 @@
                     //     document.getElementById('startCity' + event.building.number).innerHTML ='';
                     // }
 
-                    if(document.getElementById('start' + event.building.number)){
+                    // if(document.getElementById('start' + event.building.number)){
+                    //
+                    //     document.getElementById('start' + event.building.number).innerHTML ='';
+                    // }
+                    // if(document.getElementById('startCity' + event.building.number)){
+                    //     document.getElementById('startCity' + event.building.number).innerHTML ='';
+                    //
+                    // }
 
-                        document.getElementById('start' + event.building.number).innerHTML ='';
-                    }
-                    if(document.getElementById('startCity' + event.building.number)){
-                        document.getElementById('startCity' + event.building.number).innerHTML ='';
 
+                    if(event.building.position>0 && event.building.position < 20){
+                        this.knightPosition = event.building.position;
                     }
+
                     if(event.building.game_number == this.item.game_number){
                         this.buildings.push(event.building);
                     }
+                    if(event.building.element_type_id==3){
+                        if(event.building.status == 2){
+                            document.getElementById('start' + event.building.number).innerHTML ='';
+                        }
+                        else{
+                            document.getElementById('startCity' + event.building.number).innerHTML ='';
+                        }
+
+                    }
+
+
 
 
                     console.log('Заработало!');
@@ -529,6 +829,9 @@
                 axios.get('/games/coordinateelements').then(response =>{
                     this.coordinates = response.data;
                     console.log(this.item.game_number);
+                    console.log('мои данные');
+                    console.log(this.colors);
+                    console.log('мои данные');
                 })
             },
             //получаем расположение гексов
@@ -542,6 +845,7 @@
             fetchPlayerColors() {
                 axios.get('/games/playercolor/'+this.item.game_number).then(response =>{
                     this.colors = response.data;
+                    console.log('Цвета игроков');
                     console.log(this.colors);
                 })
             },
@@ -553,6 +857,72 @@
                     console.log(this.buildings);
                 })
             },
+            //получаем данные о картах игроков
+            fetchPlayerCards(){
+                axios.get('/games/playercards/'+this.item.game_number).then(response =>{
+                    this.playercards = response.data;
+                    console.log('Карты');
+                    console.log(this.playercards);
+                    // считаем количество карт на руках
+                    for(var i=0;i<this.playercards.length;i++){
+                        if(this.playercards[i].position_id==1){
+                            if(this.playercards[i].type_res<6){
+                                this.player1countcard = this.player1countcard+this.playercards[i].count_res;
+                            }
+                            if(this.playercards[i].type_res>5 && this.playercards[i].type_res<11){
+                                this.player1countcardrazv = this.player1countcard+this.playercards[i].count_res;
+                            }
+                            if(this.playercards[i].type_res>10){
+                                this.player1countcardknight = this.player1countcard+this.playercards[i].count_res;
+                            }
+                        }
+                        if(this.playercards[i].position_id==2){
+                            if(this.playercards[i].type_res<6){
+                                this.player2countcard = this.player2countcard+this.playercards[i].count_res;
+                            }
+                            if(this.playercards[i].type_res>5 && this.playercards[i].type_res<11){
+                                this.player2countcardrazv = this.player2countcard+this.playercards[i].count_res;
+                            }
+                            if(this.playercards[i].type_res>10){
+                                this.player2countcardknight = this.player2countcard+this.playercards[i].count_res;
+                            }
+                        }
+                        if(this.playercards[i].position_id==3){
+                            if(this.playercards[i].type_res<6){
+                                this.player3countcard = this.player3countcard+this.playercards[i].count_res;
+                            }
+                            if(this.playercards[i].type_res>5 && this.playercards[i].type_res<11){
+                                this.player3countcardrazv = this.player3countcard+this.playercards[i].count_res;
+                            }
+                            if(this.playercards[i].type_res>10){
+                                this.player3countcardknight = this.player3countcard+this.playercards[i].count_res;
+                            }
+                        }
+                        if(this.playercards[i].position_id==4){
+                            if(this.playercards[i].type_res<6){
+                                this.player4countcard = this.player4countcard+this.playercards[i].count_res;
+                            }
+                            if(this.playercards[i].type_res>5 && this.playercards[i].type_res<11){
+                                this.player4countcardrazv = this.player4countcard+this.playercards[i].count_res;
+                            }
+                            if(this.playercards[i].type_res>10){
+                                this.player4countcardknight = this.player4countcard+this.playercards[i].count_res;
+                            }
+                        }
+                    }
+                })
+            },
+
+            //получить местоположение рыцаря
+            fetchKnightPosition(){
+                axios.get('/games/getknightposition/'+this.item.game_number).then(response =>{
+                    console.log(response.data[0].position);
+                    this.knightPosition = response.data[0].position;
+                    console.log('Цвета местоположение рыцаря');
+                    //console.log(this.knightPosition);
+                })
+            },
+
 
             addTown(id){
 
@@ -653,6 +1023,11 @@
               // axios.post('color',{color: color});
                  axios.post('color',{game_number: this.item.game_number, color: color, color_id:color_id});
            //     console.log({game_number: this.item, user: this.user, color: color});
+               // fetchPlayerColors();
+                axios.get('/games/playercolor/'+this.item.game_number).then(response =>{
+                    this.colors = response.data;
+                    console.log(this.colors[0].color);
+                })
             },
             //добавляем данные по строительству дороги или города или поселения в базу
             addBuildingToDb(type_id,id,typeCityOrVillege,coordinate_top,coordinate_left){
@@ -698,6 +1073,83 @@
                     coordinate_left: coordinate_left,
                 });
             },
+
+            //удаление строения данные по строительству дороги или города или поселения в базу
+            delBuildingFromDb(type_id,id,typeCityOrVillege,coordinate_top,coordinate_left){
+                    axios.post('delbuildingfromdb',{
+                    game_number: this.item.game_number,
+                    color_id: this.colors[0].id,
+                    number: id,
+                    element_type_id:type_id,
+                    typeCityOrVillege: typeCityOrVillege,
+
+                    color1_element: this.colors[0].color1_element,
+                    color2_element: this.colors[0].color2_element,
+                    color3_element: this.colors[0].color3_element,
+                    coordinate_top: coordinate_top,
+                    coordinate_left: coordinate_left,
+                });
+            },
+            changeStatusDel(){
+                if(this.statusDel == 1){
+                    this.statusDel = 0;
+                }else{
+                    this.statusDel = 1;
+                }
+            },
+            changeStatusTorg(){
+                if(this.statusTorg == 1){
+                    this.statusTorg = 0;
+                }else{
+                    this.statusTorg = 1;
+                }
+            },
+
+            delroad(a,b){
+             //   5,coordinate.number
+                if(a==4){
+                    document.getElementById('RoadVertical' + b).style.display = 'none';
+                }
+                if(a==5){
+                    document.getElementById('RoadLeftUp' + b).style.display = 'none';
+                }
+                if(a==6){
+                    document.getElementById('RoadLeftDown' + b).style.display = 'none';
+                }
+                document.getElementById('MenuRoadVertical'+b).style.display = 'none';
+
+                document.getElementById('MenuRoadLeftUp'+b).style.display = 'none';
+
+                document.getElementById('MenuRoadLeftDown'+b).style.display = 'none';
+             },
+            addResToPlayer(type_res){
+
+                console.log(type_res);
+                axios.post('addresourcetoplayer',{game_number: this.item.game_number, position_id: this.colors[0].id, type_res:type_res});
+                console.log(this.playercards);
+
+                // this.playercards.push({
+                //     game_number: this.item.game_number,
+                //     position_id: this.colors[0].position,
+                //     type_res: type_res,
+                //     count_res: 1,
+                //
+                // });
+                // считаем количество карт на руках
+            },
+
+            delResFromPlayer(type_res){
+                console.log(type_res);
+                axios.post('delresourcefromplayer',{game_number: this.item.game_number, position_id: this.colors[0].id, type_res:type_res});
+                console.log(this.playercards);
+
+            },
+            addKnight(position){
+                this.knightPosition = position;
+                axios.post('changeknightposition',{game_number: this.item.game_number, position: position});
+            }
         }
     }
 </script>
+
+

@@ -24,3 +24,7 @@ Broadcast::channel('chat', function ($user) {
 Broadcast::channel('catan-building', function ($user) {
     return $user;
 });
+
+Broadcast::channel('catan-playercard', function ($user) {
+    return $user;
+});

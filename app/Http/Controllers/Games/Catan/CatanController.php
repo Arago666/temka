@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Games\Catan;
 
+use App\Events\CatanPlayerCardToDb;
+use App\Models\CatanGameDevelopmentCard;
+use App\Models\CatanGameKnightPosition;
 use App\Models\CatanGameLog;
+use App\Models\CatanGamePlayerCard;
 use App\Models\CatanGamePositionPlayer;
 use App\Events\CatanBuildingToDb;
 use App\Http\Controllers\Controller;
@@ -173,6 +177,36 @@ class CatanController extends Controller
 //        }
 
 
+        //стартовое количество ресурсов 0
+        for($i=1;$i<5;$i++)
+        {
+            for($j=1;$j<12;$j++)
+            {
+                $res= new CatanGamePlayerCard();
+                $res->game_number=$item->game_number;
+                $res->position_id = $i;
+                $res->type_res = $j;
+                $res->count_res = 0;
+                $res->save();
+            }
+        }
+
+
+        //стартовая колода с картами развития
+
+        $cardposition = collect([6,6,6,6,6, 7,7, 8,8, 9,9, 10,10,10,10,10,10,10,10,10,10,10,10,10,10,])->shuffle();
+
+        for($i=0;$i<25;$i++)
+        {
+            $position = new CatanGameDevelopmentCard();
+            $position->game_number=$item->game_number;
+            $position->position = $i;
+            $position->type_card = $cardposition[$i];
+            $position->status = 0;
+            $position->save();
+
+        }
+
         return redirect()->route('catan.show',$item->game_number);
     }
 
@@ -222,6 +256,98 @@ class CatanController extends Controller
         return $buildings;
     }
 
+    //получить постройки в игре (где какие дороги, города и поселения стоят)
+    public function getPlayerCards($game_number)
+    {
+        $cards = CatanGamePlayerCard::query()
+            ->Where('game_number',$game_number)
+            ->get();
+        return $cards;
+    }
+
+    //добавить ресурс игроку
+    public function AddResToPlayer(Request $request){
+        if($request->type_res<6){
+            $res = CatanGamePlayerCard::query()
+                ->Where('game_number',$request->game_number)
+                ->Where('position_id','=',$request->position_id)
+                ->Where('type_res','=',$request->type_res)
+                ->first();
+
+            if($res){
+                $res->count_res = $res->count_res+1;
+                $res->save();
+            }
+            else{
+                $res = new CatanGamePlayerCard();
+
+                $res -> game_number = $request->game_number;
+                $res -> position_id = $request->position_id;
+                $res -> type_res = $request->type_res;
+                $res -> count_res = 1;
+                $res->save();
+
+            }
+            broadcast(new CatanPlayerCardToDb($res));
+        }
+        else{
+            $card = CatanGameDevelopmentCard::query()
+                ->Where('game_number',$request->game_number)
+                ->Where('status','=','0')
+                ->orderBy('position','asc')
+                ->first();
+
+
+            $res = CatanGamePlayerCard::query()
+                ->Where('game_number',$request->game_number)
+                ->Where('position_id','=',$request->position_id)
+                ->Where('type_res','=',$card->type_card)
+                ->first();
+            $res->count_res = $res->count_res+1;
+            $res->save();
+
+            $card->status = 1;
+            $card->save();
+            broadcast(new CatanPlayerCardToDb($res));
+
+
+
+
+        }
+
+    }
+
+    public function DelResFromPlayer(Request $request){
+        $res = CatanGamePlayerCard::query()
+            ->Where('game_number',$request->game_number)
+            ->Where('position_id','=',$request->position_id)
+            ->Where('type_res','=',$request->type_res)
+            ->first();
+        if($res){
+            $res->count_res = $res->count_res-1;
+            $res->save();
+        }
+        else{
+            return back();
+
+        }
+        broadcast(new CatanPlayerCardToDb($res));
+        if($request->type_res==10){
+            $res = CatanGamePlayerCard::query()
+                ->Where('game_number',$request->game_number)
+                ->Where('position_id','=',$request->position_id)
+                ->Where('type_res','=',11)
+                ->first();
+            if($res) {
+                $res->count_res = $res->count_res + 1;
+                $res->save();
+            }
+            broadcast(new CatanPlayerCardToDb($res));
+        }
+
+
+    }
+
     //выбрать цвет за столом
     public function ChoseColor(Request $request)
     {
@@ -230,12 +356,15 @@ class CatanController extends Controller
           //  ->where('user_id','=',auth()->user()->id)
             ->Where('color_id','=',$request->color_id)
             ->get();
+
+        //проверка выбран ли уже цвет игроком, если да - то выходим
         $color1 = CatanGamePositionPlayer::query()
             ->Where('game_number',$request->game_number)
             ->where('user_id','=',auth()->user()->id)
             ->get();
         if(count($color)>0 || count($color1)>0 ){
-            return false;
+            return back();
+               // ->withErrors(['msg' => 'Ошибка удаления']);
         }
 
         $item = new CatanGamePositionPlayer();
@@ -266,8 +395,10 @@ class CatanController extends Controller
             $item->position = 4;
         }
         $item->save();
+
     }
 
+    //cтроительство на карте дороги, поселения или города
     public function AddBuildingToDb(Request $request)
     {
         $item = CatanGamePositionElement::query()
@@ -350,6 +481,54 @@ class CatanController extends Controller
         $catanGameLog->save();
 
         broadcast(new CatanBuildingToDb($catanGameLog))->toOthers();
+
+       // broadcast(new CatanPlayerCardToDb($catanGameLog));
     }
+
+    //удаление на карте дороги, поселения или города
+    public function DelBuildingFromDb(Request $request)
+    {
+        $item = CatanGamePositionElement::query()
+            ->Where('game_number','=',$request->game_number)
+            ->Where('element_type_id','=',$request->element_type_id)
+            ->Where('number','=',$request->number)
+            ->delete();
+
+       // broadcast(new CatanBuildingToDb($catanGameLog))->toOthers();
+    }
+
+
+
+
+
+
+    //получить место, где стоит рыцарь
+    public function getKnightPosition($game_number)
+    {
+        $position = CatanGameKnightPosition::query()
+            ->Where('game_number',$game_number)
+            ->get();
+        return $position;
+    }
+
+    //поменять расположение рыцаря
+    public function changeKnightPosition(Request $request){
+        $position = CatanGameKnightPosition::query()
+            ->where('game_number',$request->game_number)
+            ->first();
+        if($position){
+            $position->position=$request->position;
+            $position->save();
+        }
+        else{
+            $position = new CatanGameKnightPosition();
+            $position->game_number = $request->game_number;
+            $position->position=$request->position;
+            $position->save();
+        }
+        broadcast(new CatanBuildingToDb($position));
+    }
+
+
 
 }
