@@ -2566,6 +2566,160 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'item'],
   data: function data() {
@@ -2592,7 +2746,18 @@ __webpack_require__.r(__webpack_exports__);
       player2countcardknight: 0,
       player3countcardknight: 0,
       player4countcardknight: 0,
-      knightPosition: 0
+      knightPosition: 0,
+      dice_one: 0,
+      dice_two: 0,
+      dice_both: 0,
+      // карты на столе
+      table_card_one: 0,
+      table_card_two: 0,
+      table_card_tree: 0,
+      table_card_four: 0,
+      table_card_five: 0,
+      table_card_dev: 0,
+      players: []
     };
   },
   created: function created() {
@@ -2604,6 +2769,7 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchBuildings();
     this.fetchPlayerCards();
     this.fetchKnightPosition();
+    this.fetchPlayers();
     Echo.join('catan-playercard').listen('CatanPlayerCardToDb', function (event) {
       console.log('Карточки');
       console.log(event.playerCard);
@@ -2687,19 +2853,49 @@ __webpack_require__.r(__webpack_exports__);
       //     document.getElementById('startCity' + event.building.number).innerHTML ='';
       //
       // }
-      if (event.building.position > 0 && event.building.position < 20) {
-        _this.knightPosition = event.building.position;
-      }
-
+      // console.log('БРЕД!!');
+      // console.log(event.building);
+      //
       if (event.building.game_number == _this.item.game_number) {
         _this.buildings.push(event.building);
-      }
 
-      if (event.building.element_type_id == 3) {
-        if (event.building.status == 2) {
-          document.getElementById('start' + event.building.number).innerHTML = '';
-        } else {
-          document.getElementById('startCity' + event.building.number).innerHTML = '';
+        if (event.building.element_type_id == 3) {
+          if (event.building.status == 2) {
+            document.getElementById('start' + event.building.number).innerHTML = '';
+          } else {
+            document.getElementById('startCity' + event.building.number).innerHTML = '';
+          }
+        } //переставляем рыцаря
+
+
+        if (event.building.position_knight > 0 && event.building.position_knight < 20) {
+          _this.knightPosition = event.building.position_knight;
+          console.log('БРЕД Рыцарь');
+          console.log(event.building);
+        } //кидаем кубики
+
+
+        if (event.building.dice_one) {
+          _this.dice_one = event.building.dice_one;
+          _this.dice_two = event.building.dice_two;
+          _this.dice_both = _this.dice_one + _this.dice_two;
+          _this.table_card_one = event.building.count_card_one;
+          _this.table_card_two = event.building.count_card_two;
+          _this.table_card_tree = event.building.count_card_tree;
+          _this.table_card_four = event.building.count_card_four;
+          _this.table_card_five = event.building.count_card_five;
+          _this.table_card_dev = event.building.card_dev_type;
+        } //добавляем игроков при выборе цвета
+
+
+        if (event.building.user_name) {
+          console.log('Ахтунг!!');
+          console.log(event.building);
+          console.log(_this.players);
+
+          _this.players.push(event.building);
+
+          console.log(_this.players);
         }
       }
 
@@ -2821,9 +3017,21 @@ __webpack_require__.r(__webpack_exports__);
       var _this7 = this;
 
       axios.get('/games/getknightposition/' + this.item.game_number).then(function (response) {
-        console.log(response.data[0].position);
-        _this7.knightPosition = response.data[0].position;
+        console.log(response.data[0].position_knight);
+        _this7.knightPosition = response.data[0].position_knight;
         console.log('Цвета местоположение рыцаря'); //console.log(this.knightPosition);
+      });
+    },
+    //получить всех игроков игры
+    fetchPlayers: function fetchPlayers() {
+      var _this8 = this;
+
+      axios.get('/games/getplayers/' + this.item.game_number).then(function (response) {
+        console.log('Все игроки');
+        _this8.players = response.data;
+        console.log(_this8.players); //  this.knightPosition = response.data[0].position;
+
+        console.log('Все игроки'); //console.log(this.knightPosition);
       });
     },
     addTown: function addTown(id) {
@@ -2893,20 +3101,27 @@ __webpack_require__.r(__webpack_exports__);
     },
     //игрок выбирает цвет
     ChoseColor: function ChoseColor(color, color_id) {
-      var _this8 = this;
+      var _this9 = this;
 
       //   alert(color);
       // axios.post('color',{color: color});
+      console.log('бляяя');
       axios.post('color', {
         game_number: this.item.game_number,
         color: color,
         color_id: color_id
-      }); //     console.log({game_number: this.item, user: this.user, color: color});
-      // fetchPlayerColors();
+      });
+      console.log({
+        game_number: this.item,
+        user: this.user,
+        color: color,
+        color_id: color_id
+      });
+      console.log('бляяя'); // fetchPlayerColors();
 
       axios.get('/games/playercolor/' + this.item.game_number).then(function (response) {
-        _this8.colors = response.data;
-        console.log(_this8.colors[0].color);
+        _this9.colors = response.data;
+        console.log(_this9.colors[0].color);
       });
     },
     //добавляем данные по строительству дороги или города или поселения в базу
@@ -3005,14 +3220,16 @@ __webpack_require__.r(__webpack_exports__);
         position_id: this.colors[0].id,
         type_res: type_res
       });
-      console.log(this.playercards); // this.playercards.push({
-      //     game_number: this.item.game_number,
-      //     position_id: this.colors[0].position,
-      //     type_res: type_res,
-      //     count_res: 1,
-      //
-      // });
-      // считаем количество карт на руках
+      console.log(this.playercards);
+    },
+    addResToPlayerFromTable: function addResToPlayerFromTable(type_res) {
+      console.log(type_res);
+      axios.post('addresourcetoplayerfromtable', {
+        game_number: this.item.game_number,
+        position_id: this.colors[0].id,
+        type_res: type_res
+      });
+      console.log(this.playercards);
     },
     delResFromPlayer: function delResFromPlayer(type_res) {
       console.log(type_res);
@@ -3023,11 +3240,18 @@ __webpack_require__.r(__webpack_exports__);
       });
       console.log(this.playercards);
     },
-    addKnight: function addKnight(position) {
-      this.knightPosition = position;
+    addKnight: function addKnight(position_knight) {
+      this.knightPosition = position_knight;
       axios.post('changeknightposition', {
         game_number: this.item.game_number,
-        position: position
+        position_knight: position_knight
+      });
+    },
+    trowdice: function trowdice() {
+      //this.knightPosition = position;
+      axios.post('trowdice', {
+        game_number: this.item.game_number,
+        position_id: this.colors[0].id
       });
     }
   }
@@ -48430,7 +48654,7 @@ var render = function() {
       [
         _c(
           "div",
-          { staticStyle: { position: "absolute", left: "750px", top: "0px" } },
+          { staticStyle: { position: "absolute", left: "718px", top: "0px" } },
           [
             _vm.colors[0]
               ? _c("div", [
@@ -48439,76 +48663,7 @@ var render = function() {
                     {
                       staticStyle: {
                         position: "absolute",
-                        left: "160px",
-                        top: "0px"
-                      }
-                    },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn",
-                          style:
-                            "width: 100px;background:" +
-                            _vm.colors[0].color +
-                            ";color:white;"
-                        },
-                        [_vm._v("Твой цвет")]
-                      ),
-                      _vm._v(" "),
-                      _vm.statusDel == 0
-                        ? _c("button", {
-                            staticClass: "btn",
-                            staticStyle: { background: "#2fa360" },
-                            on: {
-                              click: function($event) {
-                                return _vm.changeStatusDel()
-                              }
-                            }
-                          })
-                        : _c("button", {
-                            staticClass: "btn",
-                            staticStyle: { background: "red" },
-                            on: {
-                              click: function($event) {
-                                return _vm.changeStatusDel()
-                              }
-                            }
-                          }),
-                      _vm._v(" "),
-                      _vm.statusTorg == 0
-                        ? _c("button", {
-                            staticClass: "btn",
-                            staticStyle: { background: "red" },
-                            on: {
-                              click: function($event) {
-                                return _vm.changeStatusTorg()
-                              }
-                            }
-                          })
-                        : _c("button", {
-                            staticClass: "btn",
-                            staticStyle: { background: "#eadd3f" },
-                            on: {
-                              click: function($event) {
-                                return _vm.changeStatusTorg()
-                              }
-                            }
-                          }),
-                      _vm._v(" "),
-                      _c("button", {
-                        staticClass: "btn",
-                        staticStyle: { background: "#eadd3f" }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticStyle: {
-                        position: "absolute",
-                        top: "90px",
+                        top: "0px",
                         left: "-55px"
                       }
                     },
@@ -48714,6 +48869,531 @@ var render = function() {
                               }
                             },
                             [_vm._v("Взять")]
+                          )
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticStyle: {
+                        position: "absolute",
+                        top: "200px",
+                        left: "-55px",
+                        width: "600px",
+                        height: "300px",
+                        background: "url(/img/derevo-doski-fon2.jpg)",
+                        "background-size": "600px 300px",
+                        "border-radius": "100px",
+                        "box-shadow": "0 12px 6px -6px #666, 0 0 3px 0 #ccc"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticStyle: {
+                            position: "absolute",
+                            left: "250px",
+                            top: "310px"
+                          }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success",
+                              staticStyle: { width: "80px" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.trowdice()
+                                }
+                              }
+                            },
+                            [_vm._v("Кубики")]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticStyle: {
+                            "z-index": "999",
+                            position: "absolute",
+                            left: "100px",
+                            top: "20px"
+                          }
+                        },
+                        [
+                          _vm.dice_one == 1
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/1.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.dice_one == 2
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/2.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.dice_one == 3
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/3.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.dice_one == 4
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/4.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.dice_one == 5
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/5.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.dice_one == 6
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/6.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e()
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticStyle: {
+                            "z-index": "999",
+                            position: "absolute",
+                            left: "170px",
+                            top: "20px"
+                          }
+                        },
+                        [
+                          _vm.dice_two == 1
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/1.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.dice_two == 2
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/2.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.dice_two == 3
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/3.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.dice_two == 4
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/4.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.dice_two == 5
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/5.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.dice_two == 6
+                            ? _c("img", {
+                                attrs: {
+                                  src: "/img/6.png",
+                                  width: "50",
+                                  height: "50"
+                                }
+                              })
+                            : _vm._e()
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticStyle: {
+                        position: "absolute",
+                        top: "390px",
+                        left: "-55px"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticStyle: {
+                            position: "absolute",
+                            top: "0px",
+                            left: "0px"
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "90px",
+                                left: "35px"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    display: "none",
+                                    position: "absolute",
+                                    top: "90px",
+                                    left: "0px"
+                                  }
+                                },
+                                [_vm._v(_vm._s((_vm.a = 0)))]
+                              ),
+                              _vm._v(" "),
+                              _vm.table_card_one != 0
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticStyle: {
+                                        position: "absolute",
+                                        top: "0px",
+                                        left: "0px"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticStyle: { display: "none" } },
+                                        [_vm._v(_vm._s((_vm.a = 90)))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("img", {
+                                        attrs: {
+                                          src: "/img/kart-seno.png",
+                                          width: "80",
+                                          height: "120"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-success",
+                                          staticStyle: { width: "80px" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.addResToPlayerFromTable(
+                                                1
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(_vm.table_card_one))]
+                                      )
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.table_card_two != 0
+                                ? _c(
+                                    "div",
+                                    {
+                                      style:
+                                        "position: absolute;top:0px;left:" +
+                                        _vm.a +
+                                        "px;"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticStyle: { display: "none" } },
+                                        [_vm._v(_vm._s((_vm.a = 90 + _vm.a)))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("img", {
+                                        attrs: {
+                                          src: "/img/kart-glina.png",
+                                          width: "80",
+                                          height: "120"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-success",
+                                          staticStyle: { width: "80px" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.addResToPlayerFromTable(
+                                                2
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(_vm.table_card_two))]
+                                      )
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.table_card_tree != 0
+                                ? _c(
+                                    "div",
+                                    {
+                                      style:
+                                        "position: absolute;top:0px;left:" +
+                                        _vm.a +
+                                        "px;"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticStyle: { display: "none" } },
+                                        [_vm._v(_vm._s((_vm.a = 90 + _vm.a)))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("img", {
+                                        staticClass: "content_center",
+                                        attrs: {
+                                          src: "/img/kart-les.png",
+                                          width: "80",
+                                          height: "120"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-success",
+                                          staticStyle: { width: "80px" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.addResToPlayerFromTable(
+                                                3
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(_vm.table_card_tree))]
+                                      )
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.table_card_four != 0
+                                ? _c(
+                                    "div",
+                                    {
+                                      style:
+                                        "position: absolute;top:0px;left:" +
+                                        _vm.a +
+                                        "px;"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticStyle: { display: "none" } },
+                                        [_vm._v(_vm._s((_vm.a = 90 + _vm.a)))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("img", {
+                                        attrs: {
+                                          src: "/img/kart-ovtsa.png",
+                                          width: "80",
+                                          height: "120"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-success",
+                                          staticStyle: { width: "80px" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.addResToPlayerFromTable(
+                                                4
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(_vm.table_card_four))]
+                                      )
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.table_card_five != 0
+                                ? _c(
+                                    "div",
+                                    {
+                                      style:
+                                        "position: absolute;top:0px;left:" +
+                                        _vm.a +
+                                        "px;"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticStyle: { display: "none" } },
+                                        [_vm._v(_vm._s((_vm.a = 90 + _vm.a)))]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("img", {
+                                        attrs: {
+                                          src: "/img/kart-kamen.png",
+                                          width: "80",
+                                          height: "120"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-success",
+                                          staticStyle: { width: "80px" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.addResToPlayerFromTable(
+                                                5
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(_vm.table_card_five))]
+                                      )
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.table_card_dev != 0
+                                ? _c(
+                                    "div",
+                                    {
+                                      style:
+                                        "position: absolute;top:0px;left:" +
+                                        _vm.a +
+                                        "px;"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        { staticStyle: { display: "none" } },
+                                        [_vm._v(_vm._s((_vm.a = 90 + _vm.a)))]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm.table_card_dev == 6
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: "/img/kart-1poin-1.png",
+                                              width: "80",
+                                              height: "120"
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.table_card_dev == 7
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: "/img/kart-monopolia.png",
+                                              width: "80",
+                                              height: "120"
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.table_card_dev == 8
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: "/img/kart-proriv.png",
+                                              width: "80",
+                                              height: "120"
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.table_card_dev == 9
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: "/img/kart-road.png",
+                                              width: "80",
+                                              height: "120"
+                                            }
+                                          })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.table_card_dev == 10
+                                        ? _c("img", {
+                                            attrs: {
+                                              src: "/img/kart-knight.png",
+                                              width: "80",
+                                              height: "120"
+                                            }
+                                          })
+                                        : _vm._e()
+                                    ]
+                                  )
+                                : _vm._e()
+                            ]
                           )
                         ]
                       )
@@ -49994,92 +50674,715 @@ var render = function() {
           0
         ),
         _vm._v(" "),
+        _vm.colors[0]
+          ? _c("div", [
+              _c(
+                "div",
+                {
+                  staticStyle: {
+                    position: "absolute",
+                    left: "-375px",
+                    top: "-24px"
+                  }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      style:
+                        "width: 100px;background:" +
+                        _vm.colors[0].color +
+                        ";color:white;"
+                    },
+                    [_vm._v("Твой цвет")]
+                  ),
+                  _vm._v(" "),
+                  _vm.statusDel == 0
+                    ? _c("button", {
+                        staticClass: "btn",
+                        staticStyle: {
+                          background: "#2fa360",
+                          position: "absolute",
+                          left: "104px",
+                          top: "2px"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.changeStatusDel()
+                          }
+                        }
+                      })
+                    : _c("button", {
+                        staticClass: "btn",
+                        staticStyle: {
+                          background: "red",
+                          position: "absolute",
+                          left: "104px",
+                          top: "2px"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.changeStatusDel()
+                          }
+                        }
+                      }),
+                  _vm._v(" "),
+                  _vm.statusTorg == 0
+                    ? _c("button", {
+                        staticClass: "btn",
+                        staticStyle: {
+                          background: "red",
+                          position: "absolute",
+                          left: "104px",
+                          top: "20px"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.changeStatusTorg()
+                          }
+                        }
+                      })
+                    : _c("button", {
+                        staticClass: "btn",
+                        staticStyle: {
+                          background: "#eadd3f",
+                          position: "absolute",
+                          left: "104px",
+                          top: "20px"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.changeStatusTorg()
+                          }
+                        }
+                      })
+                ]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c(
           "div",
           { staticStyle: { position: "absolute", top: "0px", left: "-300px" } },
           [
-            _c("div", [
-              _vm._v("\n                    Первый игрок: **"),
-              _c("br"),
-              _vm._v(
-                "\n                    Количество карт: " +
-                  _vm._s(_vm.player1countcard)
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                    Количество карт развития: " +
-                  _vm._s(_vm.player1countcardrazv)
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                    Количество сыгранных рыцарей: " +
-                  _vm._s(_vm.player1countcardknight)
-              ),
-              _c("br"),
-              _c("br")
+            _c("div", { staticStyle: { display: "none" } }, [
+              _vm._v(_vm._s((_vm.a = 35)))
             ]),
             _vm._v(" "),
-            _c("div", [
-              _vm._v(
-                "\n                    Первый игрок: ***\n                    Количество карт: " +
-                  _vm._s(_vm.player2countcard)
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                    Количество карт развития: " +
-                  _vm._s(_vm.player2countcardrazv)
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                    Количество сыгранных рыцарей: " +
-                  _vm._s(_vm.player2countcardknight)
-              ),
-              _c("br"),
-              _c("br")
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v("\n                    Первый игрок: ***"),
-              _c("br"),
-              _vm._v(
-                "\n                    Количество карт: " +
-                  _vm._s(_vm.player3countcard)
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                    Количество карт развития: " +
-                  _vm._s(_vm.player3countcardrazv)
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                    Количество сыгранных рыцарей: " +
-                  _vm._s(_vm.player3countcardknight)
-              ),
-              _c("br"),
-              _c("br")
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _vm._v("\n                    Первый игрок: ***"),
-              _c("br"),
-              _vm._v(
-                "\n                    Количество карт: " +
-                  _vm._s(_vm.player4countcard)
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                    Количество карт развития: " +
-                  _vm._s(_vm.player4countcardrazv)
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                    Количество сыгранных рыцарей: " +
-                  _vm._s(_vm.player4countcardknight)
-              ),
-              _c("br"),
-              _c("br")
-            ])
-          ]
+            _vm._l(_vm.players, function(player) {
+              return _c("div", [
+                player.position == 1 && player.position != _vm.colors[0].id
+                  ? _c("div", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card",
+                          style:
+                            "width: 360px;height: 140px;position: absolute;top:" +
+                            _vm.a +
+                            "px;left:-200px;"
+                        },
+                        [
+                          _c("div", { staticStyle: { display: "none" } }, [
+                            _vm._v(_vm._s((_vm.a = _vm.a + 155)))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "45px",
+                                left: "10px"
+                              }
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  staticStyle: {
+                                    width: "130px",
+                                    background: "red",
+                                    color: "white"
+                                  }
+                                },
+                                [_vm._v(_vm._s(player.user_name))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "10px",
+                                left: "220px"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "/img/kart-back-res.png",
+                                  width: "60",
+                                  height: "90"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    top: "84px",
+                                    left: "20px",
+                                    "font-size": "32px",
+                                    "font-weight": "bold",
+                                    "font-family": "'Monotype Corsiva'"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.player1countcard))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "10px",
+                                left: "150px"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "/img/kart-back.png",
+                                  width: "60",
+                                  height: "90"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    top: "84px",
+                                    left: "20px",
+                                    "font-size": "32px",
+                                    "font-weight": "bold",
+                                    "font-family": "'Monotype Corsiva'"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.player1countcardrazv))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "10px",
+                                left: "290px"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                staticStyle: { filter: "grayscale(80%)" },
+                                attrs: {
+                                  src: "/img/kart-knight.png",
+                                  width: "60",
+                                  height: "90"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    top: "84px",
+                                    left: "20px",
+                                    "font-size": "32px",
+                                    "font-weight": "bold",
+                                    "font-family": "'Monotype Corsiva'"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.player1countcardknight))]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                player.position == 2 && player.position != _vm.colors[0].id
+                  ? _c("div", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card",
+                          style:
+                            "width: 360px;height: 140px;position: absolute;top:" +
+                            _vm.a +
+                            "px;left:-200px;"
+                        },
+                        [
+                          _c("div", { staticStyle: { display: "none" } }, [
+                            _vm._v(_vm._s((_vm.a = _vm.a + 155)))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "45px",
+                                left: "10px"
+                              }
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  staticStyle: {
+                                    width: "130px",
+                                    background: "green",
+                                    color: "white"
+                                  }
+                                },
+                                [_vm._v(_vm._s(player.user_name))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "10px",
+                                left: "220px"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "/img/kart-back-res.png",
+                                  width: "60",
+                                  height: "90"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    top: "84px",
+                                    left: "20px",
+                                    "font-size": "32px",
+                                    "font-weight": "bold",
+                                    "font-family": "'Monotype Corsiva'"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.player2countcard))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "10px",
+                                left: "150px"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "/img/kart-back.png",
+                                  width: "60",
+                                  height: "90"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    top: "84px",
+                                    left: "20px",
+                                    "font-size": "32px",
+                                    "font-weight": "bold",
+                                    "font-family": "'Monotype Corsiva'"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.player2countcardrazv))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "10px",
+                                left: "290px"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                staticStyle: { filter: "grayscale(80%)" },
+                                attrs: {
+                                  src: "/img/kart-knight.png",
+                                  width: "60",
+                                  height: "90"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    top: "84px",
+                                    left: "20px",
+                                    "font-size": "32px",
+                                    "font-weight": "bold",
+                                    "font-family": "'Monotype Corsiva'"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.player2countcardknight))]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                player.position == 3 && player.position != _vm.colors[0].id
+                  ? _c("div", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card",
+                          style:
+                            "width: 360px;height: 140px;position: absolute;top:" +
+                            _vm.a +
+                            "px;left:-200px;"
+                        },
+                        [
+                          _c("div", { staticStyle: { display: "none" } }, [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s((_vm.a = _vm.a + 155)) +
+                                "\n                            "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "45px",
+                                left: "10px"
+                              }
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  staticStyle: {
+                                    width: "130px",
+                                    background: "orange",
+                                    color: "white"
+                                  }
+                                },
+                                [_vm._v(_vm._s(player.user_name))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "10px",
+                                left: "220px"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "/img/kart-back-res.png",
+                                  width: "60",
+                                  height: "90"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    top: "84px",
+                                    left: "20px",
+                                    "font-size": "32px",
+                                    "font-weight": "bold",
+                                    "font-family": "'Monotype Corsiva'"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.player3countcard))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "10px",
+                                left: "150px"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "/img/kart-back.png",
+                                  width: "60",
+                                  height: "90"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    top: "84px",
+                                    left: "20px",
+                                    "font-size": "32px",
+                                    "font-weight": "bold",
+                                    "font-family": "'Monotype Corsiva'"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.player3countcardrazv))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "10px",
+                                left: "290px"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                staticStyle: { filter: "grayscale(80%)" },
+                                attrs: {
+                                  src: "/img/kart-knight.png",
+                                  width: "60",
+                                  height: "90"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    top: "84px",
+                                    left: "20px",
+                                    "font-size": "32px",
+                                    "font-weight": "bold",
+                                    "font-family": "'Monotype Corsiva'"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.player3countcardknight))]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                player.position == 4 && player.position != _vm.colors[0].id
+                  ? _c("div", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card",
+                          style:
+                            "width: 360px;height: 140px;position: absolute;top:" +
+                            _vm.a +
+                            "px;left:-200px;"
+                        },
+                        [
+                          _c("div", { staticStyle: { display: "none" } }, [
+                            _vm._v(_vm._s((_vm.a = _vm.a + 155)))
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "45px",
+                                left: "10px"
+                              }
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn",
+                                  staticStyle: {
+                                    width: "130px",
+                                    background: "blue",
+                                    color: "white"
+                                  }
+                                },
+                                [_vm._v(_vm._s(player.user_name))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "10px",
+                                left: "220px"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "/img/kart-back-res.png",
+                                  width: "60",
+                                  height: "90"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    top: "84px",
+                                    left: "20px",
+                                    "font-size": "32px",
+                                    "font-weight": "bold",
+                                    "font-family": "'Monotype Corsiva'"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.player4countcard))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "10px",
+                                left: "150px"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "/img/kart-back.png",
+                                  width: "60",
+                                  height: "90"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    top: "84px",
+                                    left: "20px",
+                                    "font-size": "32px",
+                                    "font-weight": "bold",
+                                    "font-family": "'Monotype Corsiva'"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.player4countcardrazv))]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                top: "10px",
+                                left: "290px"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                staticStyle: { filter: "grayscale(80%)" },
+                                attrs: {
+                                  src: "/img/kart-knight.png",
+                                  width: "60",
+                                  height: "90"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    top: "84px",
+                                    left: "20px",
+                                    "font-size": "32px",
+                                    "font-weight": "bold",
+                                    "font-family": "'Monotype Corsiva'"
+                                  }
+                                },
+                                [_vm._v(_vm._s(_vm.player4countcardknight))]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
+              ])
+            })
+          ],
+          2
         ),
         _vm._v(" "),
         _vm._l(_vm.buildings, function(building) {

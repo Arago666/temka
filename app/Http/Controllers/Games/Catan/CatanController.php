@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CatanCoordinateElement;
 use App\Models\CatanGame;
 use App\Models\CatanGamePositionElement;
+use App\Models\CatanGameTurn;
 use App\Models\CatanPositionCard;
 use App\Models\Message;
 use Illuminate\Http\Request;
@@ -265,6 +266,18 @@ class CatanController extends Controller
         return $cards;
     }
 
+    //получить постройки в игре (где какие дороги, города и поселения стоят)
+    public function getPlayers($game_number)
+    {
+        $players = CatanGamePositionPlayer::query()
+            ->Where('game_number',$game_number)
+            ->join('users', function($join){
+                $join->on('users.id','=','catan_game_position_players.user_id');
+            })
+            ->get();
+        return $players;
+    }
+
     //добавить ресурс игроку
     public function AddResToPlayer(Request $request){
         if($request->type_res<6){
@@ -316,6 +329,59 @@ class CatanController extends Controller
         }
 
     }
+    //добавить ресурс игроку со стола
+    public function AddResToPlayerFromtable(Request $request){
+        if($request->type_res<6){
+            $res = CatanGamePlayerCard::query()
+                ->Where('game_number',$request->game_number)
+                ->Where('position_id','=',$request->position_id)
+                ->Where('type_res','=',$request->type_res)
+                ->first();
+
+            if($res){
+                $res->count_res = $res->count_res+1;
+                $res->save();
+            }
+            else{
+                $res = new CatanGamePlayerCard();
+
+                $res -> game_number = $request->game_number;
+                $res -> position_id = $request->position_id;
+                $res -> type_res = $request->type_res;
+                $res -> count_res = 1;
+                $res->save();
+
+            }
+            broadcast(new CatanPlayerCardToDb($res));
+        }
+
+        //убрать карту со стола
+        $turn = CatanGameTurn::query()
+            ->Where('game_number',$request->game_number)
+            ->orderBy('id','desc')
+            ->first();
+        if($request->type_res==1){
+            $turn->count_card_one = $turn->count_card_one-1;
+        }
+        if($request->type_res==2){
+            $turn->count_card_two = $turn->count_card_two-1;
+        }
+        if($request->type_res==3){
+            $turn->count_card_tree = $turn->count_card_tree-1;
+        }
+        if($request->type_res==4){
+            $turn->count_card_four = $turn->count_card_four-1;
+        }
+        if($request->type_res==5){
+            $turn->count_card_five = $turn->count_card_five-1;
+        }
+
+
+        $turn->save();
+        broadcast(new CatanBuildingToDb($turn));
+
+
+    }
 
     public function DelResFromPlayer(Request $request){
         $res = CatanGamePlayerCard::query()
@@ -329,9 +395,37 @@ class CatanController extends Controller
         }
         else{
             return back();
-
         }
         broadcast(new CatanPlayerCardToDb($res));
+
+        //добавить карту на стол
+        $turn = CatanGameTurn::query()
+            ->Where('game_number',$request->game_number)
+            ->orderBy('id','desc')
+            ->first();
+        if($request->type_res==1){
+            $turn->count_card_one = $turn->count_card_one+1;
+        }
+        if($request->type_res==2){
+            $turn->count_card_two = $turn->count_card_two+1;
+        }
+        if($request->type_res==3){
+            $turn->count_card_tree = $turn->count_card_tree+1;
+        }
+        if($request->type_res==4){
+            $turn->count_card_four = $turn->count_card_four+1;
+        }
+        if($request->type_res==5){
+            $turn->count_card_five = $turn->count_card_five+1;
+        }
+        if($request->type_res>5){
+            $turn->card_dev_type = $request->type_res;
+        }
+
+        $turn->save();
+        broadcast(new CatanBuildingToDb($turn));
+
+        //если рыцарь то добавить в сыгранные рыцари
         if($request->type_res==10){
             $res = CatanGamePlayerCard::query()
                 ->Where('game_number',$request->game_number)
@@ -370,6 +464,7 @@ class CatanController extends Controller
         $item = new CatanGamePositionPlayer();
 
         $item -> user_id = $request->user()->id;
+       $item -> user_name = $request->user()->name;
         $item -> game_number = $request->game_number;
        // $item = CatanGame::find($request->game_number);
 
@@ -395,6 +490,8 @@ class CatanController extends Controller
             $item->position = 4;
         }
         $item->save();
+
+        broadcast(new CatanBuildingToDb($item));
 
     }
 
@@ -517,16 +614,39 @@ class CatanController extends Controller
             ->where('game_number',$request->game_number)
             ->first();
         if($position){
-            $position->position=$request->position;
+            $position->position_knight=$request->position_knight;
             $position->save();
         }
         else{
             $position = new CatanGameKnightPosition();
             $position->game_number = $request->game_number;
-            $position->position=$request->position;
+            $position->position_knight=$request->position_knight;
             $position->save();
         }
         broadcast(new CatanBuildingToDb($position));
+    }
+
+    public function TrowDice(Request $request)
+    {
+        //найти какой сейчас ход
+        //найти кто сейчас ходит
+        $dice = new CatanGameTurn();
+        $dice->dice_one = rand(1,6);
+        $dice->dice_two = rand(1,6);
+        $dice->game_number = $request->game_number;
+
+        $dice->turn_number = 0;
+        $dice->position_id = 0;
+        $dice->count_card_one = 0;
+        $dice->count_card_two = 0;
+        $dice->count_card_tree = 0;
+        $dice->count_card_four = 0;
+        $dice->count_card_five = 0;
+        $dice->card_dev_type = 0;
+
+        $dice->save();
+        broadcast(new CatanBuildingToDb($dice));
+
     }
 
 

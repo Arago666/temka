@@ -36,6 +36,9 @@ Route::group(['namespace' => 'Games\Catan'], function (){
     Route::get('/games/buildings/{game_number}','CatanController@getBuildings');
     Route::get('/games/playercards/{game_number}','CatanController@getPlayerCards');
     Route::get('/games/getknightposition/{game_number}','CatanController@getKnightPosition');
+    Route::get('/games/getplayers/{game_number}','CatanController@getPlayers');
+
+
 
 
     Route::resource('/games/catan', 'CatanController')->except([
@@ -45,8 +48,10 @@ Route::group(['namespace' => 'Games\Catan'], function (){
     Route::post('/games/catan/addbuildingtodb','CatanController@AddBuildingToDb');
     Route::post('/games/catan/delbuildingfromdb','CatanController@DelBuildingFromDb');
     Route::post('/games/catan/addresourcetoplayer','CatanController@AddResToPlayer');
+    Route::post('/games/catan/addresourcetoplayerfromtable','CatanController@AddResToPlayerFromtable');
     Route::post('/games/catan/delresourcefromplayer','CatanController@DelResFromPlayer');
     Route::post('/games/catan/changeknightposition','CatanController@changeKnightPosition');
+    Route::post('/games/catan/trowdice','CatanController@TrowDice');
 
 
 

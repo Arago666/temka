@@ -17,7 +17,7 @@ class CreateCatanGameKnightPositionsTable extends Migration
             $table->id();
 
             $table->string('game_number');
-            $table->bigInteger('position');
+            $table->bigInteger('position_knight');
 
             $table->timestamps();
         });

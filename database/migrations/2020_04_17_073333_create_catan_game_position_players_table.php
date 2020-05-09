@@ -16,7 +16,8 @@ class CreateCatanGamePositionPlayersTable extends Migration
         Schema::create('catan_game_position_players', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('user_id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->string('user_name')->nullable();
             $table->bigInteger('color_id')->unsigned();
 
             $table->string('game_number');
@@ -27,6 +28,7 @@ class CreateCatanGamePositionPlayersTable extends Migration
             $table->timestamps();
 
             $table->foreign('color_id')->references('id')->on('catan_colors');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

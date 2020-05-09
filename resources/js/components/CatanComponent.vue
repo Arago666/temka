@@ -2,22 +2,12 @@
     <div class="container">
 
         <div style="position:absolute; top:100px; left: 610px;">
-            <div style="position:absolute; left:750px; top:0px;">
+            <div style="position:absolute; left:718px; top:0px;">
                 <div v-if="colors[0]">
-                    <div style="position: absolute; left:160px;top:0px;">
-                        <button class="btn" :style="'width: 100px;background:'+colors[0].color+';color:white;'">Твой цвет</button>
-    <!--кнопка ключения удаления строения-->
-                        <button class="btn" v-if="statusDel==0" v-on:click="changeStatusDel()" style="background: #2fa360;"></button>
-                        <button class="btn" v-else v-on:click="changeStatusDel()" style="background: red;"></button>
-    <!--Кнопка включения значков обмена ресурсов на карте-->
-                        <button class="btn" v-if="statusTorg==0" v-on:click="changeStatusTorg()" style="background: red"></button>
-                        <button class="btn" v-else v-on:click="changeStatusTorg()" style="background: #eadd3f;"></button>
-    <!--пустая кнопка для интерфейся-->
-                        <button class="btn" style="background: #eadd3f;"></button>
-                    </div>
+
 
                     <!--            Взять ресурс из банка (карты)-->
-                    <div style="position: absolute;top:90px;left:-55px;">
+                    <div style="position: absolute;top:0px;left:-55px;">
                         <div style="position: absolute;top:0px;left:0px;">
                             <img src="/img/kart-seno.png" width="80" height="120">
                             <button v-on:click="addResToPlayer(1)" class="btn btn-success" style="width:80px;" >Взять</button>
@@ -42,6 +32,89 @@
                         <div style="position: absolute;top:0px;left:450px;">
                             <img src="/img/kart-back.png"  width="80" height="120">
                             <button v-on:click="addResToPlayer(7)" class="btn btn-success" style="width:80px;" >Взять</button>
+                        </div>
+
+                    </div>
+
+
+                    <!--        Стол    Бросить кубики-->
+                    <div style="position: absolute;
+                    top:200px;
+                    left:-55px;
+                    width: 600px;
+                    height: 300px;
+                    background: url(/img/derevo-doski-fon2.jpg);
+                    background-size:600px 300px;
+                    border-radius:100px;
+                    box-shadow: 0 12px 6px -6px #666, 0 0 3px 0 #ccc;">
+                        <div style="position: absolute;left:250px;top:310px;">
+                        <button v-on:click="trowdice()" class="btn btn-success" style="width:80px;" >Кубики</button>
+                        </div>
+                        <div style="z-index: 999;position: absolute;left:100px;top:20px;">
+                            <img v-if="dice_one==1" src="/img/1.png" width="50" height="50">
+                            <img v-if="dice_one==2" src="/img/2.png" width="50" height="50">
+                            <img v-if="dice_one==3" src="/img/3.png" width="50" height="50">
+                            <img v-if="dice_one==4" src="/img/4.png" width="50" height="50">
+                            <img v-if="dice_one==5" src="/img/5.png" width="50" height="50">
+                            <img v-if="dice_one==6" src="/img/6.png" width="50" height="50">
+                        </div>
+
+                        <div style="z-index: 999;position: absolute;left:170px;top:20px;">
+                            <img v-if="dice_two==1" src="/img/1.png" width="50" height="50">
+                            <img v-if="dice_two==2" src="/img/2.png" width="50" height="50">
+                            <img v-if="dice_two==3" src="/img/3.png" width="50" height="50">
+                            <img v-if="dice_two==4" src="/img/4.png" width="50" height="50">
+                            <img v-if="dice_two==5" src="/img/5.png" width="50" height="50">
+                            <img v-if="dice_two==6" src="/img/6.png" width="50" height="50">
+                        </div>
+
+                    </div>
+                    <div style="position: absolute;top:390px;left:-55px;">
+                        <div style="position: absolute;top:0px;left:0px;">
+
+
+
+                            <div style="position: absolute;top:90px;left:35px;">
+                                <div style="display: none;position: absolute;top:90px;left:0px;">{{a=0}}</div>
+                                <div v-if="table_card_one!=0" style="position: absolute;top:0px;left:0px;">
+                                    <div style="display: none;">{{a=90}}</div>
+                                    <img src="/img/kart-seno.png" width="80" height="120">
+                                    <button v-on:click="addResToPlayerFromTable(1)" class="btn btn-success" style="width:80px;" >{{table_card_one}}</button>
+
+                                </div>
+                                <div v-if="table_card_two!=0" :style="'position: absolute;top:0px;left:'+a+'px;'">
+                                  <div style="display: none;">{{a=90+a}}</div>
+                                    <img src="/img/kart-glina.png"  width="80" height="120">
+                                    <button v-on:click="addResToPlayerFromTable(2)" class="btn btn-success" style="width:80px;" >{{table_card_two}}</button>
+                                </div>
+                                <div v-if="table_card_tree!=0" :style="'position: absolute;top:0px;left:'+a+'px;'">
+                                    <div style="display: none;">{{a=90+a}}</div>
+                                    <img class="content_center" src="/img/kart-les.png"  width="80" height="120">
+                                    <button v-on:click="addResToPlayerFromTable(3)" class="btn btn-success" style="width:80px;" >{{table_card_tree}}</button>
+                                </div>
+                                <div v-if="table_card_four!=0" :style="'position: absolute;top:0px;left:'+a+'px;'">
+                                    <div style="display: none;">{{a=90+a}}</div>
+                                    <img src="/img/kart-ovtsa.png"  width="80" height="120">
+                                    <button v-on:click="addResToPlayerFromTable(4)" class="btn btn-success" style="width:80px;" >{{table_card_four}}</button>
+                                </div>
+                                <div v-if="table_card_five!=0" :style="'position: absolute;top:0px;left:'+a+'px;'">
+                                    <div style="display: none;">{{a=90+a}}</div>
+                                    <img src="/img/kart-kamen.png"  width="80" height="120">
+                                    <button v-on:click="addResToPlayerFromTable(5)" class="btn btn-success" style="width:80px;" >{{table_card_five}}</button>
+                                </div>
+                                <div v-if="table_card_dev!=0" :style="'position: absolute;top:0px;left:'+a+'px;'">
+                                    <div style="display: none;">{{a=90+a}}</div>
+                                    <img v-if="table_card_dev==6" src="/img/kart-1poin-1.png"  width="80" height="120">
+                                    <img v-if="table_card_dev==7" src="/img/kart-monopolia.png"  width="80" height="120">
+                                    <img v-if="table_card_dev==8" src="/img/kart-proriv.png"  width="80" height="120">
+                                    <img v-if="table_card_dev==9" src="/img/kart-road.png"  width="80" height="120">
+                                    <img v-if="table_card_dev==10" src="/img/kart-knight.png"  width="80" height="120">
+
+                                </div>
+
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -182,7 +255,7 @@
 
             </div>
 
-<!--            Обмен ресурсов-->
+<!--           Значки обмена ресурсов на карте-->
             <div v-if="statusTorg==1">
                 <div style="position: absolute;top:455px;left:341px;">
                     <img src="/img/0-derevo.png"  width="20" height="20">
@@ -212,6 +285,9 @@
                     <img src="/img/0-3-1.png"  width="20" height="20">
                 </div>
             </div>
+
+
+
 
 
             <!--            Карты ресурсов игрока-->
@@ -283,36 +359,114 @@
                 </div>
             </div>
 
+<!--            твой цвет и кнопки управления-->
+            <div v-if="colors[0]">
+                <div style="position: absolute; left:-375px;top:-24px;">
+                    <button class="btn" :style="'width: 100px;background:'+colors[0].color+';color:white;'">Твой цвет</button>
+                    <!--кнопка ключения удаления строения-->
+                    <button class="btn" v-if="statusDel==0" v-on:click="changeStatusDel()" style="background: #2fa360;position: absolute;left: 104px;top:2px;"></button>
+                    <button class="btn" v-else v-on:click="changeStatusDel()" style="background: red;position: absolute;left: 104px;top:2px;"></button>
+                    <!--Кнопка включения значков обмена ресурсов на карте-->
+                    <button class="btn" v-if="statusTorg==0" v-on:click="changeStatusTorg()" style="background: red;position: absolute;left: 104px;top:20px;"></button>
+                    <button class="btn" v-else v-on:click="changeStatusTorg()" style="background: #eadd3f;position: absolute;left: 104px;top:20px;"></button>
+
+                </div>
+            </div>
+
             <!--            Карты ресурсов других игроков -->
             <div style="position: absolute;top:0px;left:-300px;">
-                <div>
-                    Первый игрок: **<br>
-                    Количество карт: {{ player1countcard }}<br>
-                    Количество карт развития: {{ player1countcardrazv }}<br>
-                    Количество сыгранных рыцарей: {{ player1countcardknight}}<br><br>
-                </div>
-                <div>
-                    Первый игрок: ***
-                    Количество карт: {{ player2countcard }}<br>
-                    Количество карт развития: {{ player2countcardrazv }}<br>
-                    Количество сыгранных рыцарей: {{ player2countcardknight}}<br><br>
-                </div>
-                <div>
-                    Первый игрок: ***<br>
-                    Количество карт: {{ player3countcard }}<br>
-                    Количество карт развития: {{ player3countcardrazv }}<br>
-                    Количество сыгранных рыцарей: {{ player3countcardknight}}<br><br>
-                </div>
-                <div>
-                    Первый игрок: ***<br>
-                    Количество карт: {{ player4countcard }}<br>
-                    Количество карт развития: {{ player4countcardrazv }}<br>
-                    Количество сыгранных рыцарей: {{ player4countcardknight}}<br><br>
-                </div>
+                <div style="display: none;">{{a=35}}</div>
+                <div v-for="player in players">
+                    <div v-if="player.position == 1 && player.position !=colors[0].id">
 
+                                <div class="card" :style="'width: 360px;height: 140px;position: absolute;top:'+a+'px;left:-200px;'">
+                                    <div style="display: none;">{{a=a+155}}</div>
+                                        <div style="position: absolute;top:45px;left:10px;">
+                                            <button class="btn" style="width: 130px;background:red;color:white;">{{player.user_name}}</button>
+                                        </div>
+                                        <div style="position: absolute;top:10px;left:220px;">
+                                            <img src="/img/kart-back-res.png"  width="60" height="90">
+                                            <div style="position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player1countcard }}</div>
+                                        </div>
+                                        <div   style="position: absolute;top:10px;left:150px;">
+                                            <img src="/img/kart-back.png"  width="60" height="90">
+                                            <div style="position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player1countcardrazv }}</div>
+                                        </div>
+                                        <div   style="position: absolute;top:10px;left:290px;">
+                                            <img src="/img/kart-knight.png"  width="60" height="90" style="filter: grayscale(80%); ">
+                                            <div style=" position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player1countcardknight}}</div>
+                                        </div>
+                                 </div>
+                    </div>
 
+                    <div v-if="player.position == 2 && player.position !=colors[0].id">
+                        <div class="card" :style="'width: 360px;height: 140px;position: absolute;top:'+a+'px;left:-200px;'">
+                            <div style="display: none;">{{a=a+155}}</div>
 
+                            <div style="position: absolute;top:45px;left:10px;">
+                                <button class="btn" style="width: 130px;background:green;color:white;">{{player.user_name}}</button>
+                            </div>
+                            <div style="position: absolute;top:10px;left:220px;">
+                                <img src="/img/kart-back-res.png"  width="60" height="90">
+                                <div style="position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player2countcard }}</div>
+                            </div>
+                            <div   style="position: absolute;top:10px;left:150px;">
+                                <img src="/img/kart-back.png"  width="60" height="90">
+                                <div style="position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player2countcardrazv }}</div>
+                            </div>
+                            <div   style="position: absolute;top:10px;left:290px;">
+                                <img src="/img/kart-knight.png"  width="60" height="90" style="filter: grayscale(80%); ">
+                                <div style=" position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player2countcardknight}}</div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div v-if="player.position == 3 && player.position !=colors[0].id">
+                        <div class="card" :style="'width: 360px;height: 140px;position: absolute;top:'+a+'px;left:-200px;'">
+                            <div style="display: none;">
+                                {{a=a+155}}
+                            </div>
+
+                            <div style="position: absolute;top:45px;left:10px;">
+                                <button class="btn" style="width: 130px;background:orange;color:white;">{{player.user_name}}</button>
+                            </div>
+                            <div style="position: absolute;top:10px;left:220px;">
+                                <img src="/img/kart-back-res.png"  width="60" height="90">
+                                <div style="position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player3countcard }}</div>
+                            </div>
+                            <div   style="position: absolute;top:10px;left:150px;">
+                                <img src="/img/kart-back.png"  width="60" height="90">
+                                <div style="position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player3countcardrazv }}</div>
+                            </div>
+                            <div   style="position: absolute;top:10px;left:290px;">
+                                <img src="/img/kart-knight.png"  width="60" height="90" style="filter: grayscale(80%); ">
+                                <div style=" position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player3countcardknight}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-if="player.position == 4 && player.position !=colors[0].id">
+                        <div class="card" :style="'width: 360px;height: 140px;position: absolute;top:'+a+'px;left:-200px;'">
+                            <div style="display: none;">{{a=a+155}}</div>
+
+                            <div style="position: absolute;top:45px;left:10px;">
+                                <button class="btn" style="width: 130px;background:blue;color:white;">{{player.user_name}}</button>
+                            </div>
+                            <div style="position: absolute;top:10px;left:220px;">
+                                <img src="/img/kart-back-res.png"  width="60" height="90">
+                                <div style="position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player4countcard }}</div>
+                            </div>
+                            <div   style="position: absolute;top:10px;left:150px;">
+                                <img src="/img/kart-back.png"  width="60" height="90">
+                                <div style="position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player4countcardrazv }}</div>
+                            </div>
+                            <div   style="position: absolute;top:10px;left:290px;">
+                                <img src="/img/kart-knight.png"  width="60" height="90" style="filter: grayscale(80%); ">
+                                <div style=" position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player4countcardknight}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!--         стартовая загрузка Дорог-->
@@ -689,6 +843,18 @@
                 player4countcardknight: 0,
 
                 knightPosition: 0,
+                dice_one: 0,
+                dice_two: 0,
+                dice_both: 0,
+                // карты на столе
+                table_card_one: 0,
+                table_card_two: 0,
+                table_card_tree: 0,
+                table_card_four: 0,
+                table_card_five: 0,
+                table_card_dev: 0,
+
+                players: [],
 
 
             }
@@ -702,6 +868,7 @@
             this.fetchBuildings();
             this.fetchPlayerCards();
             this.fetchKnightPosition();
+            this.fetchPlayers();
 
 
             Echo.join('catan-playercard')
@@ -793,23 +960,59 @@
                     //
                     // }
 
+                    // console.log('БРЕД!!');
+                    // console.log(event.building);
+                    //
 
-                    if(event.building.position>0 && event.building.position < 20){
-                        this.knightPosition = event.building.position;
-                    }
+
+
+
+
+
 
                     if(event.building.game_number == this.item.game_number){
                         this.buildings.push(event.building);
-                    }
-                    if(event.building.element_type_id==3){
-                        if(event.building.status == 2){
-                            document.getElementById('start' + event.building.number).innerHTML ='';
-                        }
-                        else{
-                            document.getElementById('startCity' + event.building.number).innerHTML ='';
+                        if(event.building.element_type_id==3){
+                            if(event.building.status == 2){
+                                document.getElementById('start' + event.building.number).innerHTML ='';
+                            }
+                            else{
+                                document.getElementById('startCity' + event.building.number).innerHTML ='';
+                            }
+
                         }
 
+                        //переставляем рыцаря
+                        if(event.building.position_knight>0 && event.building.position_knight < 20){
+                            this.knightPosition = event.building.position_knight;
+                            console.log('БРЕД Рыцарь');
+                            console.log(event.building);
+                        }
+
+                        //кидаем кубики
+                        if(event.building.dice_one){
+                            this.dice_one = event.building.dice_one;
+                            this.dice_two = event.building.dice_two;
+                            this.dice_both = this.dice_one + this.dice_two;
+                            this.table_card_one = event.building.count_card_one;
+                            this.table_card_two = event.building.count_card_two;
+                            this.table_card_tree = event.building.count_card_tree;
+                            this.table_card_four = event.building.count_card_four;
+                            this.table_card_five = event.building.count_card_five;
+                            this.table_card_dev = event.building.card_dev_type;
+                        }
+
+                        //добавляем игроков при выборе цвета
+                        if(event.building.user_name){
+                            console.log('Ахтунг!!');
+                            console.log(event.building);
+                            console.log( this.players);
+                            this.players.push(event.building);
+
+                            console.log( this.players);
+                        }
                     }
+
 
 
 
@@ -916,12 +1119,24 @@
             //получить местоположение рыцаря
             fetchKnightPosition(){
                 axios.get('/games/getknightposition/'+this.item.game_number).then(response =>{
-                    console.log(response.data[0].position);
-                    this.knightPosition = response.data[0].position;
+                    console.log(response.data[0].position_knight);
+                    this.knightPosition = response.data[0].position_knight;
                     console.log('Цвета местоположение рыцаря');
                     //console.log(this.knightPosition);
                 })
             },
+            //получить всех игроков игры
+            fetchPlayers(){
+                axios.get('/games/getplayers/'+this.item.game_number).then(response =>{
+                    console.log('Все игроки');
+                    this.players = response.data;
+                    console.log(this.players);
+                  //  this.knightPosition = response.data[0].position;
+                    console.log('Все игроки');
+                    //console.log(this.knightPosition);
+                })
+            },
+
 
 
             addTown(id){
@@ -1021,8 +1236,10 @@
              //   alert(color);
 
               // axios.post('color',{color: color});
+                console.log('бляяя');
                  axios.post('color',{game_number: this.item.game_number, color: color, color_id:color_id});
-           //     console.log({game_number: this.item, user: this.user, color: color});
+               console.log({game_number: this.item, user: this.user, color: color, color_id:color_id});
+                console.log('бляяя');
                // fetchPlayerColors();
                 axios.get('/games/playercolor/'+this.item.game_number).then(response =>{
                     this.colors = response.data;
@@ -1123,19 +1340,14 @@
                 document.getElementById('MenuRoadLeftDown'+b).style.display = 'none';
              },
             addResToPlayer(type_res){
-
                 console.log(type_res);
                 axios.post('addresourcetoplayer',{game_number: this.item.game_number, position_id: this.colors[0].id, type_res:type_res});
                 console.log(this.playercards);
-
-                // this.playercards.push({
-                //     game_number: this.item.game_number,
-                //     position_id: this.colors[0].position,
-                //     type_res: type_res,
-                //     count_res: 1,
-                //
-                // });
-                // считаем количество карт на руках
+            },
+            addResToPlayerFromTable(type_res){
+                console.log(type_res);
+                axios.post('addresourcetoplayerfromtable',{game_number: this.item.game_number, position_id: this.colors[0].id, type_res:type_res});
+                console.log(this.playercards);
             },
 
             delResFromPlayer(type_res){
@@ -1144,10 +1356,14 @@
                 console.log(this.playercards);
 
             },
-            addKnight(position){
-                this.knightPosition = position;
-                axios.post('changeknightposition',{game_number: this.item.game_number, position: position});
-            }
+            addKnight(position_knight){
+                this.knightPosition = position_knight;
+                axios.post('changeknightposition',{game_number: this.item.game_number, position_knight: position_knight});
+            },
+            trowdice(){
+                //this.knightPosition = position;
+                axios.post('trowdice',{game_number: this.item.game_number,  position_id: this.colors[0].id});
+            },
         }
     }
 </script>
