@@ -2720,6 +2720,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'item'],
   data: function data() {
@@ -3252,6 +3258,13 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('trowdice', {
         game_number: this.item.game_number,
         position_id: this.colors[0].id
+      });
+    },
+    stealRes: function stealRes(player_id_to_steal) {
+      axios.post('stealres', {
+        game_number: this.item.game_number,
+        position_id: this.colors[0].id,
+        player_id_to_steal: player_id_to_steal
       });
     }
   }
@@ -50917,7 +50930,22 @@ var render = function() {
                                 [_vm._v(_vm._s(_vm.player1countcardknight))]
                               )
                             ]
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c("button", {
+                            staticClass: "btn",
+                            staticStyle: {
+                              background: "#2fa360",
+                              position: "absolute",
+                              left: "65px",
+                              top: "90px"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.stealRes(1)
+                              }
+                            }
+                          })
                         ]
                       )
                     ])
@@ -51068,7 +51096,22 @@ var render = function() {
                                 [_vm._v(_vm._s(_vm.player2countcardknight))]
                               )
                             ]
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c("button", {
+                            staticClass: "btn",
+                            staticStyle: {
+                              background: "#2fa360",
+                              position: "absolute",
+                              left: "65px",
+                              top: "90px"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.stealRes(2)
+                              }
+                            }
+                          })
                         ]
                       )
                     ])
@@ -51223,7 +51266,22 @@ var render = function() {
                                 [_vm._v(_vm._s(_vm.player3countcardknight))]
                               )
                             ]
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c("button", {
+                            staticClass: "btn",
+                            staticStyle: {
+                              background: "#2fa360",
+                              position: "absolute",
+                              left: "65px",
+                              top: "90px"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.stealRes(3)
+                              }
+                            }
+                          })
                         ]
                       )
                     ])
@@ -51374,7 +51432,22 @@ var render = function() {
                                 [_vm._v(_vm._s(_vm.player4countcardknight))]
                               )
                             ]
-                          )
+                          ),
+                          _vm._v(" "),
+                          _c("button", {
+                            staticClass: "btn",
+                            staticStyle: {
+                              background: "#2fa360",
+                              position: "absolute",
+                              left: "65px",
+                              top: "90px"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.stealRes(4)
+                              }
+                            }
+                          })
                         ]
                       )
                     ])

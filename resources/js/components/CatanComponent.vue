@@ -396,7 +396,10 @@
                                             <img src="/img/kart-knight.png"  width="60" height="90" style="filter: grayscale(80%); ">
                                             <div style=" position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player1countcardknight}}</div>
                                         </div>
+                                    <button class="btn" v-on:click="stealRes(1)" style="background: #2fa360;position: absolute;left: 65px;top:90px;"></button>
                                  </div>
+
+
                     </div>
 
                     <div v-if="player.position == 2 && player.position !=colors[0].id">
@@ -418,6 +421,7 @@
                                 <img src="/img/kart-knight.png"  width="60" height="90" style="filter: grayscale(80%); ">
                                 <div style=" position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player2countcardknight}}</div>
                             </div>
+                            <button class="btn" v-on:click="stealRes(2)" style="background: #2fa360;position: absolute;left: 65px;top:90px;"></button>
                         </div>
                     </div>
 
@@ -442,6 +446,7 @@
                                 <img src="/img/kart-knight.png"  width="60" height="90" style="filter: grayscale(80%); ">
                                 <div style=" position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player3countcardknight}}</div>
                             </div>
+                            <button class="btn" v-on:click="stealRes(3)" style="background: #2fa360;position: absolute;left: 65px;top:90px;"></button>
                         </div>
                     </div>
 
@@ -464,6 +469,7 @@
                                 <img src="/img/kart-knight.png"  width="60" height="90" style="filter: grayscale(80%); ">
                                 <div style=" position: absolute;top:84px;left:20px;font-size: 32px;font-weight: bold;font-family: 'Monotype Corsiva';">{{ player4countcardknight}}</div>
                             </div>
+                            <button class="btn" v-on:click="stealRes(4)" style="background: #2fa360;position: absolute;left: 65px;top:90px;"></button>
                         </div>
                     </div>
                 </div>
@@ -1364,6 +1370,9 @@
                 //this.knightPosition = position;
                 axios.post('trowdice',{game_number: this.item.game_number,  position_id: this.colors[0].id});
             },
+            stealRes(player_id_to_steal){
+                axios.post('stealres',{game_number: this.item.game_number,  position_id: this.colors[0].id, player_id_to_steal:player_id_to_steal});
+            }
         }
     }
 </script>

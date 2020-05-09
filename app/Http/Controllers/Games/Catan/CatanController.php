@@ -648,6 +648,35 @@ class CatanController extends Controller
         broadcast(new CatanBuildingToDb($dice));
 
     }
+    public function StealRes(Request $request)
+    {
+        $res = CatanGamePlayerCard::query()
+            ->Where('game_number',$request->game_number)
+            ->Where('position_id','=',$request->player_id_to_steal)
+            ->Where('count_res','!=','0')
+            ->Where('type_res','<','6')
+            ->get();
+        $type_res_to_steal = rand(1,count($res));
+        for($i=0;$i<count($res);$i++){
+            if($i+1==$type_res_to_steal){
+                $type_res_to_add =  $res[$i]->type_res;
+                $res[$i]->count_res = $res[$i]->count_res-1;
+                $res[$i]->save();
+                broadcast(new CatanPlayerCardToDb($res[$i]));
+            }
+        }
+
+
+        $res1 = CatanGamePlayerCard::query()
+            ->Where('game_number',$request->game_number)
+            ->Where('position_id','=',$request->position_id)
+            ->Where('type_res','=',$type_res_to_add)
+            ->first();
+        $res1->count_res = $res1->count_res +1;
+        $res1->save();
+        broadcast(new CatanPlayerCardToDb($res1));
+
+    }
 
 
 

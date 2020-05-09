@@ -52,6 +52,8 @@ Route::group(['namespace' => 'Games\Catan'], function (){
     Route::post('/games/catan/delresourcefromplayer','CatanController@DelResFromPlayer');
     Route::post('/games/catan/changeknightposition','CatanController@changeKnightPosition');
     Route::post('/games/catan/trowdice','CatanController@TrowDice');
+    Route::post('/games/catan/stealres','CatanController@StealRes');
+
 
 
 
