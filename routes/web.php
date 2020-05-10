@@ -37,7 +37,7 @@ Route::group(['namespace' => 'Games\Catan'], function (){
     Route::get('/games/playercards/{game_number}','CatanController@getPlayerCards');
     Route::get('/games/getknightposition/{game_number}','CatanController@getKnightPosition');
     Route::get('/games/getplayers/{game_number}','CatanController@getPlayers');
-
+//    Route::get('/games/catan/addresfromdice/{game_number}','CatanController@AddResourceFromDice');
 
 
 
@@ -53,6 +53,8 @@ Route::group(['namespace' => 'Games\Catan'], function (){
     Route::post('/games/catan/changeknightposition','CatanController@changeKnightPosition');
     Route::post('/games/catan/trowdice','CatanController@TrowDice');
     Route::post('/games/catan/stealres','CatanController@StealRes');
+    Route::post('/games/catan/addresfromdice','CatanController@AddResourceFromDice');
+
 
 
 

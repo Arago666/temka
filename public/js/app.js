@@ -2726,6 +2726,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'item'],
   data: function data() {
@@ -2763,7 +2768,8 @@ __webpack_require__.r(__webpack_exports__);
       table_card_four: 0,
       table_card_five: 0,
       table_card_dev: 0,
-      players: []
+      players: [],
+      status_dice_rest_to_player: 0
     };
   },
   created: function created() {
@@ -2779,7 +2785,14 @@ __webpack_require__.r(__webpack_exports__);
     Echo.join('catan-playercard').listen('CatanPlayerCardToDb', function (event) {
       console.log('Карточки');
       console.log(event.playerCard);
-      var k = 1;
+      var k = 1; // убираем кнопку после раздачи ресурсов
+
+      if (event.playerCard.number_geks) {
+        console.log('status_dice_rest_to_player');
+        console.log(event.playerCard);
+        console.log('status_dice_rest_to_player');
+        _this.status_dice_rest_to_player = 0;
+      }
 
       if (event.playerCard.game_number == _this.item.game_number) {
         //добавляем количиство карт локального пользователя
@@ -2891,6 +2904,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.table_card_four = event.building.count_card_four;
           _this.table_card_five = event.building.count_card_five;
           _this.table_card_dev = event.building.card_dev_type;
+          _this.status_dice_rest_to_player = 1;
         } //добавляем игроков при выборе цвета
 
 
@@ -3259,6 +3273,7 @@ __webpack_require__.r(__webpack_exports__);
         game_number: this.item.game_number,
         position_id: this.colors[0].id
       });
+      this.status_dice_rest_to_player = 1;
     },
     stealRes: function stealRes(player_id_to_steal) {
       axios.post('stealres', {
@@ -3266,6 +3281,17 @@ __webpack_require__.r(__webpack_exports__);
         position_id: this.colors[0].id,
         player_id_to_steal: player_id_to_steal
       });
+    },
+    addresfromdice: function addresfromdice() {
+      axios.post('addresfromdice', {
+        game_number: this.item.game_number,
+        dice_both: this.dice_both
+      });
+      this.status_dice_rest_to_player = 0; // axios.post('addresfromdice',{game_number: this.item.game_number, dice_both:this.dice_both);
+      // console.log('взять ресурсы');
+
+      console.log(this.dice_both);
+      console.log(this.item.game_number);
     }
   }
 });
@@ -48930,6 +48956,34 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
+                      _vm.status_dice_rest_to_player == 1
+                        ? _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                position: "absolute",
+                                left: "340px",
+                                top: "310px"
+                              }
+                            },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-success",
+                                  staticStyle: { width: "150px" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.addresfromdice()
+                                    }
+                                  }
+                                },
+                                [_vm._v("Раздать ресурсы")]
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
                       _c(
                         "div",
                         {
@@ -52670,7 +52724,7 @@ var render = function() {
                       coordinate.coordinate_top +
                       "px; left:" +
                       coordinate.coordinate_left +
-                      "px; height: 30px; width: 30px; border-radius: 30px; color: transparent;background-color: transparent; border-color: transparent; cursor: pointer;",
+                      "px; height: 30px; width: 30px; border-radius: 30px; color: transparent;background-color: transparent; border-color: transparent; cursor: pointer;color:black;",
                     attrs: { id: "button_active" + coordinate.number },
                     on: {
                       click: function($event) {

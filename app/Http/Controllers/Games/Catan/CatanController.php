@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Games\Catan;
 
 use App\Events\CatanPlayerCardToDb;
+use App\Models\CatanGameBorderElement;
 use App\Models\CatanGameDevelopmentCard;
 use App\Models\CatanGameKnightPosition;
 use App\Models\CatanGameLog;
@@ -279,6 +280,7 @@ class CatanController extends Controller
     }
 
     //добавить ресурс игроку
+
     public function AddResToPlayer(Request $request){
         if($request->type_res<6){
             $res = CatanGamePlayerCard::query()
@@ -678,6 +680,122 @@ class CatanController extends Controller
 
     }
 
+    public function AddResourceFromDice(Request $request){
+//        $buildings = CatanGamePositionElement::query()
+//          //  ->join('catan_colors','catan_colors.id','=','catan_game_position_elements.color_id')
+//            //->Where('game_number',$request->game_number)
+//          ->Where('game_number','6BQlzI4v21HKyw7')
+//
+//            ->Where('color_id','1')
+//            ->Where('element_type_id','3')
+//            ->join('catan_game_border_elements', function($join){
+//                $join->on('catan_game_border_elements.number_town','=','catan_game_position_elements.number');
+//            })
+////            ->join('catan_position_cards', function($join){
+////                $join->on('catan_game_border_elements.number_geks','=','catan_position_cards.position');
+////            })
+//            ->get();
+
+//        $request->game_number='N89rPCh6VUuv5N0';
+//            $request->dice_both= '5';
+
+        $knight = CatanGameKnightPosition::query()
+            ->Where('game_number','=',$request->game_number)
+//           ->Where('game_number','=','N89rPCh6VUuv5N0')
+            ->first();
+        //костыль, отправляем модель рыцаря так как просто переменная не отдается, чтобы скрыть у всех кнопку раздать ресурсы
+
+        if($knight){
+            $knight_position_on_table = $knight->position_knight;
+        }
+        else{
+            $knight_position_on_table=0;
+        }
+
+        $zaglushka = CatanGameBorderElement::query()->first();
+        broadcast(new CatanPlayerCardToDb($zaglushka));
+
+
+        $buildings = CatanGameBorderElement::query()
+            ->Where('number_geks','!=',$knight_position_on_table)
+            ->join('catan_game_position_elements', function($join) use ($request) {
+                $join->on('catan_game_position_elements.number','=','catan_game_border_elements.number_town')
+                    ->Where('catan_game_position_elements.game_number','=', $request->game_number)
+//                    ->Where('catan_game_position_elements.game_number','=', 'N89rPCh6VUuv5N0')
+                    // ->Where('catan_game_position_elements.color_id','=','1')
+                    ->Where('catan_game_position_elements.element_type_id','=','3');
+            })
+            ->join('catan_position_cards', function($join) use ($request) {
+                $join->on('catan_position_cards.position','=','catan_game_border_elements.number_geks')
+                    ->Where('catan_position_cards.game_number','=', $request->game_number)
+//                    ->Where('catan_position_cards.game_number','=', 'N89rPCh6VUuv5N0')
+                    ->Where('catan_position_cards.card_type_id','!=','1')
+                    ->Where('catan_position_cards.number','=', $request->dice_both);
+//                    ->Where('catan_position_cards.number','=', '5');
+            })
+            ->get();
+     // dd($buildings);
+        for($i=0;$i<count($buildings);$i++)
+        {
+//            echo '<br>card_type_id=';
+//            echo $buildings[$i]->card_type_id;
+//            echo '  number=';
+//            echo $buildings[$i]->number;
+//            echo '  status=';
+//            echo $buildings[$i]->status;
+            //косячок в расхождении данных по гексам и типам ресурсов, переприсваиваем соответствующие типы ресурсов
+            if($buildings[$i]->card_type_id==2){
+                $type_card = 2;
+            }
+            if($buildings[$i]->card_type_id==3){
+                $type_card = 5;
+            }
+            if($buildings[$i]->card_type_id==4){
+                $type_card = 3;
+            }
+            if($buildings[$i]->card_type_id==5){
+                $type_card = 1;
+            }
+            if($buildings[$i]->card_type_id==6){
+                $type_card = 4;
+            }
+            for($j=0;$j<$buildings[$i]->status;$j++)
+            {
+                $res = CatanGamePlayerCard::query()
+                    ->Where('game_number',$request->game_number)
+                 //  ->Where('position_id','=','1')
+                    ->Where('position_id','=',$buildings[$i]->color_id)
+
+                    ->Where('type_res','=',$type_card)
+                    ->first();
+
+                if($res){
+                    $res->count_res = $res->count_res+1;
+                    $res->save();
+                }
+                else{
+                    $res = new CatanGamePlayerCard();
+
+                    $res -> game_number = $request->game_number;
+                    $res -> position_id = $request->position_id;
+                    $res -> type_res = $request->type_res;
+                    $res -> count_res = 1;
+                    $res->save();
+                }
+                broadcast(new CatanPlayerCardToDb($res));
+            }
+
+
+
+        }
+//        $data = [];
+//        $data ['game_number'] = '6BQlzI4v21HKyw7';
+//        $data ['position_id'] = '1';
+//        $data ['type_res'] = $buildings[0]->card_type_id;
+//       AddResToPlayer($data);
+
+
+    }
 
 
 }

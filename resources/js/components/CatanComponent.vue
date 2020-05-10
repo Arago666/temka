@@ -49,6 +49,11 @@
                     box-shadow: 0 12px 6px -6px #666, 0 0 3px 0 #ccc;">
                         <div style="position: absolute;left:250px;top:310px;">
                         <button v-on:click="trowdice()" class="btn btn-success" style="width:80px;" >Кубики</button>
+
+                        </div>
+                        <div v-if="status_dice_rest_to_player==1" style="position: absolute;left:340px;top:310px;">
+
+                            <button v-on:click="addresfromdice()" class="btn btn-success" style="width:150px;" >Раздать ресурсы</button>
                         </div>
                         <div style="z-index: 999;position: absolute;left:100px;top:20px;">
                             <img v-if="dice_one==1" src="/img/1.png" width="50" height="50">
@@ -795,7 +800,7 @@
                 </div>
 
                 <!--              кнопка для вызова меню постройки поселения или города-->
-                <button v-on:click="openMenu(coordinate.number)"  class="button_active" :id="'button_active'+coordinate.number" :style="'z-index: 99; position: absolute; top:'+ coordinate.coordinate_top +'px; left:'+ coordinate.coordinate_left +'px; height: 30px; width: 30px; border-radius: 30px; color: transparent;background-color: transparent; border-color: transparent; cursor: pointer;'"></button>
+                <button v-on:click="openMenu(coordinate.number)"  class="button_active" :id="'button_active'+coordinate.number" :style="'z-index: 99; position: absolute; top:'+ coordinate.coordinate_top +'px; left:'+ coordinate.coordinate_left +'px; height: 30px; width: 30px; border-radius: 30px; color: transparent;background-color: transparent; border-color: transparent; cursor: pointer;color:black;'"></button>
             </div>
 
 
@@ -861,6 +866,7 @@
                 table_card_dev: 0,
 
                 players: [],
+                status_dice_rest_to_player: 0,
 
 
             }
@@ -883,7 +889,13 @@
                     console.log(event.playerCard);
                     var k=1;
 
-
+                    // убираем кнопку после раздачи ресурсов
+                    if(event.playerCard.number_geks){
+                        console.log('status_dice_rest_to_player');
+                        console.log(event.playerCard);
+                        console.log('status_dice_rest_to_player');
+                          this.status_dice_rest_to_player = 0;
+                    }
 
 
                     if(event.playerCard.game_number == this.item.game_number){
@@ -1006,7 +1018,9 @@
                             this.table_card_four = event.building.count_card_four;
                             this.table_card_five = event.building.count_card_five;
                             this.table_card_dev = event.building.card_dev_type;
+                            this.status_dice_rest_to_player = 1;
                         }
+
 
                         //добавляем игроков при выборе цвета
                         if(event.building.user_name){
@@ -1369,10 +1383,20 @@
             trowdice(){
                 //this.knightPosition = position;
                 axios.post('trowdice',{game_number: this.item.game_number,  position_id: this.colors[0].id});
+                this.status_dice_rest_to_player =1;
             },
             stealRes(player_id_to_steal){
                 axios.post('stealres',{game_number: this.item.game_number,  position_id: this.colors[0].id, player_id_to_steal:player_id_to_steal});
-            }
+            },
+            addresfromdice(){
+               axios.post('addresfromdice',{game_number: this.item.game_number, dice_both:this.dice_both});
+               this.status_dice_rest_to_player = 0;
+               // axios.post('addresfromdice',{game_number: this.item.game_number, dice_both:this.dice_both);
+
+                // console.log('взять ресурсы');
+                console.log(this.dice_both);
+                console.log(this.item.game_number);
+            },
         }
     }
 </script>
