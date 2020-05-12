@@ -239,7 +239,7 @@ class CatanController extends Controller
             ->get();
       //  $status = CatanPositionCard::Where('game_number',$game_number)->orderBy('position')->get();
         // $status=CatanPositionCard::Where('game_number',1)->orderBy('position')->get();
-
+//        broadcast(new CatanBuildingToDb($color));
         return $color;
     }
 

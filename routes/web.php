@@ -39,8 +39,6 @@ Route::group(['namespace' => 'Games\Catan'], function (){
     Route::get('/games/getplayers/{game_number}','CatanController@getPlayers');
 //    Route::get('/games/catan/addresfromdice/{game_number}','CatanController@AddResourceFromDice');
 
-
-
     Route::resource('/games/catan', 'CatanController')->except([
         'store', 'update', 'destroy'
     ])->names('catan');
@@ -54,13 +52,15 @@ Route::group(['namespace' => 'Games\Catan'], function (){
     Route::post('/games/catan/trowdice','CatanController@TrowDice');
     Route::post('/games/catan/stealres','CatanController@StealRes');
     Route::post('/games/catan/addresfromdice','CatanController@AddResourceFromDice');
-
-
-
-
-
-
-
-
 });
 
+
+
+
+Route::group(['namespace' => 'Games\CardWars'], function (){
+
+    Route::resource('/games/cardwars', 'CardWarsController')->except([
+        'store', 'update', 'destroy'
+    ])->names('cardwars');
+
+});

@@ -88,6 +88,7 @@
 
                 <div class="links">
                     <a href="{{ route('catan.index') }}">Колонизаторы</a>
+                    <a href="{{ route('cardwars.index') }}">Карточные войны</a>
                     <a href="#">Битва магов</a>
                     <a href="#">Манчкин</a>
                     <a href="#">Мачикоро</a>
