@@ -30,13 +30,13 @@ Route::post('/messages','ChatsController@sendMessage');
 
 Route::group(['namespace' => 'Games\Catan'], function (){
 //    Route::get('/games/catan','CatanController@index');
-    Route::get('/games/cardposition/{game_number}','CatanController@getCatanCardPosition');
-    Route::get('games/coordinateelements','CatanController@getCatanCoordinateElements');
-    Route::get('/games/playercolor/{game_number}','CatanController@getCatanPlayerColor');
-    Route::get('/games/buildings/{game_number}','CatanController@getBuildings');
-    Route::get('/games/playercards/{game_number}','CatanController@getPlayerCards');
-    Route::get('/games/getknightposition/{game_number}','CatanController@getKnightPosition');
-    Route::get('/games/getplayers/{game_number}','CatanController@getPlayers');
+    Route::get('/games/catan/cardposition/{game_number}','CatanController@getCatanCardPosition');
+    Route::get('games/catan/coordinateelements','CatanController@getCatanCoordinateElements');
+    Route::get('/games/catan/playercolor/{game_number}','CatanController@getCatanPlayerColor');
+    Route::get('/games/catan/buildings/{game_number}','CatanController@getBuildings');
+    Route::get('/games/catan/playercards/{game_number}','CatanController@getPlayerCards');
+    Route::get('/games/catan/getknightposition/{game_number}','CatanController@getKnightPosition');
+    Route::get('/games/catan/getplayers/{game_number}','CatanController@getPlayers');
 //    Route::get('/games/catan/addresfromdice/{game_number}','CatanController@AddResourceFromDice');
 
     Route::resource('/games/catan', 'CatanController')->except([
@@ -60,7 +60,7 @@ Route::group(['namespace' => 'Games\Catan'], function (){
 Route::group(['namespace' => 'Games\CardWars'], function (){
 
     Route::resource('/games/cardwars', 'CardWarsController')->except([
-        'store', 'update', 'destroy'
+        'update', 'destroy','edit','create'
     ])->names('cardwars');
 
 });

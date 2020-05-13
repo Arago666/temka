@@ -1053,7 +1053,7 @@
 
             //получаем координаты всех элементов
             fetchCoordinate() {
-                axios.get('/games/coordinateelements').then(response =>{
+                axios.get('/games/catan/coordinateelements').then(response =>{
                     this.coordinates = response.data;
                     console.log(this.item.game_number);
                     console.log('мои данные');
@@ -1063,14 +1063,14 @@
             },
             //получаем расположение гексов
             fetchPosition() {
-                axios.get('/games/cardposition/'+this.item.game_number).then(response =>{
+                axios.get('/games/catan/cardposition/'+this.item.game_number).then(response =>{
                     this.positions = response.data;
 
                 })
             },
             //получаем цвета игроков
             fetchPlayerColors() {
-                axios.get('/games/playercolor/'+this.item.game_number).then(response =>{
+                axios.get('/games/catan/playercolor/'+this.item.game_number).then(response =>{
                     this.colors = response.data;
                     console.log('Цвета игроков');
                     console.log(this.colors);
@@ -1078,7 +1078,7 @@
             },
             //получаем данные о построенных дорогах/городах/поселениях игроками в игре
             fetchBuildings(){
-                axios.get('/games/buildings/'+this.item.game_number).then(response =>{
+                axios.get('/games/catan/buildings/'+this.item.game_number).then(response =>{
                     this.buildings = response.data;
                     console.log('Строения');
                     console.log(this.buildings);
@@ -1086,7 +1086,7 @@
             },
             //получаем данные о картах игроков
             fetchPlayerCards(){
-                axios.get('/games/playercards/'+this.item.game_number).then(response =>{
+                axios.get('/games/catan/playercards/'+this.item.game_number).then(response =>{
                     this.playercards = response.data;
                     console.log('Карты');
                     console.log(this.playercards);
@@ -1142,7 +1142,7 @@
 
             //получить местоположение рыцаря
             fetchKnightPosition(){
-                axios.get('/games/getknightposition/'+this.item.game_number).then(response =>{
+                axios.get('/games/catan/getknightposition/'+this.item.game_number).then(response =>{
                     console.log(response.data[0].position_knight);
                     this.knightPosition = response.data[0].position_knight;
                     console.log('Цвета местоположение рыцаря');
@@ -1151,7 +1151,7 @@
             },
             //получить всех игроков игры
             fetchPlayers(){
-                axios.get('/games/getplayers/'+this.item.game_number).then(response =>{
+                axios.get('/games/catan/getplayers/'+this.item.game_number).then(response =>{
                     console.log('Все игроки');
                     this.players = response.data;
                     console.log(this.players);
@@ -1265,7 +1265,7 @@
                console.log({game_number: this.item, user: this.user, color: color, color_id:color_id});
                 console.log('бляяя');
                // fetchPlayerColors();
-                axios.get('/games/playercolor/'+this.item.game_number).then(response =>{
+                axios.get('/games/catan/playercolor/'+this.item.game_number).then(response =>{
                     this.colors = response.data;
                     console.log(this.colors[0].color);
                 })

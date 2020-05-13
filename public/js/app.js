@@ -1899,6 +1899,91 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CardWarsComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CardWarsComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user', 'item'],
+  data: function data() {
+    return {
+      coordinates: [],
+      positions: [],
+      townText: [],
+      textRes: [],
+      statusOK: [],
+      colors: [],
+      buildings: [],
+      playercards: [],
+      statusDel: '0',
+      statusTorg: '0',
+      player1countcard: 0,
+      player1countcardrazv: 0,
+      player1countcardknight: 0,
+      player2countcard: 0,
+      player3countcard: 0,
+      player4countcard: 0,
+      player2countcardrazv: 0,
+      player3countcardrazv: 0,
+      player4countcardrazv: 0,
+      player2countcardknight: 0,
+      player3countcardknight: 0,
+      player4countcardknight: 0,
+      knightPosition: 0,
+      dice_one: 0,
+      dice_two: 0,
+      dice_both: 0,
+      // карты на столе
+      table_card_one: 0,
+      table_card_two: 0,
+      table_card_tree: 0,
+      table_card_four: 0,
+      table_card_five: 0,
+      table_card_dev: 0,
+      players: [],
+      status_dice_rest_to_player: 0
+    };
+  },
+  created: function created() {
+    // this.fetchCoordinate();
+    // this.fetchPosition();
+    // this.fetchPlayerColors();
+    // this.fetchBuildings();
+    // this.fetchPlayerCards();
+    // this.fetchKnightPosition();
+    // this.fetchPlayers();
+    Echo.join('cardwars-main').listen('CardWarsMain', function (event) {
+      console.log(event);
+    });
+  },
+  methods: {//получаем игроков за столом cardwars_game_position_players
+    //получаем карты игроков за столом  cardwars_game_player_cards + // получаем img колод игроков за столом cardwars_deck_cards
+    //получаем колоды игроков за столом cardwars_game_deck_cards
+    //получаем расположение гексов
+    // fetchPosition() {
+    //     axios.get('/games/cardposition/'+this.item.game_number).then(response =>{
+    //         this.positions = response.data;
+    //     })
+    // },
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CatanComponent.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CatanComponent.vue?vue&type=script&lang=js& ***!
@@ -2931,7 +3016,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchCoordinate: function fetchCoordinate() {
       var _this2 = this;
 
-      axios.get('/games/coordinateelements').then(function (response) {
+      axios.get('/games/catan/coordinateelements').then(function (response) {
         _this2.coordinates = response.data;
         console.log(_this2.item.game_number);
         console.log('мои данные');
@@ -2943,7 +3028,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchPosition: function fetchPosition() {
       var _this3 = this;
 
-      axios.get('/games/cardposition/' + this.item.game_number).then(function (response) {
+      axios.get('/games/catan/cardposition/' + this.item.game_number).then(function (response) {
         _this3.positions = response.data;
       });
     },
@@ -2951,7 +3036,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchPlayerColors: function fetchPlayerColors() {
       var _this4 = this;
 
-      axios.get('/games/playercolor/' + this.item.game_number).then(function (response) {
+      axios.get('/games/catan/playercolor/' + this.item.game_number).then(function (response) {
         _this4.colors = response.data;
         console.log('Цвета игроков');
         console.log(_this4.colors);
@@ -2961,7 +3046,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchBuildings: function fetchBuildings() {
       var _this5 = this;
 
-      axios.get('/games/buildings/' + this.item.game_number).then(function (response) {
+      axios.get('/games/catan/buildings/' + this.item.game_number).then(function (response) {
         _this5.buildings = response.data;
         console.log('Строения');
         console.log(_this5.buildings);
@@ -2971,7 +3056,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchPlayerCards: function fetchPlayerCards() {
       var _this6 = this;
 
-      axios.get('/games/playercards/' + this.item.game_number).then(function (response) {
+      axios.get('/games/catan/playercards/' + this.item.game_number).then(function (response) {
         _this6.playercards = response.data;
         console.log('Карты');
         console.log(_this6.playercards); // считаем количество карт на руках
@@ -3039,7 +3124,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchKnightPosition: function fetchKnightPosition() {
       var _this7 = this;
 
-      axios.get('/games/getknightposition/' + this.item.game_number).then(function (response) {
+      axios.get('/games/catan/getknightposition/' + this.item.game_number).then(function (response) {
         console.log(response.data[0].position_knight);
         _this7.knightPosition = response.data[0].position_knight;
         console.log('Цвета местоположение рыцаря'); //console.log(this.knightPosition);
@@ -3049,7 +3134,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchPlayers: function fetchPlayers() {
       var _this8 = this;
 
-      axios.get('/games/getplayers/' + this.item.game_number).then(function (response) {
+      axios.get('/games/catan/getplayers/' + this.item.game_number).then(function (response) {
         console.log('Все игроки');
         _this8.players = response.data;
         console.log(_this8.players); //  this.knightPosition = response.data[0].position;
@@ -3142,7 +3227,7 @@ __webpack_require__.r(__webpack_exports__);
       });
       console.log('бляяя'); // fetchPlayerColors();
 
-      axios.get('/games/playercolor/' + this.item.game_number).then(function (response) {
+      axios.get('/games/catan/playercolor/' + this.item.game_number).then(function (response) {
         _this9.colors = response.data;
         console.log(_this9.colors[0].color);
       });
@@ -48674,6 +48759,32 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CardWarsComponent.vue?vue&type=template&id=50f47cb2&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CardWarsComponent.vue?vue&type=template&id=50f47cb2& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _vm._v("\n\n    Привет play cardwars\n\n\n")
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CatanComponent.vue?vue&type=template&id=bf742036&":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CatanComponent.vue?vue&type=template&id=bf742036& ***!
@@ -65236,6 +65347,7 @@ Vue.use(vue_chat_scroll__WEBPACK_IMPORTED_MODULE_0___default.a);
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('chats-component', __webpack_require__(/*! ./components/ChatsComponent.vue */ "./resources/js/components/ChatsComponent.vue")["default"]);
 Vue.component('catan-component', __webpack_require__(/*! ./components/CatanComponent.vue */ "./resources/js/components/CatanComponent.vue")["default"]);
+Vue.component('cardwars-component', __webpack_require__(/*! ./components/CardWarsComponent */ "./resources/js/components/CardWarsComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -65299,6 +65411,75 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 window.Echo.channel('DemoChannel').listen('WebsocketDemoEvent', function (e) {
   console.log(e);
 });
+
+/***/ }),
+
+/***/ "./resources/js/components/CardWarsComponent.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/CardWarsComponent.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CardWarsComponent_vue_vue_type_template_id_50f47cb2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CardWarsComponent.vue?vue&type=template&id=50f47cb2& */ "./resources/js/components/CardWarsComponent.vue?vue&type=template&id=50f47cb2&");
+/* harmony import */ var _CardWarsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CardWarsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/CardWarsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CardWarsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CardWarsComponent_vue_vue_type_template_id_50f47cb2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CardWarsComponent_vue_vue_type_template_id_50f47cb2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/CardWarsComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/CardWarsComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/CardWarsComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CardWarsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CardWarsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CardWarsComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CardWarsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CardWarsComponent.vue?vue&type=template&id=50f47cb2&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/CardWarsComponent.vue?vue&type=template&id=50f47cb2& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardWarsComponent_vue_vue_type_template_id_50f47cb2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CardWarsComponent.vue?vue&type=template&id=50f47cb2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CardWarsComponent.vue?vue&type=template&id=50f47cb2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardWarsComponent_vue_vue_type_template_id_50f47cb2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardWarsComponent_vue_vue_type_template_id_50f47cb2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

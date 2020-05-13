@@ -28,3 +28,7 @@ Broadcast::channel('catan-building', function ($user) {
 Broadcast::channel('catan-playercard', function ($user) {
     return $user;
 });
+
+Broadcast::channel('cardwars-main', function ($user) {
+    return $user;
+});
