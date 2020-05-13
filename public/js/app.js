@@ -2875,6 +2875,9 @@ __webpack_require__.r(__webpack_exports__);
       // console.log('БРЕД!!');
       // console.log(event.building);
       //
+      // console.log('ssss');
+      // console.log(event);
+      // console.log('ssss');
       if (event.building.game_number == _this.item.game_number) {
         _this.buildings.push(event.building);
 

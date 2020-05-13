@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CatanCoordinateElementsTableSeeder::class);
         $this->call(CatanColorsTableSeeder::class);
         $this->call(CatanGameBorderElementSeeder::class);
+        $this->call(CardWarsDeckCardsTableSeeder::class);
     }
 }

@@ -13,6 +13,7 @@ use Illuminate\Queue\SerializesModels;
 class CatanBuildingToDb implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+//    use Dispatchable, InteractsWithSockets;
 
 
     public $building;

@@ -495,6 +495,7 @@ class CatanController extends Controller
 
         broadcast(new CatanBuildingToDb($item));
 
+
     }
 
     //cтроительство на карте дороги, поселения или города
@@ -578,6 +579,7 @@ class CatanController extends Controller
         $catanGameLog->coordinate_top = $request->coordinate_top;
         $catanGameLog->coordinate_left = $request->coordinate_left;
         $catanGameLog->save();
+
 
         broadcast(new CatanBuildingToDb($catanGameLog))->toOthers();
 
