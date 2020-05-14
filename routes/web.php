@@ -58,9 +58,26 @@ Route::group(['namespace' => 'Games\Catan'], function (){
 
 
 Route::group(['namespace' => 'Games\CardWars'], function (){
+    Route::get('/games/cardwars/getplayers/{game_number}','CardWarsController@getPlayers');
+    Route::get('/games/cardwars/getplayerscards/{game_number}','CardWarsController@getPlayersCards');
+    Route::get('/games/cardwars/getcardsimg/{game_number}','CardWarsController@getCardsImg');
+
+
+//    Route::get('/games/cardwars/getplayerspositions/{game_number}','CardWarsController@getPlayersPositions');
+
+
 
     Route::resource('/games/cardwars', 'CardWarsController')->except([
         'update', 'destroy','edit','create'
     ])->names('cardwars');
+
+    Route::post('/games/cardwars/choseplayerposition','CardWarsController@ChosePlayerPosition');
+    Route::post('/games/cardwars/addcardtoplayer','CardWarsController@addCardToPlayer');
+    Route::post('/games/cardwars/cardwithhand','CardWarsController@cardWithHand');
+    Route::post('/games/cardwars/changehpplayer','CardWarsController@changeHpPlayer');
+
+
+
+
 
 });

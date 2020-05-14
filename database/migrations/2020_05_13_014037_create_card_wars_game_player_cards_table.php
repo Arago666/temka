@@ -26,10 +26,9 @@ class CreateCardWarsGamePlayerCardsTable extends Migration
 
             $table->bigInteger('shirt_card'); //1 - картинкой вверх,   2 - рубашкой вверх (не видно карту)
 
-            $table->bigInteger('position_card'); //1-4 позиция за столом, 0 - на руке
+            $table->bigInteger('position_card'); //1-4 позиция за столом, 0 - на руке, 5 - сброс
 
-
-            $table->bigInteger('hp'); //Хп монстра, если он на столе
+            $table->bigInteger('hp')->nullable(); //Хп монстра, если он на столе
 
             $table->timestamps();
         });

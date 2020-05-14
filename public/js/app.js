@@ -1917,48 +1917,526 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user', 'item'],
   data: function data() {
     return {
-      coordinates: [],
-      positions: [],
-      townText: [],
-      textRes: [],
-      statusOK: [],
-      colors: [],
-      buildings: [],
-      playercards: [],
-      statusDel: '0',
-      statusTorg: '0',
-      player1countcard: 0,
-      player1countcardrazv: 0,
-      player1countcardknight: 0,
-      player2countcard: 0,
-      player3countcard: 0,
-      player4countcard: 0,
-      player2countcardrazv: 0,
-      player3countcardrazv: 0,
-      player4countcardrazv: 0,
-      player2countcardknight: 0,
-      player3countcardknight: 0,
-      player4countcardknight: 0,
-      knightPosition: 0,
-      dice_one: 0,
-      dice_two: 0,
-      dice_both: 0,
-      // карты на столе
-      table_card_one: 0,
-      table_card_two: 0,
-      table_card_tree: 0,
-      table_card_four: 0,
-      table_card_five: 0,
-      table_card_dev: 0,
       players: [],
-      status_dice_rest_to_player: 0
+      player1position: 0,
+      player2position: 0,
+      selectedDeck: '',
+      playerscards: [],
+      myPosition: '',
+      opponentPosition: '',
+      myDeckType: '',
+      opponentDeckType: '',
+      cardsImg: []
     };
   },
   created: function created() {
+    var _this = this;
+
+    this.fetchPlayers();
+    this.fetchPlayersCards();
+    this.fetchСardsImg(); //  this.fetchPlayersPositions();
     // this.fetchCoordinate();
     // this.fetchPosition();
     // this.fetchPlayerColors();
@@ -1966,19 +2444,308 @@ __webpack_require__.r(__webpack_exports__);
     // this.fetchPlayerCards();
     // this.fetchKnightPosition();
     // this.fetchPlayers();
+
     Echo.join('cardwars-main').listen('CardWarsMain', function (event) {
-      console.log(event);
+      if (event.cardwars.game_number == _this.item.game_number) {
+        console.log('1111');
+        console.log(event.cardwars);
+        console.log(_this.user);
+
+        if (_this.playerscards.length < 8) {
+          window.location.href = _this.item.game_number;
+        } //выбрали цвет за столом и карты
+
+
+        if (event.cardwars.position == 1) {
+          _this.player1position = 1;
+
+          if (event.cardwars.user_id == _this.user.id) {
+            console.log('1222111');
+            _this.myPosition = event.cardwars.position;
+            console.log(_this.myPosition);
+          }
+        }
+
+        if (event.cardwars.position == 2) {
+          _this.player2position = 1;
+
+          if (event.cardwars.user_id == _this.user.id) {
+            console.log('1222111');
+            _this.myPosition = event.cardwars.position;
+            console.log(_this.myPosition);
+          }
+        } // if(event.cardwars.number)
+        // {
+        //   //  this.playerscards = response.data;
+        //     console.log('1111');
+        //  this.cardsImg.push(event.cardwars);
+        // }
+        //
+        // if(this.playerscards.length<8 ){
+        //
+        //   //  this.playercards.push(event.cardwars);
+        //     this.playerscards.push(event.cardwars);
+        // }
+
+
+        var j = 0; // if(this.players.length<2)
+        // {
+        //     console.log('this.players.first.event');
+        //     this.players.push(event.cardwars);
+        // }
+
+        if (event.cardwars.active_deck_status && !event.cardwars.position) {
+          for (var i = 0; i < _this.playerscards.length; i++) {
+            if (_this.playerscards[i].position_id == event.cardwars.position_id && _this.playerscards[i].number_card == event.cardwars.card_position && _this.playerscards[i].card_type == 1) {
+              console.log("УДАЛИЛИ!!!!!!!!!!!!!!!!!!!!!");
+              _this.playerscards[i].status = 9;
+            }
+          }
+        }
+
+        if (!event.cardwars.active_deck_status && !event.cardwars.position) {
+          for (var i = 0; i < _this.playerscards.length; i++) {
+            if (_this.playerscards[i].position_id == event.cardwars.position_id && _this.playerscards[i].number_card == event.cardwars.number_card && _this.playerscards[i].card_type == event.cardwars.card_type) {
+              _this.playerscards[i].status = event.cardwars.status;
+              _this.playerscards[i].shirt_card = event.cardwars.shirt_card;
+              _this.playerscards[i].position_card = event.cardwars.position_card;
+              _this.playerscards[i].hp = event.cardwars.hp;
+              j = 1;
+            }
+          }
+
+          if (j == 0) {
+            _this.playerscards.push(event.cardwars);
+          }
+        }
+
+        if (event.cardwars.position) {
+          for (var i = 0; i < _this.players.length; i++) {
+            if (_this.players[i].position == event.cardwars.position) {
+              _this.players[i].hp = event.cardwars.hp;
+              console.log(event.cardwars.game_number);
+            }
+          }
+        }
+      }
+
+      console.log(_this.playerscards);
+      console.log('this.playerscards');
+      console.log(event.cardwars);
+      console.log('event.cardwars');
     });
   },
-  methods: {//получаем игроков за столом cardwars_game_position_players
+  methods: {
+    //получаем игроков за столом cardwars_game_position_players
     //получаем карты игроков за столом  cardwars_game_player_cards + // получаем img колод игроков за столом cardwars_deck_cards
     //получаем колоды игроков за столом cardwars_game_deck_cards
-    //получаем расположение гексов
-    // fetchPosition() {
-    //     axios.get('/games/cardposition/'+this.item.game_number).then(response =>{
-    //         this.positions = response.data;
-    //     })
-    // },
+    // получаем игроков за столом
+    fetchPlayers: function fetchPlayers() {
+      var _this2 = this;
+
+      axios.get('/games/cardwars/getplayers/' + this.item.game_number).then(function (response) {
+        console.log('this.players');
+        console.log(response.data);
+        _this2.players = response.data;
+
+        for (var i = 0; i < _this2.players.length; i++) {
+          if (_this2.players[i].position == 1) {
+            _this2.player1position = 1;
+          }
+
+          if (_this2.players[i].position == 2) {
+            _this2.player2position = 1;
+          } //узнаем свою позицию за столом
+
+
+          if (_this2.players[i].user_id == _this2.user.id) {
+            _this2.myPosition = _this2.players[i].position;
+            _this2.myDeckType = _this2.players[i].deck_type;
+          } else {
+            _this2.opponentPosition = _this2.players[i].position;
+            _this2.opponentDeckType = _this2.players[i].deck_type;
+          }
+        }
+
+        console.log(' this.myPosition');
+        console.log(_this2.myPosition);
+        console.log(' this.opponentDeckType');
+        console.log(_this2.opponentDeckType);
+        console.log(' this.myDeckType');
+        console.log(_this2.myDeckType); // if(this.players.user_id == this.user.id)
+      });
+    },
+    //игрок выбрал цвет
+    ChosePlayerPosition: function ChosePlayerPosition(colorPlayer, position, selectedDeck) {
+      axios.post('choseplayerposition', {
+        game_number: this.item.game_number,
+        position: position,
+        color_id: colorPlayer,
+        deck_type: selectedDeck
+      });
+    },
+    //получаем текущие карты игрока (+ стартовую карту (4 шт) + иконку (кем играет))
+    fetchPlayersCards: function fetchPlayersCards() {
+      var _this3 = this;
+
+      axios.get('/games/cardwars/getplayerscards/' + this.item.game_number).then(function (response) {
+        //  console.log(response.data);
+        _this3.playerscards = response.data;
+        console.log('this.playerscards');
+        console.log(_this3.playerscards);
+      });
+    },
+    //получаем картинки карт
+    fetchСardsImg: function fetchArdsImg() {
+      var _this4 = this;
+
+      axios.get('/games/cardwars/getcardsimg/' + this.item.game_number).then(function (response) {
+        console.log('getcardsimg');
+        console.log(response.data);
+        _this4.cardsImg = response.data;
+      });
+    },
+    addCardToPlayer: function addCardToPlayer() {
+      axios.post('addcardtoplayer', {
+        game_number: this.item.game_number,
+        position: this.myPosition
+      });
+    },
+    //меню при клике на карту с руки
+    openMenuCardPlayer: function openMenuCardPlayer(id) {
+      console.log(id);
+      document.getElementById('MenuCardPlayer' + id).style.display = 'block';
+    },
+    //меню при клике на карту с руки (доп для)
+    openMenuCardPlayerFight: function openMenuCardPlayerFight(id) {
+      console.log(id);
+      document.getElementById('MenuCardPlayerFight' + id).style.display = 'block';
+      document.getElementById('MenuCardPlayerTown' + id).style.display = 'none';
+    },
+    //меню при клике на карту с руки (доп для)
+    openMenuCardPlayerTown: function openMenuCardPlayerTown(id) {
+      console.log(id);
+      document.getElementById('MenuCardPlayerTown' + id).style.display = 'block';
+      document.getElementById('MenuCardPlayerFight' + id).style.display = 'none';
+    },
+    closeMenuCardPlayer: function closeMenuCardPlayer(id) {
+      console.log(id);
+      document.getElementById('MenuCardPlayer' + id).style.display = 'none';
+      document.getElementById('MenuCardPlayerTown' + id).style.display = 'none';
+      document.getElementById('MenuCardPlayerFight' + id).style.display = 'none';
+    },
+    cardWithHand: function cardWithHand(id, status, position_card, start_status) {
+      console.log('sss');
+      console.log(id);
+      console.log(status);
+      console.log(position_card);
+      console.log('sss');
+      console.log(this.item.game_number);
+      console.log(this.myPosition);
+      axios.post('cardwithhand', {
+        game_number: this.item.game_number,
+        position: this.myPosition,
+        number_card: id,
+        status: status,
+        position_card: position_card,
+        start_status: start_status
+      });
+    },
+    openMenuCardField: function openMenuCardField(id) {
+      console.log(id);
+      document.getElementById('MenuCardField' + id).style.display = 'block'; //  document.getElementById('MenuCardFieldFight'+id).style.display = 'none';
+    },
+    openMenuCardFieldFight: function openMenuCardFieldFight(id) {
+      console.log(id);
+      document.getElementById('MenuCardFieldFight' + id).style.display = 'block'; //  document.getElementById('MenuCardPlayerFight'+id).style.display = 'none';
+    },
+    closeMenuCardField: function closeMenuCardField(id) {
+      console.log(id);
+      document.getElementById('MenuCardFieldFight' + id).style.display = 'none';
+      document.getElementById('MenuCardField' + id).style.display = 'none';
+    },
+    openMenuCardBuilding: function openMenuCardBuilding(id) {
+      console.log(id);
+      document.getElementById('MenuCardBuilding' + id).style.display = 'block'; //  document.getElementById('MenuCardFieldFight'+id).style.display = 'none';
+    },
+    openMenuCardBuildingChangePosition: function openMenuCardBuildingChangePosition(id) {
+      console.log(id);
+      document.getElementById('MenuCardBuildingChangePosition' + id).style.display = 'block'; //  document.getElementById('MenuCardFieldFight'+id).style.display = 'none';
+    },
+    closeMenuCardBuilding: function closeMenuCardBuilding(id) {
+      console.log(id);
+      document.getElementById('MenuCardBuilding' + id).style.display = 'none';
+      document.getElementById('MenuCardBuildingChangePosition' + id).style.display = 'none';
+    },
+    openDiscardDeck: function openDiscardDeck() {
+      document.getElementById('DiscardDeck').style.display = 'block';
+    },
+    closeDiscardDeck: function closeDiscardDeck() {
+      document.getElementById('DiscardDeck').style.display = 'none';
+    },
+    changehp: function changehp(id, status, position_card, start_status, hp, position) {
+      console.log('sss');
+      console.log(id);
+      console.log(status);
+      console.log(position_card);
+      console.log('sss');
+      console.log(this.item.game_number);
+      console.log(this.myPosition);
+      axios.post('cardwithhand', {
+        game_number: this.item.game_number,
+        position: position,
+        number_card: id,
+        status: status,
+        position_card: position_card,
+        start_status: start_status,
+        hp: hp
+      });
+    },
+    bigCardBack: function bigCardBack(id, status, position_card, shirt_card) {
+      axios.post('cardwithhand', {
+        game_number: this.item.game_number,
+        position: this.myPosition,
+        number_card: id,
+        status: status,
+        position_card: position_card,
+        shirt_card: shirt_card
+      });
+    },
+    changeHpPlayer: function changeHpPlayer(position, changeHpCount) {
+      axios.post('changehpplayer', {
+        game_number: this.item.game_number,
+        position: position,
+        changeHpCount: changeHpCount
+      });
+    },
+    changeSizeImg: function changeSizeImg(position_id, number_card) {
+      document.getElementById('Img' + position_id + '_' + number_card).style.height = '352px';
+      document.getElementById('Img' + position_id + '_' + number_card).style.width = '256px';
+      document.getElementById('ImgDiv' + position_id + '_' + number_card).style.zIndex = 999;
+    },
+    changeSizeImgToDefault: function changeSizeImgToDefault(position_id, number_card) {
+      document.getElementById('Img' + position_id + '_' + number_card).style.height = '176px';
+      document.getElementById('Img' + position_id + '_' + number_card).style.width = '126px';
+      document.getElementById('ImgDiv' + position_id + '_' + number_card).style.zIndex = 1;
+    },
+    changeSizeImgFight: function changeSizeImgFight(position_id, number_card) {
+      document.getElementById('Img' + position_id + '_' + number_card).style.height = '352px';
+      document.getElementById('Img' + position_id + '_' + number_card).style.width = '256px';
+      document.getElementById('Img' + position_id + '_' + number_card).style.transform = 'rotate(0)';
+      document.getElementById('ImgDiv' + position_id + '_' + number_card).style.zIndex = 999;
+    },
+    changeSizeImgToDefaultFight: function changeSizeImgToDefaultFight(position_id, number_card) {
+      document.getElementById('Img' + position_id + '_' + number_card).style.height = '176px';
+      document.getElementById('Img' + position_id + '_' + number_card).style.width = '126px';
+      document.getElementById('Img' + position_id + '_' + number_card).style.transform = 'rotate(-90deg)';
+      document.getElementById('ImgDiv' + position_id + '_' + number_card).style.zIndex = 1;
+    },
+    changeSizeImgToDefaultFightMe: function changeSizeImgToDefaultFightMe(position_id, number_card) {
+      document.getElementById('Img' + position_id + '_' + number_card).style.height = '176px';
+      document.getElementById('Img' + position_id + '_' + number_card).style.width = '126px';
+      document.getElementById('Img' + position_id + '_' + number_card).style.transform = 'rotate(90deg)';
+      document.getElementById('ImgDiv' + position_id + '_' + number_card).style.zIndex = 1;
+    }
   }
 });
 
@@ -48774,9 +49541,3454 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _vm._v("\n\n    Привет play cardwars\n\n\n")
-  ])
+  return _c(
+    "div",
+    { staticClass: "container", staticStyle: { position: "relative" } },
+    [
+      _vm.player1position == 0 ||
+      (_vm.player2position == 0 && _vm.myPosition == "")
+        ? _c("div", { staticStyle: { width: "200px" } }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { attrs: { for: "exampleFormControlSelect1" } }, [
+                _vm._v("Выбрать колоду")
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selectedDeck,
+                      expression: "selectedDeck"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "exampleFormControlSelect1" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.selectedDeck = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { disabled: "", value: "" } }, [
+                    _vm._v("Выберите колоду")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("Кейк")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [
+                    _vm._v("Принцесса Жвачка")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "3" } }, [
+                    _vm._v("Лимонхват")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "4" } }, [_vm._v("Чарли")])
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", [_vm._v("Выбрано: " + _vm._s(_vm.selectedDeck))])
+            ]),
+            _vm._v(" "),
+            _vm.player1position == 0
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    staticStyle: { width: "200px" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ChosePlayerPosition(1, 1, _vm.selectedDeck)
+                      }
+                    }
+                  },
+                  [_vm._v("Сесть за стол")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.player2position == 0
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    staticStyle: { width: "200px" },
+                    on: {
+                      click: function($event) {
+                        return _vm.ChosePlayerPosition(2, 2, _vm.selectedDeck)
+                      }
+                    }
+                  },
+                  [_vm._v("Сесть за стол")]
+                )
+              : _vm._e()
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      (_vm.player1position == 0 || _vm.player2position == 0) &&
+      _vm.myPosition != ""
+        ? _c("div", { staticStyle: { width: "200px" } }, [
+            _c("button", { staticClass: "btn btn-danger" }, [
+              _vm._v("Ждем второго игрока")
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.player1position != 0 && _vm.player2position != 0
+        ? _c("div", {
+            staticStyle: {
+              position: "absolute",
+              top: "-20px",
+              left: "870px",
+              width: "600px",
+              height: "238px",
+              background: "url(/img/derevo-doski-fon2.jpg)",
+              "background-size": "600px 300px",
+              "border-radius": "100px",
+              "box-shadow": "0 12px 6px -6px #666, 0 0 3px 0 #ccc"
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.players, function(player) {
+        return _vm.player1position != 0 && _vm.player2position != 0
+          ? _c(
+              "div",
+              {
+                staticStyle: {
+                  position: "relative",
+                  left: "-400px",
+                  top: "10px"
+                }
+              },
+              [
+                player.position != _vm.myPosition
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.cardsImg, function(cardsImage) {
+                        return _c("div", [
+                          cardsImage.deck_type == _vm.opponentDeckType &&
+                          cardsImage.card_type == 3
+                            ? _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    left: "65px",
+                                    top: "0px"
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "/img/cardwars/" + cardsImage.img,
+                                      width: "262",
+                                      height: "354"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticStyle: {
+                                        position: "absolute",
+                                        top: "356px",
+                                        left: "107px"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-success",
+                                          staticStyle: {
+                                            "border-radius": "70px"
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(player.hp))]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticStyle: {
+                                        position: "absolute",
+                                        top: "355px",
+                                        left: "177px"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.changeHpPlayer(
+                                                _vm.opponentPosition,
+                                                1
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("+")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticStyle: {
+                                        position: "absolute",
+                                        top: "355px",
+                                        left: "47px"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.changeHpPlayer(
+                                                _vm.opponentPosition,
+                                                -1
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("-")]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ])
+                      }),
+                      0
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                player.position == _vm.myPosition
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.cardsImg, function(cardsImage) {
+                        return _c("div", [
+                          cardsImage.deck_type == _vm.myDeckType &&
+                          cardsImage.card_type == 3
+                            ? _c(
+                                "div",
+                                {
+                                  staticStyle: {
+                                    position: "absolute",
+                                    left: "65px",
+                                    top: "450px"
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "/img/cardwars/" + cardsImage.img,
+                                      width: "262",
+                                      height: "354"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticStyle: {
+                                        position: "absolute",
+                                        top: "-33px",
+                                        left: "107px"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-success",
+                                          staticStyle: {
+                                            "border-radius": "70px"
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(player.hp))]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticStyle: {
+                                        position: "absolute",
+                                        top: "-32px",
+                                        left: "177px"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.changeHpPlayer(
+                                                _vm.myPosition,
+                                                1
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("+")]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticStyle: {
+                                        position: "absolute",
+                                        top: "-32px",
+                                        left: "47px"
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-danger",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.changeHpPlayer(
+                                                _vm.myPosition,
+                                                -1
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [_vm._v("-")]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            : _vm._e()
+                        ])
+                      }),
+                      0
+                    )
+                  : _vm._e()
+              ]
+            )
+          : _vm._e()
+      }),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" } }, [
+        _vm._v(_vm._s((_vm.i = 0)))
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.playerscards, function(playercard) {
+        return _vm.player1position != 0 && _vm.player2position != 0
+          ? _c("div", [
+              playercard.status == 1 && playercard.position_id != _vm.myPosition
+                ? _c("div", [
+                    _c("div", { staticStyle: { display: "none" } }, [
+                      _vm._v(_vm._s((_vm.i = _vm.i + 1)))
+                    ])
+                  ])
+                : _vm._e()
+            ])
+          : _vm._e()
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticStyle: { position: "absolute", top: "20px", left: "-50px" } },
+        [
+          _c(
+            "button",
+            {
+              staticClass: "btn-dark",
+              staticStyle: { "border-radius": "50px" }
+            },
+            [_vm._v(_vm._s(_vm.i))]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticStyle: { display: "none" } }, [
+        _vm._v(
+          " " +
+            _vm._s((_vm.b = 900)) +
+            " " +
+            _vm._s((_vm.c = 280)) +
+            " " +
+            _vm._s((_vm.d = 906)) +
+            " "
+        )
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.playerscards, function(playercard) {
+        return _vm.player1position != 0 && _vm.player2position != 0
+          ? _c("div", [
+              _c("div", { staticStyle: { display: "none" } }, [
+                playercard.position_card == 1
+                  ? _c("div", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s((_vm.a = 0)) +
+                          "     " +
+                          _vm._s((_vm.aTown = 24)) +
+                          "\n                "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                playercard.position_card == 2
+                  ? _c("div", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s((_vm.a = 0 + 220)) +
+                          " " +
+                          _vm._s((_vm.aTown = 24 + 220)) +
+                          "\n                "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                playercard.position_card == 3
+                  ? _c("div", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s((_vm.a = 0 + 440)) +
+                          " " +
+                          _vm._s((_vm.aTown = 24 + 440)) +
+                          "\n                "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                playercard.position_card == 4
+                  ? _c("div", [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s((_vm.a = 0 + 660)) +
+                          " " +
+                          _vm._s((_vm.aTown = 24 + 660)) +
+                          "\n                "
+                      )
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              playercard.status == 6 && playercard.position_id != _vm.myPosition
+                ? _c(
+                    "div",
+                    _vm._l(_vm.cardsImg, function(cardsImage) {
+                      return _c("div", [
+                        cardsImage.deck_type == _vm.opponentDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 2
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.a +
+                                  "px;top:160px;"
+                              },
+                              [
+                                playercard.shirt_card == 1
+                                  ? _c("img", {
+                                      attrs: {
+                                        src: "/img/cardwars/" + cardsImage.img,
+                                        width: "176",
+                                        height: "250"
+                                      }
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                playercard.shirt_card == 2
+                                  ? _c("img", {
+                                      attrs: {
+                                        src: "/img/cardwars/back.jpg",
+                                        width: "176",
+                                        height: "250"
+                                      }
+                                    })
+                                  : _vm._e()
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              playercard.status == 6 && playercard.position_id == _vm.myPosition
+                ? _c(
+                    "div",
+                    _vm._l(_vm.cardsImg, function(cardsImage) {
+                      return _c("div", [
+                        cardsImage.deck_type == _vm.myDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 2
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.a +
+                                  "px;top:420px;"
+                              },
+                              [
+                                playercard.shirt_card == 1
+                                  ? _c("img", {
+                                      attrs: {
+                                        src: "/img/cardwars/" + cardsImage.img,
+                                        width: "176",
+                                        height: "250"
+                                      },
+                                      on: {
+                                        dblclick: function($event) {
+                                          return _vm.bigCardBack(
+                                            playercard.number_card,
+                                            playercard.status,
+                                            playercard.position_card,
+                                            2
+                                          )
+                                        }
+                                      }
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                playercard.shirt_card == 2
+                                  ? _c("img", {
+                                      attrs: {
+                                        src: "/img/cardwars/back.jpg",
+                                        width: "176",
+                                        height: "250"
+                                      },
+                                      on: {
+                                        dblclick: function($event) {
+                                          return _vm.bigCardBack(
+                                            playercard.number_card,
+                                            playercard.status,
+                                            playercard.position_card,
+                                            1
+                                          )
+                                        }
+                                      }
+                                    })
+                                  : _vm._e()
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              playercard.status == 5 && playercard.position_id == _vm.myPosition
+                ? _c(
+                    "div",
+                    _vm._l(_vm.cardsImg, function(cardsImage) {
+                      return _c("div", [
+                        cardsImage.deck_type == _vm.myDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 1
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.aTown +
+                                  "px;top:680px;"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    style: "position: absolute;left:0px;top:0",
+                                    attrs: {
+                                      id:
+                                        "ImgDiv" +
+                                        playercard.position_id +
+                                        "_" +
+                                        playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      attrs: {
+                                        id:
+                                          "Img" +
+                                          playercard.position_id +
+                                          "_" +
+                                          playercard.number_card,
+                                        src: "/img/cardwars/" + cardsImage.img,
+                                        width: "128",
+                                        height: "176"
+                                      },
+                                      on: {
+                                        mousemove: function($event) {
+                                          if (!$event.altKey) {
+                                            return null
+                                          }
+                                          return _vm.changeSizeImg(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        mouseleave: function($event) {
+                                          return _vm.changeSizeImgToDefault(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        click: function($event) {
+                                          return _vm.openMenuCardBuilding(
+                                            playercard.number_card
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    style:
+                                      "z-index: 100;display:none; position: absolute; top:30px; left:14px;",
+                                    attrs: {
+                                      id:
+                                        "MenuCardBuilding" +
+                                        playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openMenuCardBuildingChangePosition(
+                                              playercard.number_card
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Переместить")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-dark",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.cardWithHand(
+                                              playercard.number_card,
+                                              8,
+                                              playercard.position_card,
+                                              5
+                                            ),
+                                              _vm.closeMenuCardBuilding(
+                                                playercard.number_card
+                                              )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Сбросить")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.closeMenuCardBuilding(
+                                              playercard.number_card
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Закрыть")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        style:
+                                          "z-index: 100;display:none; position: absolute; top:0px; left:100px;",
+                                        attrs: {
+                                          id:
+                                            "MenuCardBuildingChangePosition" +
+                                            playercard.number_card
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  5,
+                                                  1,
+                                                  5
+                                                ),
+                                                  _vm.closeMenuCardBuilding(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("1 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  5,
+                                                  2,
+                                                  5
+                                                ),
+                                                  _vm.closeMenuCardBuilding(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("2 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  5,
+                                                  3,
+                                                  5
+                                                ),
+                                                  _vm.closeMenuCardBuilding(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("3 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  5,
+                                                  4,
+                                                  5
+                                                ),
+                                                  _vm.closeMenuCardBuilding(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("4 позиция")]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              playercard.status == 4 && playercard.position_id == _vm.myPosition
+                ? _c(
+                    "div",
+                    _vm._l(_vm.cardsImg, function(cardsImage) {
+                      return _c("div", [
+                        cardsImage.deck_type == _vm.myDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 1
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.aTown +
+                                  "px;top:518px;"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    style: "position: absolute;left:0px;top:0",
+                                    attrs: {
+                                      id:
+                                        "ImgDiv" +
+                                        playercard.position_id +
+                                        "_" +
+                                        playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      staticStyle: {
+                                        transform: "rotate(90deg)"
+                                      },
+                                      attrs: {
+                                        src: "/img/cardwars/" + cardsImage.img,
+                                        id:
+                                          "Img" +
+                                          playercard.position_id +
+                                          "_" +
+                                          playercard.number_card,
+                                        width: "128",
+                                        height: "176"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.openMenuCardField(
+                                            playercard.number_card
+                                          )
+                                        },
+                                        mousemove: function($event) {
+                                          if (!$event.altKey) {
+                                            return null
+                                          }
+                                          return _vm.changeSizeImgFight(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        mouseleave: function($event) {
+                                          return _vm.changeSizeImgToDefaultFightMe(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      position: "absolute",
+                                      top: "-11px",
+                                      left: "50px",
+                                      "z-index": "2"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        staticStyle: {
+                                          "border-radius": "70px"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.changehp(
+                                              playercard.number_card,
+                                              playercard.status,
+                                              playercard.position_card,
+                                              playercard.status,
+                                              1,
+                                              _vm.myPosition
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(playercard.hp))]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      position: "absolute",
+                                      top: "129px",
+                                      left: "152px",
+                                      "z-index": "2"
+                                    }
+                                  },
+                                  [
+                                    _c("button", {
+                                      staticClass: "btn btn-success",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.changehp(
+                                            playercard.number_card,
+                                            playercard.status,
+                                            playercard.position_card,
+                                            playercard.status,
+                                            -1,
+                                            _vm.myPosition
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    style:
+                                      "z-index: 100;display:none; position: absolute; top:30px; left:14px;",
+                                    attrs: {
+                                      id:
+                                        "MenuCardField" + playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openMenuCardFieldFight(
+                                              playercard.number_card
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Переместить")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-success",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.cardWithHand(
+                                              playercard.number_card,
+                                              3,
+                                              playercard.position_card,
+                                              4
+                                            ),
+                                              _vm.closeMenuCardField(
+                                                playercard.number_card
+                                              )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("В атаку")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-warning",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.cardWithHand(
+                                              playercard.number_card,
+                                              4,
+                                              playercard.position_card,
+                                              4
+                                            ),
+                                              _vm.closeMenuCardField(
+                                                playercard.number_card
+                                              )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Флюп")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-dark",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.cardWithHand(
+                                              playercard.number_card,
+                                              8,
+                                              playercard.position_card,
+                                              4
+                                            ),
+                                              _vm.closeMenuCardField(
+                                                playercard.number_card
+                                              )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Сбросить")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.closeMenuCardField(
+                                              playercard.number_card
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Закрыть")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        style:
+                                          "z-index: 100;display:none; position: absolute; top:0px; left:100px;",
+                                        attrs: {
+                                          id:
+                                            "MenuCardFieldFight" +
+                                            playercard.number_card
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  1,
+                                                  4
+                                                ),
+                                                  _vm.closeMenuCardField(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("1 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  2,
+                                                  4
+                                                ),
+                                                  _vm.closeMenuCardField(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("2 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  3,
+                                                  4
+                                                ),
+                                                  _vm.closeMenuCardField(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("3 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  4,
+                                                  4
+                                                ),
+                                                  _vm.closeMenuCardField(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("4 позиция")]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              playercard.status == 2 && playercard.position_id == _vm.myPosition
+                ? _c(
+                    "div",
+                    _vm._l(_vm.cardsImg, function(cardsImage) {
+                      return _c("div", [
+                        cardsImage.deck_type == _vm.myDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 1
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.aTown +
+                                  "px;top:454px;"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    style: "position: absolute;left:0px;top:0",
+                                    attrs: {
+                                      id:
+                                        "ImgDiv" +
+                                        playercard.position_id +
+                                        "_" +
+                                        playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      staticStyle: {
+                                        height: "176px",
+                                        width: "128px"
+                                      },
+                                      attrs: {
+                                        id:
+                                          "Img" +
+                                          playercard.position_id +
+                                          "_" +
+                                          playercard.number_card,
+                                        src: "/img/cardwars/" + cardsImage.img,
+                                        width: "128",
+                                        height: "176"
+                                      },
+                                      on: {
+                                        mousemove: function($event) {
+                                          if (!$event.altKey) {
+                                            return null
+                                          }
+                                          return _vm.changeSizeImg(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        mouseleave: function($event) {
+                                          return _vm.changeSizeImgToDefault(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        click: function($event) {
+                                          return _vm.openMenuCardField(
+                                            playercard.number_card
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      position: "absolute",
+                                      top: "50px",
+                                      left: "50px",
+                                      "z-index": "2"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        staticStyle: {
+                                          "border-radius": "70px"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.changehp(
+                                              playercard.number_card,
+                                              playercard.status,
+                                              playercard.position_card,
+                                              playercard.status,
+                                              1,
+                                              _vm.myPosition
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(playercard.hp))]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      position: "absolute",
+                                      top: "190px",
+                                      left: "152px",
+                                      "z-index": "2"
+                                    }
+                                  },
+                                  [
+                                    _c("button", {
+                                      staticClass: "btn btn-success",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.changehp(
+                                            playercard.number_card,
+                                            playercard.status,
+                                            playercard.position_card,
+                                            playercard.status,
+                                            -1,
+                                            _vm.myPosition
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    style:
+                                      "z-index: 100;display:none; position: absolute; top:30px; left:14px;",
+                                    attrs: {
+                                      id:
+                                        "MenuCardField" + playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openMenuCardFieldFight(
+                                              playercard.number_card
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Переместить")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-success",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.cardWithHand(
+                                              playercard.number_card,
+                                              3,
+                                              playercard.position_card,
+                                              2
+                                            ),
+                                              _vm.closeMenuCardField(
+                                                playercard.number_card
+                                              )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("В атаку")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-warning",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.cardWithHand(
+                                              playercard.number_card,
+                                              4,
+                                              playercard.position_card,
+                                              2
+                                            ),
+                                              _vm.closeMenuCardField(
+                                                playercard.number_card
+                                              )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Флюп")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-dark",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.cardWithHand(
+                                              playercard.number_card,
+                                              8,
+                                              playercard.position_card,
+                                              2
+                                            ),
+                                              _vm.closeMenuCardField(
+                                                playercard.number_card
+                                              )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Сбросить")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.closeMenuCardField(
+                                              playercard.number_card
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Закрыть")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        style:
+                                          "z-index: 100;display:none; position: absolute; top:0px; left:100px;",
+                                        attrs: {
+                                          id:
+                                            "MenuCardFieldFight" +
+                                            playercard.number_card
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  1,
+                                                  2
+                                                ),
+                                                  _vm.closeMenuCardField(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("1 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  2,
+                                                  2
+                                                ),
+                                                  _vm.closeMenuCardField(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("2 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  3,
+                                                  2
+                                                ),
+                                                  _vm.closeMenuCardField(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("3 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  4,
+                                                  2
+                                                ),
+                                                  _vm.closeMenuCardField(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("4 позиция")]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              playercard.status == 3 && playercard.position_id == _vm.myPosition
+                ? _c(
+                    "div",
+                    _vm._l(_vm.cardsImg, function(cardsImage) {
+                      return _c("div", [
+                        cardsImage.deck_type == _vm.myDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 1
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.aTown +
+                                  "px;top:396px;"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    style: "position: absolute;left:0px;top:0",
+                                    attrs: {
+                                      id:
+                                        "ImgDiv" +
+                                        playercard.position_id +
+                                        "_" +
+                                        playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      staticStyle: {
+                                        transform: "rotate(90deg)"
+                                      },
+                                      attrs: {
+                                        src: "/img/cardwars/" + cardsImage.img,
+                                        id:
+                                          "Img" +
+                                          playercard.position_id +
+                                          "_" +
+                                          playercard.number_card,
+                                        width: "128",
+                                        height: "176"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.openMenuCardField(
+                                            playercard.number_card
+                                          )
+                                        },
+                                        mousemove: function($event) {
+                                          if (!$event.altKey) {
+                                            return null
+                                          }
+                                          return _vm.changeSizeImgFight(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        mouseleave: function($event) {
+                                          return _vm.changeSizeImgToDefaultFightMe(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      position: "absolute",
+                                      top: "108px",
+                                      left: "50px",
+                                      "z-index": "2"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        staticStyle: {
+                                          "border-radius": "70px"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.changehp(
+                                              playercard.number_card,
+                                              playercard.status,
+                                              playercard.position_card,
+                                              playercard.status,
+                                              1,
+                                              _vm.myPosition
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(playercard.hp))]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      position: "absolute",
+                                      top: "248px",
+                                      left: "152px",
+                                      "z-index": "2"
+                                    }
+                                  },
+                                  [
+                                    _c("button", {
+                                      staticClass: "btn btn-success",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.changehp(
+                                            playercard.number_card,
+                                            playercard.status,
+                                            playercard.position_card,
+                                            playercard.status,
+                                            -1,
+                                            _vm.myPosition
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    style:
+                                      "z-index: 100;display:none; position: absolute; top:30px; left:14px;",
+                                    attrs: {
+                                      id:
+                                        "MenuCardField" + playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openMenuCardFieldFight(
+                                              playercard.number_card
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Переместить")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-success",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.cardWithHand(
+                                              playercard.number_card,
+                                              3,
+                                              playercard.position_card,
+                                              3
+                                            ),
+                                              _vm.closeMenuCardField(
+                                                playercard.number_card
+                                              )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("В атаку")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-warning",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.cardWithHand(
+                                              playercard.number_card,
+                                              4,
+                                              playercard.position_card,
+                                              3
+                                            ),
+                                              _vm.closeMenuCardField(
+                                                playercard.number_card
+                                              )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Флюп")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-dark",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.cardWithHand(
+                                              playercard.number_card,
+                                              8,
+                                              playercard.position_card,
+                                              3
+                                            ),
+                                              _vm.closeMenuCardField(
+                                                playercard.number_card
+                                              )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Сбросить")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.closeMenuCardField(
+                                              playercard.number_card
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Закрыть")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        style:
+                                          "z-index: 100;display:none; position: absolute; top:0px; left:100px;",
+                                        attrs: {
+                                          id:
+                                            "MenuCardFieldFight" +
+                                            playercard.number_card
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  1,
+                                                  3
+                                                ),
+                                                  _vm.closeMenuCardField(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("1 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  2,
+                                                  3
+                                                ),
+                                                  _vm.closeMenuCardField(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("2 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  3,
+                                                  3
+                                                ),
+                                                  _vm.closeMenuCardField(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("3 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  4,
+                                                  3
+                                                ),
+                                                  _vm.closeMenuCardField(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("4 позиция")]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              playercard.status == 3 && playercard.position_id != _vm.myPosition
+                ? _c(
+                    "div",
+                    _vm._l(_vm.cardsImg, function(cardsImage) {
+                      return _c("div", [
+                        cardsImage.deck_type == _vm.opponentDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 1
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.aTown +
+                                  "px;top:258px;"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    style: "position: absolute;left:0px;top:0",
+                                    attrs: {
+                                      id:
+                                        "ImgDiv" +
+                                        playercard.position_id +
+                                        "_" +
+                                        playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      staticStyle: {
+                                        transform: "rotate(-90deg)"
+                                      },
+                                      attrs: {
+                                        src: "/img/cardwars/" + cardsImage.img,
+                                        id:
+                                          "Img" +
+                                          playercard.position_id +
+                                          "_" +
+                                          playercard.number_card,
+                                        width: "128",
+                                        height: "176"
+                                      },
+                                      on: {
+                                        mousemove: function($event) {
+                                          if (!$event.altKey) {
+                                            return null
+                                          }
+                                          return _vm.changeSizeImgFight(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        mouseleave: function($event) {
+                                          return _vm.changeSizeImgToDefaultFight(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      position: "absolute",
+                                      top: "-8px",
+                                      left: "50px",
+                                      "z-index": "2"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        staticStyle: {
+                                          "border-radius": "70px"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.changehp(
+                                              playercard.number_card,
+                                              playercard.status,
+                                              playercard.position_card,
+                                              playercard.status,
+                                              1,
+                                              _vm.opponentPosition
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(playercard.hp))]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      position: "absolute",
+                                      top: "132px",
+                                      left: "152px",
+                                      "z-index": "2"
+                                    }
+                                  },
+                                  [
+                                    _c("button", {
+                                      staticClass: "btn btn-success",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.changehp(
+                                            playercard.number_card,
+                                            playercard.status,
+                                            playercard.position_card,
+                                            playercard.status,
+                                            -1,
+                                            _vm.opponentPosition
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              playercard.status == 2 && playercard.position_id != _vm.myPosition
+                ? _c(
+                    "div",
+                    _vm._l(_vm.cardsImg, function(cardsImage) {
+                      return _c("div", [
+                        cardsImage.deck_type == _vm.opponentDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 1
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.aTown +
+                                  "px;top:196px;"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    style: "position: absolute;left:0px;top:0",
+                                    attrs: {
+                                      id:
+                                        "ImgDiv" +
+                                        playercard.position_id +
+                                        "_" +
+                                        playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      attrs: {
+                                        id:
+                                          "Img" +
+                                          playercard.position_id +
+                                          "_" +
+                                          playercard.number_card,
+                                        src: "/img/cardwars/" + cardsImage.img,
+                                        width: "128",
+                                        height: "176"
+                                      },
+                                      on: {
+                                        mousemove: function($event) {
+                                          if (!$event.altKey) {
+                                            return null
+                                          }
+                                          return _vm.changeSizeImg(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        mouseleave: function($event) {
+                                          return _vm.changeSizeImgToDefault(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      position: "absolute",
+                                      top: "50px",
+                                      left: "50px",
+                                      "z-index": "2"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        staticStyle: {
+                                          "border-radius": "70px"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.changehp(
+                                              playercard.number_card,
+                                              playercard.status,
+                                              playercard.position_card,
+                                              playercard.status,
+                                              1,
+                                              _vm.opponentPosition
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(playercard.hp))]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      position: "absolute",
+                                      top: "190px",
+                                      left: "152px",
+                                      "z-index": "2"
+                                    }
+                                  },
+                                  [
+                                    _c("button", {
+                                      staticClass: "btn btn-success",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.changehp(
+                                            playercard.number_card,
+                                            playercard.status,
+                                            playercard.position_card,
+                                            playercard.status,
+                                            -1,
+                                            _vm.opponentPosition
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              playercard.status == 4 && playercard.position_id != _vm.myPosition
+                ? _c(
+                    "div",
+                    _vm._l(_vm.cardsImg, function(cardsImage) {
+                      return _c("div", [
+                        cardsImage.deck_type == _vm.opponentDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 1
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.aTown +
+                                  "px;top:135px;"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    style: "position: absolute;left:0px;top:0",
+                                    attrs: {
+                                      id:
+                                        "ImgDiv" +
+                                        playercard.position_id +
+                                        "_" +
+                                        playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      staticStyle: {
+                                        transform: "rotate(-90deg)"
+                                      },
+                                      attrs: {
+                                        src: "/img/cardwars/" + cardsImage.img,
+                                        id:
+                                          "Img" +
+                                          playercard.position_id +
+                                          "_" +
+                                          playercard.number_card,
+                                        width: "128",
+                                        height: "176"
+                                      },
+                                      on: {
+                                        mousemove: function($event) {
+                                          if (!$event.altKey) {
+                                            return null
+                                          }
+                                          return _vm.changeSizeImgFight(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        mouseleave: function($event) {
+                                          return _vm.changeSizeImgToDefaultFight(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      position: "absolute",
+                                      top: "111px",
+                                      left: "50px",
+                                      "z-index": "2"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        staticStyle: {
+                                          "border-radius": "70px"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.changehp(
+                                              playercard.number_card,
+                                              playercard.status,
+                                              playercard.position_card,
+                                              playercard.status,
+                                              1,
+                                              _vm.opponentPosition
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(playercard.hp))]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticStyle: {
+                                      position: "absolute",
+                                      top: "251px",
+                                      left: "152px",
+                                      "z-index": "2"
+                                    }
+                                  },
+                                  [
+                                    _c("button", {
+                                      staticClass: "btn btn-success",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.changehp(
+                                            playercard.number_card,
+                                            playercard.status,
+                                            playercard.position_card,
+                                            playercard.status,
+                                            -1,
+                                            _vm.opponentPosition
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              playercard.status == 5 && playercard.position_id != _vm.myPosition
+                ? _c(
+                    "div",
+                    _vm._l(_vm.cardsImg, function(cardsImage) {
+                      return _c("div", [
+                        cardsImage.deck_type == _vm.opponentDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 1
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.aTown +
+                                  "px;top:-23px;"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    style: "position: absolute;left:0px;top:0",
+                                    attrs: {
+                                      id:
+                                        "ImgDiv" +
+                                        playercard.position_id +
+                                        "_" +
+                                        playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      attrs: {
+                                        id:
+                                          "Img" +
+                                          playercard.position_id +
+                                          "_" +
+                                          playercard.number_card,
+                                        src: "/img/cardwars/" + cardsImage.img,
+                                        width: "128",
+                                        height: "176"
+                                      },
+                                      on: {
+                                        mousemove: function($event) {
+                                          if (!$event.altKey) {
+                                            return null
+                                          }
+                                          return _vm.changeSizeImg(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        mouseleave: function($event) {
+                                          return _vm.changeSizeImgToDefault(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              playercard.status == 1 && playercard.position_id == _vm.myPosition
+                ? _c(
+                    "div",
+                    _vm._l(_vm.cardsImg, function(cardsImage) {
+                      return _c("div", [
+                        cardsImage.deck_type == _vm.myDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 1
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.b +
+                                  "px;top:" +
+                                  _vm.c +
+                                  "px;"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticStyle: { display: "none" } },
+                                  [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s((_vm.b = _vm.b + 135)) +
+                                        "\n                            "
+                                    ),
+                                    _vm.b == 1440
+                                      ? _c("div", [
+                                          _vm._v(
+                                            _vm._s((_vm.c = _vm.c + 200)) +
+                                              " " +
+                                              _vm._s((_vm.b = 900))
+                                          )
+                                        ])
+                                      : _vm._e()
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    style: "position: absolute;left:0px;top:0",
+                                    attrs: {
+                                      id:
+                                        "ImgDiv" +
+                                        playercard.position_id +
+                                        "_" +
+                                        playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c("img", {
+                                      staticStyle: {
+                                        height: "176px",
+                                        width: "128px"
+                                      },
+                                      attrs: {
+                                        id:
+                                          "Img" +
+                                          playercard.position_id +
+                                          "_" +
+                                          playercard.number_card,
+                                        src: "/img/cardwars/" + cardsImage.img,
+                                        width: "128",
+                                        height: "176"
+                                      },
+                                      on: {
+                                        mousemove: function($event) {
+                                          if (!$event.altKey) {
+                                            return null
+                                          }
+                                          return _vm.changeSizeImg(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        mouseleave: function($event) {
+                                          return _vm.changeSizeImgToDefault(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        click: function($event) {
+                                          return _vm.openMenuCardPlayer(
+                                            playercard.number_card
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    style:
+                                      "z-index: 100;display:none; position: absolute; top:30px; left:14px;",
+                                    attrs: {
+                                      id:
+                                        "MenuCardPlayer" +
+                                        playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openMenuCardPlayerFight(
+                                              playercard.number_card
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("В бой")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-success",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.openMenuCardPlayerTown(
+                                              playercard.number_card
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Здание")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-warning",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.cardWithHand(
+                                              playercard.number_card,
+                                              7,
+                                              0,
+                                              1
+                                            ),
+                                              _vm.closeMenuCardPlayer(
+                                                playercard.number_card
+                                              )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("На стол")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-dark",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.cardWithHand(
+                                              playercard.number_card,
+                                              8,
+                                              playercard.position_card,
+                                              1
+                                            ),
+                                              _vm.closeMenuCardPlayer(
+                                                playercard.number_card
+                                              )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Сбросить")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-danger",
+                                        staticStyle: { width: "100px" },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.closeMenuCardPlayer(
+                                              playercard.number_card
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("Закрыть")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        style:
+                                          "z-index: 100;display:none; position: absolute; top:0px; left:100px;",
+                                        attrs: {
+                                          id:
+                                            "MenuCardPlayerFight" +
+                                            playercard.number_card
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  1,
+                                                  1
+                                                ),
+                                                  _vm.closeMenuCardPlayer(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("1 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  2,
+                                                  1
+                                                ),
+                                                  _vm.closeMenuCardPlayer(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("2 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  3,
+                                                  1
+                                                ),
+                                                  _vm.closeMenuCardPlayer(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("3 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  2,
+                                                  4,
+                                                  1
+                                                ),
+                                                  _vm.closeMenuCardPlayer(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("4 позиция")]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        style:
+                                          "z-index: 100;display:none; position: absolute; top:36px; left:100px;",
+                                        attrs: {
+                                          id:
+                                            "MenuCardPlayerTown" +
+                                            playercard.number_card
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-success",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  5,
+                                                  1,
+                                                  1
+                                                ),
+                                                  _vm.closeMenuCardPlayer(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("1 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-success",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  5,
+                                                  2,
+                                                  1
+                                                ),
+                                                  _vm.closeMenuCardPlayer(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("2 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-success",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  5,
+                                                  3,
+                                                  1
+                                                ),
+                                                  _vm.closeMenuCardPlayer(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("3 позиция")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-success",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  5,
+                                                  4,
+                                                  1
+                                                ),
+                                                  _vm.closeMenuCardPlayer(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("4 позиция")]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              playercard.status == 7
+                ? _c(
+                    "div",
+                    _vm._l(_vm.cardsImg, function(cardsImage) {
+                      return _c("div", [
+                        cardsImage.deck_type == _vm.myDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 1 &&
+                        playercard.position_id == _vm.myPosition
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.d +
+                                  "px;top:10px;",
+                                attrs: {
+                                  id:
+                                    "ImgDiv" +
+                                    playercard.position_id +
+                                    "_" +
+                                    playercard.number_card
+                                }
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticStyle: { display: "none" } },
+                                  [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s((_vm.d = _vm.d + 135)) +
+                                        "\n                        "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("img", {
+                                  attrs: {
+                                    id:
+                                      "Img" +
+                                      playercard.position_id +
+                                      "_" +
+                                      playercard.number_card,
+                                    src: "/img/cardwars/" + cardsImage.img,
+                                    width: "128",
+                                    height: "176"
+                                  },
+                                  on: {
+                                    mousemove: function($event) {
+                                      if (!$event.altKey) {
+                                        return null
+                                      }
+                                      return _vm.changeSizeImg(
+                                        playercard.position_id,
+                                        playercard.number_card
+                                      )
+                                    },
+                                    mouseleave: function($event) {
+                                      return _vm.changeSizeImgToDefault(
+                                        playercard.position_id,
+                                        playercard.number_card
+                                      )
+                                    },
+                                    dblclick: function($event) {
+                                      return _vm.cardWithHand(
+                                        playercard.number_card,
+                                        8,
+                                        0,
+                                        7
+                                      )
+                                    }
+                                  }
+                                })
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        cardsImage.deck_type == _vm.opponentDeckType &&
+                        playercard.number_card == cardsImage.number &&
+                        cardsImage.card_type == 1 &&
+                        playercard.position_id != _vm.myPosition
+                          ? _c(
+                              "div",
+                              {
+                                style:
+                                  "position: absolute;left:" +
+                                  _vm.d +
+                                  "px;top:10px;",
+                                attrs: {
+                                  id:
+                                    "ImgDiv" +
+                                    playercard.position_id +
+                                    "_" +
+                                    playercard.number_card
+                                }
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticStyle: { display: "none" } },
+                                  [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s((_vm.d = _vm.d + 135)) +
+                                        "\n                        "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("img", {
+                                  attrs: {
+                                    id:
+                                      "Img" +
+                                      playercard.position_id +
+                                      "_" +
+                                      playercard.number_card,
+                                    src: "/img/cardwars/" + cardsImage.img,
+                                    width: "128",
+                                    height: "176"
+                                  },
+                                  on: {
+                                    mousemove: function($event) {
+                                      if (!$event.altKey) {
+                                        return null
+                                      }
+                                      return _vm.changeSizeImg(
+                                        playercard.position_id,
+                                        playercard.number_card
+                                      )
+                                    },
+                                    mouseleave: function($event) {
+                                      return _vm.changeSizeImgToDefault(
+                                        playercard.position_id,
+                                        playercard.number_card
+                                      )
+                                    },
+                                    dblclick: function($event) {
+                                      return _vm.cardWithHand(
+                                        playercard.number_card,
+                                        8,
+                                        0,
+                                        7
+                                      )
+                                    }
+                                  }
+                                })
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  )
+                : _vm._e()
+            ])
+          : _vm._e()
+      }),
+      _vm._v(" "),
+      _vm.player1position != 0 && _vm.player2position != 0
+        ? _c(
+            "div",
+            {
+              staticStyle: {
+                position: "absolute",
+                top: "225px",
+                left: "1105px"
+              }
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  staticStyle: { width: "120px" },
+                  on: {
+                    click: function($event) {
+                      return _vm.addCardToPlayer()
+                    }
+                  }
+                },
+                [_vm._v("Взять карту")]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticStyle: {
+                    position: "absolute",
+                    top: "5px",
+                    left: "125px"
+                  }
+                },
+                [
+                  _c("button", {
+                    staticClass: "btn btn-dark",
+                    staticStyle: { width: "20px" },
+                    on: {
+                      click: function($event) {
+                        return _vm.openDiscardDeck()
+                      }
+                    }
+                  })
+                ]
+              )
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticStyle: {
+            position: "absolute",
+            display: "none",
+            top: "-50px",
+            left: "-200px",
+            width: "1450px",
+            height: "850px",
+            background: "#fff",
+            "border-radius": "100px",
+            "box-shadow": "0 12px 6px -6px #666, 0 0 3px 0 #ccc",
+            "z-index": "3"
+          },
+          attrs: { id: "DiscardDeck" }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticStyle: { position: "absolute", top: "7px", left: "665px" }
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  staticStyle: { width: "100px" },
+                  on: {
+                    click: function($event) {
+                      return _vm.closeDiscardDeck()
+                    }
+                  }
+                },
+                [_vm._v("Закрыть")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticStyle: { display: "none" } }, [
+            _vm._v(
+              " " + _vm._s((_vm.b = 50)) + " " + _vm._s((_vm.c = 50)) + "  "
+            )
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.playerscards, function(playercard) {
+            return _vm.player1position != 0 && _vm.player2position != 0
+              ? _c("div", [
+                  playercard.status == 8 &&
+                  playercard.position_id == _vm.myPosition
+                    ? _c(
+                        "div",
+                        _vm._l(_vm.cardsImg, function(cardsImage) {
+                          return _c("div", [
+                            cardsImage.deck_type == _vm.myDeckType &&
+                            playercard.number_card == cardsImage.number &&
+                            cardsImage.card_type == 1
+                              ? _c(
+                                  "div",
+                                  {
+                                    style:
+                                      "position: absolute;left:" +
+                                      _vm.b +
+                                      "px;top:" +
+                                      _vm.c +
+                                      "px;",
+                                    attrs: {
+                                      id:
+                                        "ImgDiv" +
+                                        playercard.position_id +
+                                        "_" +
+                                        playercard.number_card
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticStyle: { display: "none" } },
+                                      [
+                                        _vm._v(
+                                          "\n                                " +
+                                            _vm._s((_vm.b = _vm.b + 135)) +
+                                            "\n                                "
+                                        ),
+                                        _vm.b == 1400
+                                          ? _c("div", [
+                                              _vm._v(
+                                                _vm._s((_vm.c = _vm.c + 200)) +
+                                                  " " +
+                                                  _vm._s((_vm.b = 50))
+                                              )
+                                            ])
+                                          : _vm._e()
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("img", {
+                                      staticStyle: {
+                                        height: "176px",
+                                        width: "128px"
+                                      },
+                                      attrs: {
+                                        id:
+                                          "Img" +
+                                          playercard.position_id +
+                                          "_" +
+                                          playercard.number_card,
+                                        src: "/img/cardwars/" + cardsImage.img,
+                                        width: "128",
+                                        height: "176"
+                                      },
+                                      on: {
+                                        mousemove: function($event) {
+                                          if (!$event.altKey) {
+                                            return null
+                                          }
+                                          return _vm.changeSizeImg(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        mouseleave: function($event) {
+                                          return _vm.changeSizeImgToDefault(
+                                            playercard.position_id,
+                                            playercard.number_card
+                                          )
+                                        },
+                                        click: function($event) {
+                                          return _vm.openMenuCardPlayer(
+                                            playercard.number_card
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        style:
+                                          "z-index: 100;display:none; position: absolute; top:30px; left:14px;",
+                                        attrs: {
+                                          id:
+                                            "MenuCardPlayer" +
+                                            playercard.number_card
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-primary",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.openMenuCardPlayerFight(
+                                                  playercard.number_card
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("В бой")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-success",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.openMenuCardPlayerTown(
+                                                  playercard.number_card
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Здание")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-warning",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  7,
+                                                  0,
+                                                  8
+                                                ),
+                                                  _vm.closeMenuCardPlayer(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("На стол")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-dark",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.cardWithHand(
+                                                  playercard.number_card,
+                                                  9,
+                                                  playercard.position_card,
+                                                  8
+                                                ),
+                                                  _vm.closeMenuCardPlayer(
+                                                    playercard.number_card
+                                                  )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Вернуть в колоду")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-danger",
+                                            staticStyle: { width: "100px" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.closeMenuCardPlayer(
+                                                  playercard.number_card
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Закрыть")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            style:
+                                              "z-index: 100;display:none; position: absolute; top:0px; left:100px;",
+                                            attrs: {
+                                              id:
+                                                "MenuCardPlayerFight" +
+                                                playercard.number_card
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass: "btn btn-primary",
+                                                staticStyle: { width: "100px" },
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.cardWithHand(
+                                                      playercard.number_card,
+                                                      2,
+                                                      1,
+                                                      8
+                                                    ),
+                                                      _vm.closeMenuCardPlayer(
+                                                        playercard.number_card
+                                                      )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("1 позиция")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass: "btn btn-primary",
+                                                staticStyle: { width: "100px" },
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.cardWithHand(
+                                                      playercard.number_card,
+                                                      2,
+                                                      2,
+                                                      8
+                                                    ),
+                                                      _vm.closeMenuCardPlayer(
+                                                        playercard.number_card
+                                                      )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("2 позиция")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass: "btn btn-primary",
+                                                staticStyle: { width: "100px" },
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.cardWithHand(
+                                                      playercard.number_card,
+                                                      2,
+                                                      3,
+                                                      8
+                                                    ),
+                                                      _vm.closeMenuCardPlayer(
+                                                        playercard.number_card
+                                                      )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("3 позиция")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass: "btn btn-primary",
+                                                staticStyle: { width: "100px" },
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.cardWithHand(
+                                                      playercard.number_card,
+                                                      2,
+                                                      4,
+                                                      8
+                                                    ),
+                                                      _vm.closeMenuCardPlayer(
+                                                        playercard.number_card
+                                                      )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("4 позиция")]
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            style:
+                                              "z-index: 100;display:none; position: absolute; top:36px; left:100px;",
+                                            attrs: {
+                                              id:
+                                                "MenuCardPlayerTown" +
+                                                playercard.number_card
+                                            }
+                                          },
+                                          [
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass: "btn btn-success",
+                                                staticStyle: { width: "100px" },
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.cardWithHand(
+                                                      playercard.number_card,
+                                                      5,
+                                                      1,
+                                                      8
+                                                    ),
+                                                      _vm.closeMenuCardPlayer(
+                                                        playercard.number_card
+                                                      )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("1 позиция")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass: "btn btn-success",
+                                                staticStyle: { width: "100px" },
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.cardWithHand(
+                                                      playercard.number_card,
+                                                      5,
+                                                      2,
+                                                      8
+                                                    ),
+                                                      _vm.closeMenuCardPlayer(
+                                                        playercard.number_card
+                                                      )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("2 позиция")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass: "btn btn-success",
+                                                staticStyle: { width: "100px" },
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.cardWithHand(
+                                                      playercard.number_card,
+                                                      5,
+                                                      3,
+                                                      8
+                                                    ),
+                                                      _vm.closeMenuCardPlayer(
+                                                        playercard.number_card
+                                                      )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("3 позиция")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "button",
+                                              {
+                                                staticClass: "btn btn-success",
+                                                staticStyle: { width: "100px" },
+                                                on: {
+                                                  click: function($event) {
+                                                    _vm.cardWithHand(
+                                                      playercard.number_card,
+                                                      5,
+                                                      4,
+                                                      8
+                                                    ),
+                                                      _vm.closeMenuCardPlayer(
+                                                        playercard.number_card
+                                                      )
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v("4 позиция")]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ])
+                        }),
+                        0
+                      )
+                    : _vm._e()
+                ])
+              : _vm._e()
+          })
+        ],
+        2
+      )
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
