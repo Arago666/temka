@@ -11,6 +11,18 @@
                     <option value="2">Принцесса Жвачка</option>
                     <option value="3">Лимонхват</option>
                     <option value="4">Чарли</option>
+                    <option value="5">Джейк</option>
+                    <option value="6">Марселин</option>
+                    <option value="7">БиМО</option>
+                    <option value="8">Финн</option>
+                    <option value="9">Принцесса Пупырка</option>
+                    <option value="10">Гантер</option>
+                    <option value="11">Гран При</option>
+                    <option value="12">Моника</option>
+                    <option value="13">Фионна</option>
+                    <option value="14">Джейк 2х2</option>
+                    <option value="15">Леди Ливнерог</option>
+                    <option value="16">Ледяной Король</option>
                 </select>
                 <span>Выбрано: {{ selectedDeck }}</span>
             </div>
@@ -867,6 +879,10 @@
     }
 </script>
 
-
+<style>
+    img{
+        border: 1px solid #d2cccc;
+    }
+</style>
 
 
